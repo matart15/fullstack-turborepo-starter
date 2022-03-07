@@ -1,0 +1,13 @@
+{
+  "index": {
+    "welcome": "Welcome to our product"
+  },
+  "sign_up": {
+    "signup": "Signup",
+    "complete": "Registration",
+    "completeDetail": "Thank you for your registaraion with Ticket X. Please check yourr email to complete signup process."
+  },
+  "sign_in": {
+    "signin": "Signin"
+  }
+}

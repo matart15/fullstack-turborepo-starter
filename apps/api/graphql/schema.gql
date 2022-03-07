@@ -1,0 +1,38 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type CurrentUserResponse {
+  email: String!
+  id: String!
+}
+
+type Mutation {
+  changePassword(data: UserChangePasswordInput!): Boolean!
+  confirmUserEmail(token: String!): Boolean!
+  signInUser(data: UserSignInInput!): UserSignInResponse!
+  signUpUser(data: UserSignUpInput!): Boolean!
+}
+
+type Query {
+  currentUser: CurrentUserResponse!
+  sayHello: String!
+}
+
+input UserChangePasswordInput {
+  newPassword: String!
+}
+
+input UserSignInInput {
+  email: String!
+  password: String!
+}
+
+type UserSignInResponse {
+  jwtToken: String!
+}
+
+input UserSignUpInput {
+  email: String!
+  password: String!
+}

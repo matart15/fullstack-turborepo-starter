@@ -1,0 +1,13 @@
+{
+  "index": {
+    "welcome": "ようこそTJ GLOBALへ"
+  },
+  "sign_up": {
+    "signup": "サインアップ",
+    "complete": "ご登録ありがとうございます",
+    "completeDetail": "Ticket Xに登録していただきありがとうございます。登録完了メールを送りました。ご確認してください"
+  },
+  "sign_in": {
+    "signin": "サインイン"
+  }
+}
