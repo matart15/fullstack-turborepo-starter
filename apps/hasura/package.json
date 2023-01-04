@@ -1,0 +1,15 @@
+{
+  "name": "hasura",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev_1": "docker-compose up hasura",
+    "console": "$(yarn bin hasura) console --admin-secret myadminsecretkey",
+    "metadata:apply": "$(yarn bin hasura) metadata apply --admin-secret myadminsecretkey",
+    "metadata:export": "$(yarn bin hasura) metadata export --admin-secret myadminsecretkey"
+  },
+  "devDependencies": {
+    "hasura-cli": "2.15.1"
+  }
+}

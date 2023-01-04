@@ -1,0 +1,61 @@
+- name: nestjs
+  definition:
+    url: http://host.docker.internal:5000/graphql
+    timeout_seconds: 60
+    customization: {}
+    forward_client_headers: true
+  permissions:
+    - role: user
+      definition:
+        schema: |
+          schema {
+            query: Query
+            mutation: Mutation
+          }
+          type CurrentUserResponse {
+            email: String!
+            id: String!
+          }
+          type Mutation {
+            changePassword(data: UserChangePasswordInput!): Boolean!
+            signInUser(data: UserSignInInput!): UserSignInResponse!
+          }
+          type Query {
+            currentUser: CurrentUserResponse!
+          }
+          type UserSignInResponse {
+            jwtToken: String!
+          }
+          input UserChangePasswordInput {
+            newPassword: String!
+          }
+          input UserSignInInput {
+            email: String!
+            password: String!
+          }
+    - role: anonymous
+      definition:
+        schema: |
+          schema {
+            query: Query
+            mutation: Mutation
+          }
+          type Mutation {
+            confirmUserEmail(token: String!): Boolean!
+            signInUser(data: UserSignInInput!): UserSignInResponse!
+            signUpUser(data: UserSignUpInput!): Boolean!
+          }
+          type Query {
+            sayHello: String!
+          }
+          type UserSignInResponse {
+            jwtToken: String!
+          }
+          input UserSignInInput {
+            email: String!
+            password: String!
+          }
+          input UserSignUpInput {
+            email: String!
+            password: String!
+          }

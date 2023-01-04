@@ -1,22 +1,18 @@
 module.exports = {
   schema: [
     {
-      "http://localhost:5000/graphql": {
+      'http://localhost:8080/v1/graphql': {
         headers: {
-          // "x-hasura-admin-secret": "myadminsecretkey",
+          'x-hasura-admin-secret': 'myadminsecretkey',
         },
       },
     },
   ],
-  documents: ["graphql/queries/**/*.gql"],
+  documents: ['graphql/queries/**/*.gql'],
   overwrite: true,
   generates: {
-    "apps/web/types/graphql.tsx": {
-      plugins: [
-        "typescript",
-        "typescript-operations",
-        "typescript-react-apollo",
-      ],
+    'apps/web/types/graphql.tsx': {
+      plugins: ['typescript', 'typescript-operations', 'typescript-react-apollo'],
       config: {
         skipTypename: false,
         withHooks: true,

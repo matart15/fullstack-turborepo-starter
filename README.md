@@ -7,7 +7,6 @@ This is fullstack turborepo starter. It comes with the following features.
   - ✅ Env Config with Validation
   - ✅ Prisma
 - ✅ NextJS
-  - ✅ Tailwind
   - ✅ Redux Toolkit Query
   - ✅ Amplify UI via Figma
 - ✅ Testing using Jest
@@ -26,7 +25,7 @@ This turborepo uses [Yarn](https://classic.yarnpkg.com/lang/en/) as a package ma
 - `api`: a [NestJS](https://nestjs.com/) app
 - `web`: a [Next.js](https://nextjs.org) app
 - `ui`: a stub React component library used by `web`.
-- `config`: `eslint`, `nginx` and `tailwind` (includes `eslint-config-next` and `eslint-config-prettier`)
+- `config`: `eslint`, `nginx` (includes `eslint-config-next` and `eslint-config-prettier`)
 - `tsconfig`: `tsconfig.json`s used throughout the monorepo
 
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).

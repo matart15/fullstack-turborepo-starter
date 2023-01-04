@@ -1,6 +1,7 @@
 const path = require('path');
 
 const apiPath = path.resolve(__dirname, 'apps/api');
+const uiPath = path.resolve(__dirname, 'packages/ui');
 const webPath = path.resolve(__dirname, 'apps/web');
 
 const ciApiPath = path.resolve(__dirname, 'out/apps/api');
@@ -20,9 +21,10 @@ module.exports = {
       },
     },
     lint: {
-      default: `nps lint.web lint.api`,
+      default: `nps lint.web lint.api lint.ui`,
       web: `cd ${webPath} && yarn lint:fix`,
       api: `cd ${apiPath} && yarn lint:fix`,
+      ui: `cd ${uiPath} && yarn lint:fix`,
     },
     test: {
       default: `nps test.web test.api`,
@@ -42,12 +44,13 @@ module.exports = {
     prisma: {
       generate: `cd ${apiPath} && npx prisma generate`,
       studio: `cd ${apiPath} && npx prisma studio`,
-      seed: {
-        dev: `cd ${apiPath} && ts-node prisma/seed.ts`,
-      },
-      migrate: {
-        dev: `cd ${apiPath} && npx prisma migrate dev`,
-      },
+      seed: `cd ${apiPath} && yarn ts-node prisma/seed.ts`,
+      migrate: `cd ${apiPath} && npx prisma migrate dev`,
+      reset: `cd ${apiPath} && npx prisma migrate reset --force dev`,
+    },
+    codegen: {
+      default: 'nps codegen web',
+      web: `cd ${webPath} && yarn codegen`,
     },
     build: {
       default: 'npx turbo run build',
@@ -63,6 +66,6 @@ module.exports = {
         api: `docker build -t api . -f ${apiPath}/Dockerfile`,
       },
     },
-    dev: 'docker-compose up -d postgres && npx turbo run dev',
+    dev: 'nps prepare.docker && npx turbo run dev',
   },
 };

@@ -2,7 +2,7 @@
 /* eslint-disable react/forbid-elements */
 import { initializeApollo } from 'lib/apollo-client';
 import { addTranslationServerSideProps } from 'lib/i18nGetStaticProps';
-import { GetServerSideProps } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
@@ -12,7 +12,8 @@ type CurrentUser = {
   email: string;
   userId: string;
 };
-const Web = ({ email, userId }: CurrentUser): JSX.Element => {
+const Web: NextPage<CurrentUser> = (data): JSX.Element => {
+  const { email, userId } = data;
   const { locale } = useRouter();
   const { t } = useTranslation('common');
   return (
@@ -58,12 +59,12 @@ export const getServerSideProps: GetServerSideProps = addTranslationServerSidePr
     context,
   });
   try {
-    const ticketQueryResult = await client.query<CurrentUserQuery>({
+    const currentUserQueryResult = await client.query<CurrentUserQuery>({
       query: CurrentUserDocument,
       // variables: { id: ticketId }
     });
-    const { id } = ticketQueryResult.data.currentUser;
-    const { email } = ticketQueryResult.data.currentUser;
+    const { id } = currentUserQueryResult.data.currentUser;
+    const { email } = currentUserQueryResult.data.currentUser;
     return {
       props: {
         // ticketId,

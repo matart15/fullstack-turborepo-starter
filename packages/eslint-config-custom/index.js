@@ -177,7 +177,7 @@ module.exports = {
   rules: mainRules,
   overrides: [
     {
-      files: ['**/atoms/**/*.[jt]s?(x)'],
+      files: ['**/src/**/*.[jt]s?(x)'],
       rules: {
         ...mainRules,
         'react/forbid-elements': 'off',

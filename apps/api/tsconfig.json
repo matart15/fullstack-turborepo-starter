@@ -11,28 +11,22 @@
     },
     "target": "es2019",
     "module": "commonjs",
-    "esModuleInterop": true,
-    "moduleResolution": "Node",
     /* Experimental Options */
     "experimentalDecorators": true, 
     "emitDecoratorMetadata": true, 
     /* Advanced Options */
-    "forceConsistentCasingInFileNames": true,
 
-    // "declaration": true,
-    // "removeComments": true,
-    // "allowSyntheticDefaultImports": true,
-    // "sourceMap": true,
-    // "incremental": true,
-    // "skipLibCheck": true,
-    // "strictNullChecks": true,
-    // "noImplicitAny": false,
-    // "strictBindCallApply": false,
-    // "forceConsistentCasingInFileNames": false,
-    // "noFallthroughCasesInSwitch": false
+    "removeComments": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "strictBindCallApply": false,
+    "noEmit": false,
+    "incremental": false,
   },
   "ts-node": {
-      "esm": true
+    "esm": true
   }
 }
 

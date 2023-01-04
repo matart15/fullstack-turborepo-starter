@@ -1,7 +1,7 @@
 import { useAuth } from 'contexts/auth';
 import Router from 'next/router';
 import { useEffect } from 'react';
-import SignInForm, { SignInFormInputValues } from 'ui/src/ui-components/SignInForm';
+import { SignInForm, SignInFormInputValues } from 'ui';
 
 const SignInPage = (): JSX.Element => {
   const { currentUser, signIn } = useAuth();
