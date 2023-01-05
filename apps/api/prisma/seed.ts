@@ -18,8 +18,8 @@ const main = async (): Promise<void> => {
   // ユーザー追加
   await usersService.create({
     data: {
-      email: 'seller@example.com',
-      password: '1234qwer',
+      email: 'manger@asdf.com',
+      password: 'asdfasdf',
       emailConfirmedAt: new Date(),
       confirmationCode: '123',
     },
@@ -27,8 +27,8 @@ const main = async (): Promise<void> => {
 
   await usersService.create({
     data: {
-      email: 'buyer@example.com',
-      password: '1234qwer',
+      email: 'user@asdf.com',
+      password: 'asdfasdf',
       emailConfirmedAt: new Date(),
       confirmationCode: '456',
     },

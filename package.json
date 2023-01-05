@@ -1,6 +1,6 @@
 {
   "name": "@matart15/fullstack-turborepo-starter",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "bin": "bin/cli.js",
   "workspaces": [
     "apps/*",
