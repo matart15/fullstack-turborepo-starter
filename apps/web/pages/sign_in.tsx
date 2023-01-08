@@ -1,7 +1,7 @@
 import { useAuth } from 'contexts/auth';
 import Router from 'next/router';
 import { useEffect } from 'react';
-import { SignInForm, SignInFormInputValues } from 'ui';
+import { SignInInterface, SignInView } from 'ui/views/SignInView';
 
 const SignInPage = (): JSX.Element => {
   const { currentUser, signIn } = useAuth();
@@ -12,18 +12,13 @@ const SignInPage = (): JSX.Element => {
     }
   }, [currentUser]);
   return (
-    <SignInForm
-      onSubmit={async (fields: SignInFormInputValues): Promise<void> => {
-        try {
-          signIn({
-            email: fields.email || '',
-            password: fields.password || '',
-          });
-        } catch (error: unknown) {
-          if (error instanceof Error) {
-            console.error(error.message);
-          }
-        }
+    <SignInView
+      recaptchaSitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+      onSubmit={async (fields: SignInInterface): Promise<void> => {
+        signIn({
+          email: fields.email || '',
+          password: fields.password || '',
+        });
       }}
     />
   );

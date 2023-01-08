@@ -2,6 +2,7 @@ const path = require('path');
 
 const apiPath = path.resolve(__dirname, 'apps/api');
 const uiPath = path.resolve(__dirname, 'packages/ui');
+const validationPath = path.resolve(__dirname, 'packages/validations');
 const webPath = path.resolve(__dirname, 'apps/web');
 
 const ciApiPath = path.resolve(__dirname, 'out/apps/api');
@@ -28,8 +29,9 @@ module.exports = {
     },
     test: {
       default: `nps test.web test.api`,
-      web: `cd ${webPath} && yarn test:watch`,
-      api: `cd ${apiPath} && yarn test:watch`,
+      web: `cd ${webPath} && yarn test`,
+      api: `cd ${apiPath} && yarn test`,
+      validation: `cd ${validationPath} && yarn test`,
       ci: {
         default: `nps test.ci.web test.ci.api`,
         web: `cd ${ciWebPath} && yarn test:ci`,
@@ -67,5 +69,12 @@ module.exports = {
       },
     },
     dev: 'nps prepare.docker && npx turbo run dev',
+    storybook: `cd ${uiPath} && yarn storybook`,
+    hasura: {
+      metadata: {
+        apply: 'cd apps/hasura && hasura metadata apply --admin-secret myadminsecretkey',
+        export: 'cd apps/hasura && hasura metadata export --admin-secret myadminsecretkey',
+      },
+    },
   },
 };

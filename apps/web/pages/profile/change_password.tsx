@@ -1,12 +1,12 @@
 import { useChangePasswordMutation } from 'types/graphql';
-import ChangePassword, { ChangePasswordInputValues } from 'ui/src/ui-components/ChangePassword';
+import { ChangePasswordInterface, ChangePasswordView } from 'ui/views/ChangePassword';
 
 const ChangePasswordPage = (): JSX.Element => {
   const [changePasswordMutation] = useChangePasswordMutation();
   return (
-    <ChangePassword
-      onSubmit={(fields: ChangePasswordInputValues): void => {
-        if (!fields.newPassword || fields.newPassword !== fields.confirmPassword) {
+    <ChangePasswordView
+      onSubmit={async (fields: ChangePasswordInterface): Promise<void> => {
+        if (!fields.newPassword || fields.newPassword !== fields.password) {
           return;
         }
         try {

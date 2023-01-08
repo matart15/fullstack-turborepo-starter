@@ -1,0 +1,63 @@
+{
+  "common": {
+    "page": "page"
+  },
+  "signUp": {
+    "successMessage": "You are now logged",
+    "notAccess": "You do not have access",
+    "emailSignUp": "Email",
+    "passwordSignUp": "Password",
+    "form": {
+      "titleSignUp": "Sign Up",
+      "emailAddress": "email",
+      "password": "password",
+      "passwordConfirm": "confirm password"
+    }
+  },
+  "changePassword": {
+    "successMessage": "email sent",
+    "form": {
+      "titleChangePassword": "change password",
+      "password": "password",
+      "passwordConfirm": "confirm password",
+      "changePassword": "send email"
+    }
+  },
+  "signIn": {
+    "successMessage": "You are now logged",
+    "notAccess": "You do not have access",
+    "emailSignIn": "Email",
+    "passwordSignIn": "Password",
+    "form": {
+      "titleSignIn": "SignIn",
+      "titleAdminSignIn": "Admin signIn",
+      "emailAddress": "email",
+      "password": "password",
+      "forgotYourPassword": "Forgot password",
+      "signup": "Sign Up",
+      "clickHere": "Click here"
+    }
+  },
+  "validation": {
+    "common": {
+      "requiredEnterCharacterAndNumber": "Please combine single-byte alphanumerical characters for {{fieldName}}",
+      "requiredCharacterAndNumber": "Please use alphanumeric characters for {{fieldName}}",
+      "requiredEnterNumber": "Please enter in numbers",
+      "requiredKatakana": "Please enter in the full-width katakana",
+      "requiredField": "{{fieldName}} is a required item",
+      "required": "Please enter {{fieldName}}",
+      "requiredSelect": "Must be selected",
+      "maxLength": "Please enter {{maxLength}} characters",
+      "maxLength_withName": "Enter {{fieldName}} with no more than {{maxLength}} characters",
+      "minLength": "Must be at least {{minLength}} characters",
+      "minLength_withName": "{{fieldName}} must be at least {{minLength}} characters",
+      "inValid": "{{fieldName}} Invalid",
+      "notMatch": "{{fieldName}} Confirmations do not match",
+      "formatIncorrect": "The format of {{fieldName}} is incorrect",
+      "requiredSelectOneContactType": "Request to select one contact type"
+    },
+    "resetPassword": {
+      "confirmRepass": "The two passwords that you entered do not match"
+    }
+  }
+}

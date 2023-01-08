@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable react/forbid-elements */
 import { initializeApollo } from 'lib/apollo-client';
-import { addTranslationServerSideProps } from 'lib/i18nGetStaticProps';
+// import { addTranslationServerSideProps } from 'lib/i18nGetStaticProps';
 import { GetServerSideProps, NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
+// import { useTranslation } from 'next-i18next';
 import { CurrentUserDocument, CurrentUserQuery } from 'types/graphql';
 
 type CurrentUser = {
@@ -15,7 +15,7 @@ type CurrentUser = {
 const Web: NextPage<CurrentUser> = (data): JSX.Element => {
   const { email, userId } = data;
   const { locale } = useRouter();
-  const { t } = useTranslation('common');
+  // const { t } = useTranslation('common');
   return (
     <>
       <p>
@@ -35,14 +35,14 @@ const Web: NextPage<CurrentUser> = (data): JSX.Element => {
           </Link>
         )}
       </p>
-      <p>{t('index.welcome')}</p>
+      <p>welcome</p>
       <div>signed in user Id : {userId}</div>
       <div>signed in user email : {email}</div>
       <div>
-        <Link href="/sign_in">{t('sign_in.signin')}</Link>
+        <Link href="/sign_in">signin</Link>
       </div>
       <div>
-        <Link href="/sign_up">{t('sign_up.signup')}</Link>
+        <Link href="/sign_up">signup</Link>
       </div>
       <div>
         <Link href="/profile/change_password.tsx">change_password</Link>
@@ -50,7 +50,7 @@ const Web: NextPage<CurrentUser> = (data): JSX.Element => {
     </>
   );
 };
-export const getServerSideProps: GetServerSideProps = addTranslationServerSideProps(async context => {
+export const getServerSideProps: GetServerSideProps = async context => {
   // const cookies = context.req.headers.cookie;
   // const { params } = context
   // const { ticketId } = params as { ticketId: string }
@@ -80,6 +80,6 @@ export const getServerSideProps: GetServerSideProps = addTranslationServerSidePr
       },
     };
   }
-});
+};
 
 export default Web;

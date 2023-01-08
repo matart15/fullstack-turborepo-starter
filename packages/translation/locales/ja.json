@@ -1,0 +1,63 @@
+{
+  "common": {
+    "page": "ページ"
+  },
+  "signUp": {
+    "successMessage": "ログインしました。",
+    "notAccess": "アクセスできません",
+    "emailSignUp": "メールアドレス",
+    "passwordSignUp": "パスワード",
+    "form": {
+      "titleSignUp": "新規会員登録",
+      "emailAddress": "メールアドレス",
+      "password": "パスワード",
+      "passwordConfirm": "パスワード確認"
+    }
+  },
+  "signIn": {
+    "successMessage": "ログインしました。",
+    "notAccess": "アクセスできません",
+    "emailSignIn": "メールアドレス",
+    "passwordSignIn": "パスワード",
+    "form": {
+      "titleSignIn": "ログイン",
+      "titleAdminSignIn": "管理者ログイン",
+      "emailAddress": "メールアドレス",
+      "password": "パスワード",
+      "forgotYourPassword": "パスワードを忘れた方は",
+      "signup": "新規会員登録",
+      "clickHere": "こちら"
+    }
+  },
+  "changePassword": {
+    "successMessage": "メール送信しました。",
+    "form": {
+      "titleChangePassword": "パスワード変更",
+      "password": "パスワード",
+      "passwordConfirm": "パスワード確認",
+      "changePassword": "メール送信"
+    }
+  },
+  "validation": {
+    "common": {
+      "requiredEnterCharacterAndNumber": "{{fieldName}}は半角英数字を組み合わせてください",
+      "requiredCharacterAndNumber": "{{fieldName}}英数字を使用してください",
+      "requiredEnterNumber": "半角の数値を入力してください",
+      "requiredKatakana": "全角カタカナで入力してください",
+      "requiredField": "{{fieldName}}は必須項目です",
+      "required": "{{fieldName}}を入力してください",
+      "requiredSelect": "選択する必要があります",
+      "maxLength": "{{maxLength}}文字入力してください",
+      "maxLength_withName": "{{fieldName}}は{{maxLength}}文字以下で入力してください",
+      "minLength": "{{minLength}}文字以上で入力してください",
+      "minLength_withName": "{{fieldName}}は{{minLength}}文字以上で入力してください",
+      "inValid": "{{fieldName}}が無効です",
+      "notMatch": "{{fieldName}}確認が一致しません",
+      "formatIncorrect": "{{fieldName}}のフォーマットが正しくありません",
+      "requiredSelectOneContactType": "1つのお問い合わせタイプを選択するように要求する"
+    },
+    "resetPassword": {
+      "confirmRepass": "パスワード確認が一致しません"
+    }
+  }
+}

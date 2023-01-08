@@ -9,7 +9,15 @@ This is fullstack turborepo starter. It comes with the following features.
 - ✅ NextJS
   - ✅ Redux Toolkit Query
   - ✅ Amplify UI via Figma
-- ✅ Testing using Jest
+- Testing using Jest
+  - ✅ validations
+    - ✅ coverage
+  - [ ]UI
+- [ ] e2e test
+- [ ] translation key check
+  - i18n-scanner
+  - pagename / component name translation
+- [ ] not use hardcoded string for routes
 - ✅ Github Actions
 - ✅ Reverse Proxy using Nginx
 - ✅ Docker Integration
@@ -80,8 +88,18 @@ To develop all apps and packages, run the following command at the root of proje
 nps dev
 ```
 
+- open http://localhost:3000 ( web )
+- open http://localhost:8080 ( hasura )
+- open http://localhost:5000/graphql ( api )
+
+login data can be found in `seed.ts`
+
 The app should be running at `http://localhost` with reverse proxy configured.
 
 ## Other available commands
 
 Run `nps` in the terminal to see list of all available commands.
+
+## troubleshoot
+
+[troubleshoot](/docs/troubleshoot.md)

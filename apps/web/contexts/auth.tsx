@@ -2,6 +2,7 @@ import { setAccessToken } from 'lib/apollo-client';
 import Router from 'next/router';
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { CurrentUserQuery, useCurrentUserLazyQuery, useSignInUserMutation, useSignUpUserMutation } from 'types/graphql';
+import { popup } from 'ui/components/popup';
 
 type AuthContextType = {
   currentUser?: CurrentUserQuery['currentUser'];
@@ -53,23 +54,29 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }, [currentUserLazyQuery]);
 
   const signIn = async ({ email, password }: { email: string; password: string }): Promise<void> => {
-    setLoading(true);
-    const { data, errors } = await signInUserMutation({
-      variables: {
-        data: {
-          email,
-          password,
+    try {
+      setLoading(true);
+      const { data, errors } = await signInUserMutation({
+        variables: {
+          data: {
+            email,
+            password,
+          },
         },
-      },
-    });
+      });
 
-    if (errors && errors?.length > 0) {
+      if (errors && errors?.length > 0) {
+        setLoading(false);
+        popup.error(errors[0]);
+        // throw errors[0];
+      } else if (data) {
+        const { jwtToken } = data.signInUser;
+        setAccessToken(jwtToken);
+        await fetchCurrentUser();
+      }
+    } catch (error) {
       setLoading(false);
-      throw errors[0];
-    } else if (data) {
-      const { jwtToken } = data.signInUser;
-      setAccessToken(jwtToken);
-      await fetchCurrentUser();
+      popup.error(error);
     }
   };
   const signUp = async ({ email, password }: { email: string; password: string }): Promise<void> => {
