@@ -1,7 +1,12 @@
 query CurrentUser {
   currentUser {
     id
+    createdAt
+    updatedAt
     email
+    name
+    emailConfirmedAt
+    confirmationCode
   }
 }
 

@@ -8,7 +8,6 @@ This is fullstack turborepo starter. It comes with the following features.
   - ✅ Prisma
 - ✅ NextJS
   - ✅ Redux Toolkit Query
-  - ✅ Amplify UI via Figma
 - Testing using Jest
   - ✅ validations
     - ✅ coverage
@@ -18,6 +17,8 @@ This is fullstack turborepo starter. It comes with the following features.
   - i18n-scanner
   - pagename / component name translation
 - [ ] not use hardcoded string for routes
+- ✅ Authentication
+- ✅ Authorization ( via hasura )
 - ✅ Github Actions
 - ✅ Reverse Proxy using Nginx
 - ✅ Docker Integration

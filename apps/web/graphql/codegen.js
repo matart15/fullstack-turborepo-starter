@@ -11,7 +11,7 @@ module.exports = {
   documents: ['graphql/queries/**/*.gql'],
   overwrite: true,
   generates: {
-    'apps/web/types/graphql.tsx': {
+    'types/graphql.tsx': {
       plugins: ['typescript', 'typescript-operations', 'typescript-react-apollo'],
       config: {
         skipTypename: false,

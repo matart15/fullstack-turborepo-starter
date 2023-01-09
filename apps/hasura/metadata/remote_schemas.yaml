@@ -12,9 +12,15 @@
             query: Query
             mutation: Mutation
           }
+          scalar DateTime
           type CurrentUserResponse {
+            confirmationCode: DateTime!
+            createdAt: DateTime!
             email: String!
+            emailConfirmedAt: DateTime!
             id: String!
+            name: String!
+            updatedAt: DateTime!
           }
           type Mutation {
             changePassword(data: UserChangePasswordInput!): Boolean!

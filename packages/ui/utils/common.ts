@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router';
+
 const uncheck = 'uncheck';
 
 export const formatPrice = (price: number): string => {
@@ -41,19 +43,12 @@ export const whereArgs = (o: any): object => {
   return newO;
 };
 
-export const convertPostalCode = (
-  postalCodeFirst: string,
-  postalCodeLast: string,
-): string | null => {
+export const convertPostalCode = (postalCodeFirst: string, postalCodeLast: string): string | null => {
   if (!postalCodeFirst || !postalCodeLast) return null;
   return `${postalCodeFirst}-${postalCodeLast}`;
 };
 
-export const getEnumString = (
-  objectList: object,
-  type: string,
-  text: string,
-): string => {
+export const getEnumString = (objectList: object, type: string, text: string): string => {
   const index = Object.keys(objectList).indexOf(type);
   if (index < 0) {
     return `${text}1`;
@@ -73,7 +68,7 @@ export const convertObjectToArray = (data): Array<{}> => {
   if (!data) {
     return [];
   }
-  return Object.keys(data).map((key) => {
+  return Object.keys(data).map(key => {
     return (data as any)[key];
   });
 };
@@ -91,13 +86,20 @@ export const countEggs = (eggs: any[]): number => {
 export const countKens = (kens: any[]): number => {
   let countKen = 0;
   for (let i = 0; i < kens?.length; i += 1) {
-    if (
-      kens[i]?.devices?.some((device) =>
-        device?.eggs?.some((egg: any) => egg?.grade),
-      )
-    ) {
+    if (kens[i]?.devices?.some(device => device?.eggs?.some((egg: any) => egg?.grade))) {
       countKen += 1;
     }
   }
   return countKen;
+};
+
+const ALLOWED_LANGUAGES = ['en', 'ja'];
+export type AllowedLanguages = typeof ALLOWED_LANGUAGES[number];
+export const useCurrentLocale = (): AllowedLanguages => {
+  const router = useRouter();
+  const routerLocale = router.locale;
+  if (ALLOWED_LANGUAGES.includes(routerLocale)) {
+    return routerLocale;
+  }
+  return 'en';
 };

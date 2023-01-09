@@ -13,46 +13,18 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  DateTime: any;
 };
 
 export type CurrentUserResponse = {
   __typename?: 'CurrentUserResponse';
+  confirmationCode: Scalars['String'];
+  createdAt: Scalars['DateTime'];
   email: Scalars['String'];
+  emailConfirmedAt?: Maybe<Scalars['DateTime']>;
   id: Scalars['String'];
-};
-
-export type Mutation = {
-  __typename?: 'Mutation';
-  changePassword: Scalars['Boolean'];
-  confirmUserEmail: Scalars['Boolean'];
-  signInUser: UserSignInResponse;
-  signUpUser: Scalars['Boolean'];
-};
-
-
-export type MutationChangePasswordArgs = {
-  data: UserChangePasswordInput;
-};
-
-
-export type MutationConfirmUserEmailArgs = {
-  token: Scalars['String'];
-};
-
-
-export type MutationSignInUserArgs = {
-  data: UserSignInInput;
-};
-
-
-export type MutationSignUpUserArgs = {
-  data: UserSignUpInput;
-};
-
-export type Query = {
-  __typename?: 'Query';
-  currentUser: CurrentUserResponse;
-  sayHello: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['DateTime'];
 };
 
 export type UserChangePasswordInput = {
@@ -74,38 +46,89 @@ export type UserSignUpInput = {
   password: Scalars['String'];
 };
 
+/** mutation root */
+export type Mutation_Root = {
+  __typename?: 'mutation_root';
+  changePassword: Scalars['Boolean'];
+  confirmUserEmail: Scalars['Boolean'];
+  signInUser: UserSignInResponse;
+  signUpUser: Scalars['Boolean'];
+};
+
+
+/** mutation root */
+export type Mutation_RootChangePasswordArgs = {
+  data: UserChangePasswordInput;
+};
+
+
+/** mutation root */
+export type Mutation_RootConfirmUserEmailArgs = {
+  token: Scalars['String'];
+};
+
+
+/** mutation root */
+export type Mutation_RootSignInUserArgs = {
+  data: UserSignInInput;
+};
+
+
+/** mutation root */
+export type Mutation_RootSignUpUserArgs = {
+  data: UserSignUpInput;
+};
+
+export type Query_Root = {
+  __typename?: 'query_root';
+  currentUser: CurrentUserResponse;
+  sayHello: Scalars['String'];
+};
+
 export type CurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CurrentUserQuery = { __typename?: 'Query', currentUser: { __typename?: 'CurrentUserResponse', id: string, email: string } };
+export type CurrentUserQuery = { __typename?: 'query_root', currentUser: { __typename?: 'CurrentUserResponse', id: string, createdAt: any, updatedAt: any, email: string, name?: string | null, emailConfirmedAt?: any | null, confirmationCode: string } };
 
 export type SignUpUserMutationVariables = Exact<{
   data: UserSignUpInput;
 }>;
 
 
-export type SignUpUserMutation = { __typename?: 'Mutation', signUpUser: boolean };
+export type SignUpUserMutation = { __typename?: 'mutation_root', signUpUser: boolean };
 
 export type ChangePasswordMutationVariables = Exact<{
   data: UserChangePasswordInput;
 }>;
 
 
-export type ChangePasswordMutation = { __typename?: 'Mutation', changePassword: boolean };
+export type ChangePasswordMutation = { __typename?: 'mutation_root', changePassword: boolean };
 
 export type SignInUserMutationVariables = Exact<{
   data: UserSignInInput;
 }>;
 
 
-export type SignInUserMutation = { __typename?: 'Mutation', signInUser: { __typename?: 'UserSignInResponse', jwtToken: string } };
+export type SignInUserMutation = { __typename?: 'mutation_root', signInUser: { __typename?: 'UserSignInResponse', jwtToken: string } };
+
+export type ConfirmUserEmailMutationVariables = Exact<{
+  token: Scalars['String'];
+}>;
+
+
+export type ConfirmUserEmailMutation = { __typename?: 'mutation_root', confirmUserEmail: boolean };
 
 
 export const CurrentUserDocument = gql`
     query CurrentUser {
   currentUser {
     id
+    createdAt
+    updatedAt
     email
+    name
+    emailConfirmedAt
+    confirmationCode
   }
 }
     `;
@@ -231,3 +254,34 @@ export function useSignInUserMutation(baseOptions?: Apollo.MutationHookOptions<S
 export type SignInUserMutationHookResult = ReturnType<typeof useSignInUserMutation>;
 export type SignInUserMutationResult = Apollo.MutationResult<SignInUserMutation>;
 export type SignInUserMutationOptions = Apollo.BaseMutationOptions<SignInUserMutation, SignInUserMutationVariables>;
+export const ConfirmUserEmailDocument = gql`
+    mutation ConfirmUserEmail($token: String!) {
+  confirmUserEmail(token: $token)
+}
+    `;
+export type ConfirmUserEmailMutationFn = Apollo.MutationFunction<ConfirmUserEmailMutation, ConfirmUserEmailMutationVariables>;
+
+/**
+ * __useConfirmUserEmailMutation__
+ *
+ * To run a mutation, you first call `useConfirmUserEmailMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useConfirmUserEmailMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [confirmUserEmailMutation, { data, loading, error }] = useConfirmUserEmailMutation({
+ *   variables: {
+ *      token: // value for 'token'
+ *   },
+ * });
+ */
+export function useConfirmUserEmailMutation(baseOptions?: Apollo.MutationHookOptions<ConfirmUserEmailMutation, ConfirmUserEmailMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ConfirmUserEmailMutation, ConfirmUserEmailMutationVariables>(ConfirmUserEmailDocument, options);
+      }
+export type ConfirmUserEmailMutationHookResult = ReturnType<typeof useConfirmUserEmailMutation>;
+export type ConfirmUserEmailMutationResult = Apollo.MutationResult<ConfirmUserEmailMutation>;
+export type ConfirmUserEmailMutationOptions = Apollo.BaseMutationOptions<ConfirmUserEmailMutation, ConfirmUserEmailMutationVariables>;

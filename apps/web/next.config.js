@@ -2,7 +2,7 @@
 const withTM = require('next-transpile-modules')(['ui']);
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path');
-// const { i18n } = require('./next-i18next.config.js')
+const { i18n } = require('./next-i18next.config.js');
 
 module.exports = withTM({
   reactStrictMode: true,
@@ -12,7 +12,7 @@ module.exports = withTM({
   experimental: {
     outputFileTracingRoot: path.join(__dirname, '../../'),
   },
-  // i18n,
+  i18n,
   pageExtensions: ['tsx', 'ts'],
   webpack(config, { isServer }) {
     // if (phase === PHASE_DEVELOPMENT_SERVER && !isServer) {

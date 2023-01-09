@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "constants": "workspace:^",
-    "i18next": "21.8.13",
-    "i18next-scanner": "3.3.0",
-    "react-i18next": "11.18.0"
+    "i18next": "22.4.9",
+    "i18next-scanner": "4.1.0",
+    "react-i18next": "12.1.4"
   }
 }

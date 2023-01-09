@@ -4,6 +4,18 @@ module.exports = {
   extends: ['custom'],
   // ignorePatterns: ['src/ui-components/*'],
   rules: {
+    // 'eslint no-restricted-imports': [
+    //   'error',
+    //   {
+    //     paths: [
+    //       {
+    //         name: 'foo',
+    //         importNames: ['DisallowedObject'],
+    //         message: "Please import 'DisallowedObject' from '/bar/baz/' instead.",
+    //       },
+    //     ],
+    //   },
+    // ],
     'boundaries/element-types': [
       2,
       {
@@ -19,19 +31,19 @@ module.exports = {
         ],
       },
     ],
-    'boundaries/external': [
-      2,
-      {
-        // disallow all external imports by default
-        default: 'allow',
-        rules: [
-          {
-            from: ['views'],
-            disallow: ['antd'],
-          },
-        ],
-      },
-    ],
+    // 'boundaries/external': [
+    //   2,
+    //   {
+    //     // disallow all external imports by default
+    //     default: 'allow',
+    //     rules: [
+    //       {
+    //         from: ['views'],
+    //         disallow: ['antd'],
+    //       },
+    //     ],
+    //   },
+    // ],
   },
   settings: {
     'boundaries/elements': [

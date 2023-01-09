@@ -73,6 +73,8 @@ module.exports = {
     hasura: {
       metadata: {
         apply: 'cd apps/hasura && hasura metadata apply --admin-secret myadminsecretkey',
+        reload: 'cd apps/hasura && hasura metadata reload --admin-secret myadminsecretkey',
+        ic: 'cd apps/hasura && hasura metadata ic list --admin-secret myadminsecretkey',
         export: 'cd apps/hasura && hasura metadata export --admin-secret myadminsecretkey',
       },
     },

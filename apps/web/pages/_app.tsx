@@ -1,8 +1,8 @@
 // import { Amplify } from "aws-amplify";
 // import awsconfig from "../aws-exports";
 import '@aws-amplify/ui-react/styles.css';
-import 'antd/dist/antd.css';
 
+// import 'antd/dist/antd.css';
 import { ApolloProvider } from '@apollo/client';
 // import { ThemeProvider } from '@aws-amplify/ui-react';
 import { AuthProvider } from 'contexts/auth';
