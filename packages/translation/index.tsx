@@ -1,4 +1,4 @@
-import { LANGUAGE_KEY } from 'constants/index';
+// import { LANGUAGE_KEY } from 'constants/index';
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import en from './locales/en.json';
@@ -20,7 +20,7 @@ i18n
   .init({
     resources,
     // lng: localStorage.getItem(LANGUAGE_KEY) || 'ja',
-    lng: 'ja',
+    // lng: 'ja',
     interpolation: {
       escapeValue: false, // react already safes from xss
     },

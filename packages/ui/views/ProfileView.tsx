@@ -24,7 +24,7 @@ export const ProfileView = ({
           <Link href="/sign_up">signup</Link>
         </Row>
         <Row>
-          <Link href="/profile/change_password.tsx">change_password</Link>
+          <Link href="/profile/change_password">change_password</Link>
         </Row>
       </Col>
     </Row>

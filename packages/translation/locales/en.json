@@ -14,15 +14,6 @@
       "passwordConfirm": "confirm password"
     }
   },
-  "changePassword": {
-    "successMessage": "email sent",
-    "form": {
-      "titleChangePassword": "change password",
-      "password": "password",
-      "passwordConfirm": "confirm password",
-      "changePassword": "send email"
-    }
-  },
   "signIn": {
     "successMessage": "You are now logged",
     "notAccess": "You do not have access",
@@ -36,6 +27,15 @@
       "forgotYourPassword": "Forgot password",
       "signup": "Sign Up",
       "clickHere": "Click here"
+    }
+  },
+  "changePassword": {
+    "successMessage": "email sent",
+    "form": {
+      "titleChangePassword": "change password",
+      "password": "password",
+      "passwordConfirm": "confirm password",
+      "changePassword": "send email"
     }
   },
   "validation": {

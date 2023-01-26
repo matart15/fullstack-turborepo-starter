@@ -1,13 +1,10 @@
 import { Button, Col, Form, Input, Row, Typography } from 'antd';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { converSchemaToAntdRule } from 'validations';
-import { schemaValidate } from 'validations/SignUp/index';
 
 import { useRecaptha, useTranslatedTexts } from './hooks';
 import { SignUpInterface } from './SignUp.interface';
 
 const { Title } = Typography;
-const yupSync = converSchemaToAntdRule(schemaValidate);
 
 export interface SignUpProps {
   onSubmit: (v: SignUpInterface) => Promise<void>;
@@ -17,7 +14,7 @@ export interface SignUpProps {
 export const SignUp = ({ onSubmit, recaptchaSitekey }: SignUpProps): JSX.Element => {
   const [form] = Form.useForm<SignUpInterface & { passwordConfirm: string }>();
 
-  const { titleSignUp, emailLabel, passwordLabel, passwordConfirmLabel, signUpLabel } = useTranslatedTexts();
+  const { yupSync, titleSignUp, emailLabel, passwordLabel, passwordConfirmLabel, signUpLabel } = useTranslatedTexts();
 
   const { OnFinishWithrecaptha, reCaptchaChangeHandler } = useRecaptha(onSubmit);
   return (

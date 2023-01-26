@@ -1,3 +1,4 @@
+import { ALLOWED_LANGUAGES, AllowedLanguages } from 'constants/index';
 import { useRouter } from 'next/router';
 
 const uncheck = 'uncheck';
@@ -73,33 +74,11 @@ export const convertObjectToArray = (data): Array<{}> => {
   });
 };
 
-export const countEggs = (eggs: any[]): number => {
-  let countEgg = 0;
-  eggs?.forEach((egg: any) => {
-    if (egg.grade) {
-      countEgg += 1;
-    }
-  });
-  return countEgg;
-};
-
-export const countKens = (kens: any[]): number => {
-  let countKen = 0;
-  for (let i = 0; i < kens?.length; i += 1) {
-    if (kens[i]?.devices?.some(device => device?.eggs?.some((egg: any) => egg?.grade))) {
-      countKen += 1;
-    }
-  }
-  return countKen;
-};
-
-const ALLOWED_LANGUAGES = ['en', 'ja'];
-export type AllowedLanguages = typeof ALLOWED_LANGUAGES[number];
 export const useCurrentLocale = (): AllowedLanguages => {
   const router = useRouter();
   const routerLocale = router.locale;
   if (ALLOWED_LANGUAGES.includes(routerLocale)) {
     return routerLocale;
   }
-  return 'en';
+  return 'ja';
 };

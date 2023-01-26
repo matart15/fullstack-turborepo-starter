@@ -1,14 +1,11 @@
 import { Button, Col, Form, Input, Row, Typography } from 'antd';
 import { SignInType } from 'constants/signIn';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { converSchemaToAntdRule } from 'validations';
-import { schemaValidate } from 'validations/SignIn/index';
 
 import { useRecaptha, useTranslatedTexts } from './hooks';
 import { SignInInterface } from './SignIn.interface';
 
 const { Title, Link } = Typography;
-const yupSync = converSchemaToAntdRule(schemaValidate);
 
 export interface SignInProps {
   signInType?: SignInType;
@@ -25,8 +22,16 @@ export const SignIn = ({
 }: SignInProps): JSX.Element => {
   const [form] = Form.useForm();
 
-  const { titleSignIn, emailLabel, passwordLabel, forgotYourPasswordLabel, clickHereLabel, signInLabel, signupLabel } =
-    useTranslatedTexts(signInType);
+  const {
+    yupSync,
+    titleSignIn,
+    emailLabel,
+    passwordLabel,
+    forgotYourPasswordLabel,
+    clickHereLabel,
+    signInLabel,
+    signupLabel,
+  } = useTranslatedTexts(signInType);
 
   const { OnFinishWithrecaptha, reCaptchaChangeHandler } = useRecaptha(onSubmit);
   return (

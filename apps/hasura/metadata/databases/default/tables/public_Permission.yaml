@@ -1,0 +1,45 @@
+table:
+  name: Permission
+  schema: public
+array_relationships:
+  - name: _PermissionToRoles
+    using:
+      foreign_key_constraint_on:
+        column: A
+        table:
+          name: _PermissionToRole
+          schema: public
+  - name: _PermissionToUsers
+    using:
+      foreign_key_constraint_on:
+        column: A
+        table:
+          name: _PermissionToUser
+          schema: public
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - operation
+        - tableName
+      filter:
+        _exists:
+          _table:
+            name: Permission
+            schema: public
+          _where:
+            _and:
+              - tableName:
+                  _eq: permission
+              - operation:
+                  _eq: show
+              - _or:
+                  - _PermissionToUsers:
+                      User:
+                        id:
+                          _eq: X-Hasura-User-Id
+                  - _PermissionToRoles:
+                      Role:
+                        Users:
+                          id:
+                            _eq: X-Hasura-User-Id

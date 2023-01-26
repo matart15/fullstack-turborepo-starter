@@ -4,7 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { GraphQLModule } from '@nestjs/graphql';
 import { AcceptLanguageResolver, HeaderResolver, I18nModule } from 'nestjs-i18n';
-import { LoggerModule } from 'nestjs-pino';
+// import { LoggerModule } from 'nestjs-pino';
 import { PrismaModule } from 'nestjs-prisma';
 import { RequestContextModule } from 'nestjs-request-context';
 import * as path from 'path';
@@ -54,13 +54,13 @@ const interceptors = [
       resolvers: [{ use: HeaderResolver, options: ['locale'] }, AcceptLanguageResolver],
     }),
     PrismaModule.forRoot({ isGlobal: true }),
-    LoggerModule.forRoot({
-      // TODO: 本番環境ではSessionTokenを標準出力に出さないようにする。
-      pinoHttp: {
-        level: process.env.NODE_ENV !== 'production' ? 'debug' : 'info',
-        transport: process.env.NODE_ENV !== 'production' ? { target: 'pino-pretty' } : undefined,
-      },
-    }),
+    // LoggerModule.forRoot({
+    //   // TODO: 本番環境ではSessionTokenを標準出力に出さないようにする。
+    //   pinoHttp: {
+    //     level: process.env.NODE_ENV !== 'production' ? 'debug' : 'info',
+    //     transport: process.env.NODE_ENV !== 'production' ? { target: 'pino-pretty' } : undefined,
+    //   },
+    // }),
     AuthModule,
     UsersModule,
     RequestContextModule,

@@ -1,11 +1,7 @@
 import { Button, Col, Form, Input, Row, Typography } from 'antd';
-import { converSchemaToAntdRule } from 'validations';
-import { schemaValidate } from 'validations/ChangePassword/index';
 
 import { ChangePasswordInterface } from './ChangePassword.interface';
 import { useTranslatedTexts } from './hooks';
-
-const yupSync = converSchemaToAntdRule(schemaValidate);
 
 const { Title } = Typography;
 
@@ -14,7 +10,7 @@ export interface ChangePasswordProps {
 }
 
 export const ChangePassword = ({ onSubmit }: ChangePasswordProps): JSX.Element => {
-  const { titleChangePassword, passwordLabel, newPasswordLabel, changePasswordLabel } = useTranslatedTexts();
+  const { yupSync, titleChangePassword, passwordLabel, newPasswordLabel, changePasswordLabel } = useTranslatedTexts();
 
   const [form] = Form.useForm<ChangePasswordInterface>();
 

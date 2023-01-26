@@ -14,12 +14,12 @@
           }
           scalar DateTime
           type CurrentUserResponse {
-            confirmationCode: DateTime!
+            confirmationCode: String!
             createdAt: DateTime!
             email: String!
-            emailConfirmedAt: DateTime!
+            emailConfirmedAt: DateTime
             id: String!
-            name: String!
+            name: String
             updatedAt: DateTime!
           }
           type Mutation {

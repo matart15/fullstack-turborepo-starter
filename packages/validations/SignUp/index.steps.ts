@@ -7,7 +7,7 @@ const feature = loadFeature('./SignUp/index.feature');
 let badInputs: any[] = [];
 let goodInputs: any[] = [];
 
-defineFeature(feature, (test) => {
+defineFeature(feature, test => {
   test('Bad inputs', ({ given, then }) => {
     given('some bad inputs', (table: any[]) => {
       badInputs = table;
@@ -22,7 +22,7 @@ defineFeature(feature, (test) => {
       badInputs.forEach((badInput: any) => {
         badPromises.push(
           expectValidationFail({
-            schema: schemaValidate,
+            schema: schemaValidate('ja'),
             value: badInput,
             errorMessage: badInput.errorMessage,
           }),
@@ -31,7 +31,7 @@ defineFeature(feature, (test) => {
       goodInputs.forEach((goodInput: any) => {
         goodPromises.push(
           expectValidationPass({
-            schema: schemaValidate,
+            schema: schemaValidate('ja'),
             value: goodInput,
           }),
         );

@@ -47,7 +47,15 @@ export class AuthResolver {
   @UseGuards(GqlAuthGuard)
   signInUser(
     @Args('data') _userSignInInput: UserSignInInput,
-    @Context() context: { user: client.User },
+    @Context()
+    context: {
+      user: client.User & {
+        permissions: client.Permission[];
+        role: client.Role & {
+          permissions: client.Permission[];
+        };
+      };
+    },
   ): Promise<UserSignInResponse> {
     return this.authService.signInUser(context.user);
   }

@@ -22,6 +22,11 @@ const main = async (): Promise<void> => {
       password: 'Ab123456',
       emailConfirmedAt: new Date(),
       confirmationCode: '123',
+      role: {
+        create: {
+          name: 'manager',
+        },
+      },
     },
   });
 
@@ -31,6 +36,11 @@ const main = async (): Promise<void> => {
       password: 'Ab123456',
       emailConfirmedAt: new Date(),
       confirmationCode: '456',
+      role: {
+        create: {
+          name: 'user',
+        },
+      },
     },
   });
   console.log('💫 seed finished.');

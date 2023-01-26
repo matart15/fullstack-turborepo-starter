@@ -22,7 +22,7 @@ defineFeature(feature, test => {
       badInputs.forEach((badInput: any) => {
         badPromises.push(
           expectValidationFail({
-            schema: schemaValidate,
+            schema: schemaValidate('ja'),
             value: badInput,
             errorMessage: badInput.errorMessage,
           }),
@@ -31,7 +31,7 @@ defineFeature(feature, test => {
       goodInputs.forEach((goodInput: any) => {
         goodPromises.push(
           expectValidationPass({
-            schema: schemaValidate,
+            schema: schemaValidate('ja'),
             value: goodInput,
           }),
         );

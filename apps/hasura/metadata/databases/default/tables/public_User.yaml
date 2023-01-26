@@ -1,0 +1,37 @@
+table:
+  name: User
+  schema: public
+object_relationships:
+  - name: Role
+    using:
+      foreign_key_constraint_on: roleId
+array_relationships:
+  - name: _PermissionToUsers
+    using:
+      foreign_key_constraint_on:
+        column: B
+        table:
+          name: _PermissionToUser
+          schema: public
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - email
+        - emailConfirmedAt
+        - id
+        - name
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - name
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+      check: null
+      set:
+        password: ""

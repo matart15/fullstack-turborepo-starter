@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import { User } from '@prisma/client';
+import { Permission, Role, User } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -26,6 +26,14 @@ export class AuthService {
   async validateUser(email: string, password: string): Promise<User | null> {
     const user = await this.usersService.findUnique({
       where: { email },
+      include: {
+        permissions: true,
+        role: {
+          include: {
+            permissions: true,
+          },
+        },
+      },
     });
 
     if (user && bcrypt.compareSync(password, user.password)) {
@@ -89,9 +97,19 @@ export class AuthService {
     return true;
   }
 
-  async signInUser(user: User): Promise<UserSignInResponse> {
+  async signInUser(
+    user: User & {
+      permissions: Permission[];
+      role: Role & {
+        permissions: Permission[];
+      };
+    },
+  ): Promise<UserSignInResponse> {
     const payload: JwtPayload = {
       'https://hasura.io/jwt/claims': {
+        'x-hasura-allowed-permissions': `{${[...user.role.permissions, ...user.permissions]
+          .map(permission => `${permission.tableName}:${permission.operation}`)
+          .join(',')}}`,
         'x-hasura-allowed-roles': ['admin', 'user'],
         'x-hasura-default-role': 'user',
         'x-hasura-user-id': user.id.toString(),

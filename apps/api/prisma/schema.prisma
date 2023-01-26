@@ -11,12 +11,31 @@ datasource db {
 }
 
 model User {
-  id               String    @id @default(uuid())
-  createdAt        DateTime  @default(now()) @db.Timestamptz(6)
-  updatedAt        DateTime  @default(now()) @updatedAt @db.Timestamptz(6)
-  email            String    @unique
+  id               String       @id @default(uuid())
+  createdAt        DateTime     @default(now()) @db.Timestamptz(6)
+  updatedAt        DateTime     @default(now()) @updatedAt @db.Timestamptz(6)
+  email            String       @unique
   name             String?
-  password         String    @db.VarChar
+  password         String       @db.VarChar
   emailConfirmedAt DateTime?
-  confirmationCode String    @unique
+  confirmationCode String       @unique
+  role             Role         @relation(fields: [roleId], references: [id])
+  roleId           String
+  permissions      Permission[]
+}
+
+model Role {
+  id          String       @id @default(uuid())
+  name        String
+  description String?
+  users       User[]
+  permissions Permission[]
+}
+
+model Permission {
+  id        String @id @default(uuid())
+  tableName String
+  operation String
+  users     User[]
+  roles     Role[]
 }
