@@ -9,11 +9,17 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "jest.setup.js"
+    "jest.setup.js",
+    ".next/types/**/*.ts"
   ],
   "compilerOptions": {
     "baseUrl": "./",
     "jsx": "preserve",
-    "isolatedModules": true
+    "isolatedModules": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   }
 }

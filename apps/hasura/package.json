@@ -10,6 +10,6 @@
     "metadata:export": "$(yarn bin hasura) metadata export --admin-secret myadminsecretkey"
   },
   "devDependencies": {
-    "hasura-cli": "2.16.1"
+    "hasura-cli": "2.17.0"
   }
 }

@@ -3,6 +3,7 @@ import { changeLocale } from 'lib/changeLocale';
 import { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { CurrentUserDocument, CurrentUserQuery } from 'types/graphql';
+import { SiteLayout } from 'ui/components/Layout';
 import { AllowedLanguages } from 'ui/utils/common';
 import { ProfileView } from 'ui/views/ProfileView';
 
@@ -10,15 +11,17 @@ const Web: NextPage<CurrentUserQuery> = (data: CurrentUserQuery): JSX.Element =>
   const router = useRouter();
   const { currentUser } = data;
   return (
-    <ProfileView
-      user={currentUser}
-      handleLocaleChange={(newLocale: AllowedLanguages): void => {
-        changeLocale({
-          locale: newLocale,
-          router,
-        });
-      }}
-    />
+    <SiteLayout breadCrumbItems={['Home', 'App', 'Dashboard']}>
+      <ProfileView
+        user={currentUser}
+        handleLocaleChange={(newLocale: AllowedLanguages): void => {
+          changeLocale({
+            locale: newLocale,
+            router,
+          });
+        }}
+      />
+    </SiteLayout>
   );
 };
 export const getServerSideProps: GetServerSideProps = async context => {

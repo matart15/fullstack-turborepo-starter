@@ -1,9 +1,9 @@
 import { Col, Row } from 'antd';
+import { AllowedLanguages } from 'constants/index';
 import Link from 'next/link';
 
 import { ChangeLanguage } from '../components/ChangeLanguage';
 import { ProfileEdit } from '../components/Profile/ProfileEdit';
-import { AllowedLanguages } from '../utils/common';
 
 export const ProfileView = ({
   user,
