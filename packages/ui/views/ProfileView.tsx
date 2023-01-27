@@ -4,12 +4,13 @@ import Link from 'next/link';
 
 import { ChangeLanguage } from '../components/ChangeLanguage';
 import { ProfileEdit } from '../components/Profile/ProfileEdit';
+import { User } from '../components/UserList/hooks';
 
 export const ProfileView = ({
   user,
   handleLocaleChange,
 }: {
-  user: Record<string, string>;
+  user?: User | null;
   handleLocaleChange: (locale: AllowedLanguages) => void;
 }): JSX.Element => {
   return (

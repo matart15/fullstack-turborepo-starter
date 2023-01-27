@@ -32,7 +32,7 @@ select_permissions:
               - tableName:
                   _eq: permission
               - operation:
-                  _eq: show
+                  _eq: READ
               - _or:
                   - _PermissionToUsers:
                       User:

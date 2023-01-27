@@ -1,4 +1,4 @@
-import { CurrentUserDocument, CurrentUserQuery } from 'graphql/generated';
+import { UserDetailDocument, UserDetailQuery } from 'graphql/generated';
 import { initializeApollo } from 'lib/apollo-client';
 import { changeLocale } from 'lib/changeLocale';
 import { GetServerSideProps, NextPage } from 'next';
@@ -7,13 +7,14 @@ import { SiteLayout } from 'ui/components/Layout';
 import { AllowedLanguages } from 'ui/utils/common';
 import { ProfileView } from 'ui/views/ProfileView';
 
-const Web: NextPage<CurrentUserQuery> = (data: CurrentUserQuery): JSX.Element => {
+type UserDetailProps = { user: UserDetailQuery['User_by_pk'] };
+const UserDetail: NextPage<UserDetailProps> = (data: UserDetailProps): JSX.Element => {
   const router = useRouter();
-  const { currentUser } = data;
+  const { user } = data;
   return (
-    <SiteLayout breadCrumbItems={['Home', 'App', 'Dashboard']}>
+    <SiteLayout breadCrumbItems={['Home', 'User', 'Detail']}>
       <ProfileView
-        user={currentUser}
+        user={user}
         handleLocaleChange={(newLocale: AllowedLanguages): void => {
           changeLocale({
             locale: newLocale,
@@ -29,17 +30,19 @@ export const getServerSideProps: GetServerSideProps = async context => {
   // const { params } = context
   // const { ticketId } = params as { ticketId: string }
 
+  const { id } = context.query;
+
   const client = initializeApollo({
     context,
   });
   try {
-    const currentUserQueryResult = await client.query<CurrentUserQuery>({
-      query: CurrentUserDocument,
-      // variables: { id: ticketId }
+    const currentUserQueryResult = await client.query<UserDetailQuery>({
+      query: UserDetailDocument,
+      variables: { id },
     });
     return {
       props: {
-        currentUser: currentUserQueryResult.data.currentUser,
+        user: currentUserQueryResult.data.User_by_pk,
       },
     };
   } catch (_error) {
@@ -52,4 +55,4 @@ export const getServerSideProps: GetServerSideProps = async context => {
   }
 };
 
-export default Web;
+export default UserDetail;

@@ -32,10 +32,17 @@ model Role {
   permissions Permission[]
 }
 
+enum PermissionOperation {
+  CREATE
+  READ
+  UPDATE
+  DELETE
+}
+
 model Permission {
-  id        String @id @default(uuid())
+  id        String              @id @default(uuid())
   tableName String
-  operation String
+  operation PermissionOperation
   users     User[]
   roles     Role[]
 }

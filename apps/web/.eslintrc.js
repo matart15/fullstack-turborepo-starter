@@ -1,7 +1,7 @@
 module.exports = {
   root: true,
   extends: ['custom'],
-  ignorePatterns: ['types/graphql.tsx'],
+  ignorePatterns: ['graphql/generated.tsx'],
   parserOptions: {
     project: 'tsconfig.json',
     sourceType: 'module',

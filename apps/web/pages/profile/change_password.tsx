@@ -1,4 +1,4 @@
-import { useChangePasswordMutation } from 'types/graphql';
+import { useChangePasswordMutation } from 'graphql/generated';
 import { ChangePasswordInterface, ChangePasswordView } from 'ui/views/ChangePassword';
 
 const ChangePasswordPage = (): JSX.Element => {

@@ -1,7 +1,12 @@
+import {
+  CurrentUserQuery,
+  useCurrentUserLazyQuery,
+  useSignInUserMutation,
+  useSignUpUserMutation,
+} from 'graphql/generated';
 import { setAccessToken } from 'lib/apollo-client';
 import Router from 'next/router';
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import { CurrentUserQuery, useCurrentUserLazyQuery, useSignInUserMutation, useSignUpUserMutation } from 'types/graphql';
 import { popup } from 'ui/components/popup';
 
 type AuthContextType = {
