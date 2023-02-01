@@ -20,6 +20,8 @@ select_permissions:
   - role: user
     permission:
       columns:
+        - description
+        - id
         - name
       filter:
         Users:

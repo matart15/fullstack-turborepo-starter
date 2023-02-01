@@ -1,0 +1,20 @@
+query PermissionList(
+  $distinct_on: [Permission_select_column!]
+  $limit: Int
+  $offset: Int
+  $order_by: [Permission_order_by!]
+  $where: Permission_bool_exp
+) {
+  Permission(distinct_on: $distinct_on, limit: $limit, offset: $offset, order_by: $order_by, where: $where) {
+    id
+    operation
+    tableName
+  }
+}
+query PermissionDetail($id: String!) {
+  Permission_by_pk(id: $id) {
+    id
+    operation
+    tableName
+  }
+}

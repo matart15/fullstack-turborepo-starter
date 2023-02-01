@@ -1,25 +1,23 @@
-import { UserDetailDocument, UserDetailQuery } from 'graphql/generated';
+import { PermissionListDocument, PermissionListQuery, UserDetailDocument, UserDetailQuery } from 'graphql/generated';
 import { initializeApollo } from 'lib/apollo-client';
-import { changeLocale } from 'lib/changeLocale';
 import { GetServerSideProps, NextPage } from 'next';
-import { useRouter } from 'next/router';
 import { SiteLayout } from 'ui/components/Layout';
-import { AllowedLanguages } from 'ui/utils/common';
-import { ProfileView } from 'ui/views/ProfileView';
+import { UserDetailView } from 'ui/views/UserDetailView';
 
-type UserDetailProps = { user: UserDetailQuery['User_by_pk'] };
+type UserDetailProps = { user: UserDetailQuery['User_by_pk']; allPermissions: PermissionListQuery['Permission'] };
 const UserDetail: NextPage<UserDetailProps> = (data: UserDetailProps): JSX.Element => {
-  const router = useRouter();
-  const { user } = data;
+  const { user, allPermissions } = data;
   return (
     <SiteLayout breadCrumbItems={['Home', 'User', 'Detail']}>
-      <ProfileView
+      <UserDetailView
         user={user}
-        handleLocaleChange={(newLocale: AllowedLanguages): void => {
-          changeLocale({
-            locale: newLocale,
-            router,
-          });
+        allPermissions={allPermissions.map(permission => ({
+          name: `${permission.tableName}.${permission.operation}`,
+          id: permission.id,
+        }))}
+        onFinish={(value): void => {
+          // eslint-disable-next-line no-console
+          console.log('onFinish', value);
         }}
       />
     </SiteLayout>
@@ -36,13 +34,18 @@ export const getServerSideProps: GetServerSideProps = async context => {
     context,
   });
   try {
-    const currentUserQueryResult = await client.query<UserDetailQuery>({
+    const userDetailQueryResult = await client.query<UserDetailQuery>({
       query: UserDetailDocument,
       variables: { id },
     });
+
+    const permissionListQueryResult = await client.query<PermissionListQuery>({
+      query: PermissionListDocument,
+    });
     return {
       props: {
-        user: currentUserQueryResult.data.User_by_pk,
+        user: userDetailQueryResult.data.User_by_pk,
+        allPermissions: permissionListQueryResult.data.Permission,
       },
     };
   } catch (_error) {

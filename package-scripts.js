@@ -4,12 +4,19 @@ const apiPath = path.resolve(__dirname, 'apps/api');
 const uiPath = path.resolve(__dirname, 'packages/ui');
 const validationPath = path.resolve(__dirname, 'packages/validations');
 const webPath = path.resolve(__dirname, 'apps/web');
+const hasuraPath = path.resolve(__dirname, 'apps/hasura');
 
 const ciApiPath = path.resolve(__dirname, 'out/apps/api');
 const ciWebPath = path.resolve(__dirname, 'out/apps/web');
 
 module.exports = {
   scripts: {
+    open: {
+      default: 'nps open.web open.hasura',
+      web: `cd ${webPath} && yarn open`,
+      api: `cd ${apiPath} && yarn open`,
+      hasura: `cd ${hasuraPath} && yarn open`,
+    },
     prepare: {
       default: `nps prepare.web prepare.api`,
       web: `yarn`,
@@ -51,7 +58,7 @@ module.exports = {
       reset: `cd ${apiPath} && npx prisma migrate reset --force dev`,
     },
     codegen: {
-      default: 'nps codegen web',
+      default: 'nps codegen.web',
       web: `cd ${webPath} && yarn codegen`,
     },
     build: {
@@ -72,10 +79,10 @@ module.exports = {
     storybook: `cd ${uiPath} && yarn storybook`,
     hasura: {
       metadata: {
-        apply: 'cd apps/hasura && hasura metadata apply --admin-secret myadminsecretkey',
-        reload: 'cd apps/hasura && hasura metadata reload --admin-secret myadminsecretkey',
-        ic: 'cd apps/hasura && hasura metadata ic list --admin-secret myadminsecretkey',
-        export: 'cd apps/hasura && hasura metadata export --admin-secret myadminsecretkey',
+        apply: `cd ${hasuraPath} && hasura metadata apply --admin-secret myadminsecretkey`,
+        reload: `cd ${hasuraPath} && hasura metadata reload --admin-secret myadminsecretkey`,
+        ic: `cd ${hasuraPath} && hasura metadata ic list --admin-secret myadminsecretkey`,
+        export: `cd ${hasuraPath} && hasura metadata export --admin-secret myadminsecretkey`,
       },
     },
   },

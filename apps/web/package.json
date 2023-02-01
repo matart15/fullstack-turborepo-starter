@@ -11,6 +11,7 @@
     "test-server": "NODE_ENV=test yarn start",
     "build": "next build",
     "start": "next start",
+    "open": "open http://localhost:3000",
     "codegen": "graphql-codegen --config graphql/codegen.js",
     "codegen:watch": "yarn codegen --watch graphql/**/*.gql",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf .next"

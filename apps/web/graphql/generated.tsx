@@ -1902,6 +1902,24 @@ export type ConfirmUserEmailMutationVariables = Exact<{
 
 export type ConfirmUserEmailMutation = { __typename?: 'mutation_root', confirmUserEmail: boolean };
 
+export type PermissionListQueryVariables = Exact<{
+  distinct_on?: InputMaybe<Array<Permission_Select_Column> | Permission_Select_Column>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Permission_Order_By> | Permission_Order_By>;
+  where?: InputMaybe<Permission_Bool_Exp>;
+}>;
+
+
+export type PermissionListQuery = { __typename?: 'query_root', Permission: Array<{ __typename?: 'Permission', id: string, operation: any, tableName: string }> };
+
+export type PermissionDetailQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type PermissionDetailQuery = { __typename?: 'query_root', Permission_by_pk?: { __typename?: 'Permission', id: string, operation: any, tableName: string } | null };
+
 export type RoleListQueryVariables = Exact<{
   distinct_on?: InputMaybe<Array<Role_Select_Column> | Role_Select_Column>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -2105,6 +2123,90 @@ export function useConfirmUserEmailMutation(baseOptions?: Apollo.MutationHookOpt
 export type ConfirmUserEmailMutationHookResult = ReturnType<typeof useConfirmUserEmailMutation>;
 export type ConfirmUserEmailMutationResult = Apollo.MutationResult<ConfirmUserEmailMutation>;
 export type ConfirmUserEmailMutationOptions = Apollo.BaseMutationOptions<ConfirmUserEmailMutation, ConfirmUserEmailMutationVariables>;
+export const PermissionListDocument = gql`
+    query PermissionList($distinct_on: [Permission_select_column!], $limit: Int, $offset: Int, $order_by: [Permission_order_by!], $where: Permission_bool_exp) {
+  Permission(
+    distinct_on: $distinct_on
+    limit: $limit
+    offset: $offset
+    order_by: $order_by
+    where: $where
+  ) {
+    id
+    operation
+    tableName
+  }
+}
+    `;
+
+/**
+ * __usePermissionListQuery__
+ *
+ * To run a query within a React component, call `usePermissionListQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePermissionListQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePermissionListQuery({
+ *   variables: {
+ *      distinct_on: // value for 'distinct_on'
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
+ *      order_by: // value for 'order_by'
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function usePermissionListQuery(baseOptions?: Apollo.QueryHookOptions<PermissionListQuery, PermissionListQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PermissionListQuery, PermissionListQueryVariables>(PermissionListDocument, options);
+      }
+export function usePermissionListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PermissionListQuery, PermissionListQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PermissionListQuery, PermissionListQueryVariables>(PermissionListDocument, options);
+        }
+export type PermissionListQueryHookResult = ReturnType<typeof usePermissionListQuery>;
+export type PermissionListLazyQueryHookResult = ReturnType<typeof usePermissionListLazyQuery>;
+export type PermissionListQueryResult = Apollo.QueryResult<PermissionListQuery, PermissionListQueryVariables>;
+export const PermissionDetailDocument = gql`
+    query PermissionDetail($id: String!) {
+  Permission_by_pk(id: $id) {
+    id
+    operation
+    tableName
+  }
+}
+    `;
+
+/**
+ * __usePermissionDetailQuery__
+ *
+ * To run a query within a React component, call `usePermissionDetailQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePermissionDetailQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePermissionDetailQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function usePermissionDetailQuery(baseOptions: Apollo.QueryHookOptions<PermissionDetailQuery, PermissionDetailQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PermissionDetailQuery, PermissionDetailQueryVariables>(PermissionDetailDocument, options);
+      }
+export function usePermissionDetailLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PermissionDetailQuery, PermissionDetailQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PermissionDetailQuery, PermissionDetailQueryVariables>(PermissionDetailDocument, options);
+        }
+export type PermissionDetailQueryHookResult = ReturnType<typeof usePermissionDetailQuery>;
+export type PermissionDetailLazyQueryHookResult = ReturnType<typeof usePermissionDetailLazyQuery>;
+export type PermissionDetailQueryResult = Apollo.QueryResult<PermissionDetailQuery, PermissionDetailQueryVariables>;
 export const RoleListDocument = gql`
     query RoleList($distinct_on: [Role_select_column!], $limit: Int, $offset: Int, $order_by: [Role_order_by!], $where: Role_bool_exp) {
   Role(

@@ -20,26 +20,7 @@ select_permissions:
   - role: user
     permission:
       columns:
+        - id
         - operation
         - tableName
-      filter:
-        _exists:
-          _table:
-            name: Permission
-            schema: public
-          _where:
-            _and:
-              - tableName:
-                  _eq: permission
-              - operation:
-                  _eq: READ
-              - _or:
-                  - _PermissionToUsers:
-                      User:
-                        id:
-                          _eq: X-Hasura-User-Id
-                  - _PermissionToRoles:
-                      Role:
-                        Users:
-                          id:
-                            _eq: X-Hasura-User-Id
+      filter: {}
