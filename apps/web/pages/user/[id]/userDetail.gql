@@ -1,0 +1,18 @@
+query UserDetail($where: UserWhereUniqueInput!) {
+  findUniqueUser(where: $where) {
+    confirmationCode
+    createdAt
+    email
+    emailConfirmedAt
+    id
+    name
+    permissions {
+      id
+    }
+    role {
+      id
+    }
+    roleId
+    updatedAt
+  }
+}

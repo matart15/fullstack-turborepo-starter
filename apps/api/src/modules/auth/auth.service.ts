@@ -6,7 +6,7 @@ import * as bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
 
 import { MailService } from '../mail/mail.service';
-import { UsersService } from '../users/users.service';
+import { UserService } from '../user/user.service';
 import { AuthConfirmationCodeDoesNotExist } from './auth.error';
 import { AuthInvalidPasssword } from './auth.errors';
 import { UserChangePasswordInput } from './dto/user-change-password.input';
@@ -17,7 +17,7 @@ import { JwtPayload } from './interfaces/jwt-payload.interface';
 @Injectable()
 export class AuthService {
   constructor(
-    private usersService: UsersService,
+    private usersService: UserService,
     private mailService: MailService,
     private jwtService: JwtService,
     private configService: ConfigService,

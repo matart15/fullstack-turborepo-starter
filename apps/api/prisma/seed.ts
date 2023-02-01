@@ -2,10 +2,10 @@
 import { PrismaClient } from '@prisma/client';
 import { PrismaService } from 'nestjs-prisma';
 
-import * as a from '../src/modules/users/users.service';
+import * as a from '../src/modules/user/user.service';
 
 console.log('a: ', a);
-const { UsersService } = a;
+const { UserService } = a;
 
 const prisma = new PrismaClient();
 
@@ -13,7 +13,7 @@ const main = async (): Promise<void> => {
   console.log('💫 seed executing ...');
 
   const prismaService = new PrismaService();
-  const usersService = new UsersService(prismaService);
+  const usersService = new UserService(prismaService);
 
   // ユーザー追加
   await usersService.create({

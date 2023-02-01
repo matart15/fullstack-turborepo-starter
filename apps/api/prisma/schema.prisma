@@ -5,17 +5,30 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator nestgraphql {
+  // provider = "node node_modules/prisma-nestjs-graphql"
+  // for yarn monorepos
+  provider          = "prisma-nestjs-graphql"
+  output            = "./@generated"
+  outputFilePattern = "{model}/{type}/{name}.{type}.ts"
+  tsConfigFilePath  = "./tsconfig.json"
+
+  // for more configuration options, see https://github.com/unlight/prisma-nestjs-graphql
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id               String       @id @default(uuid())
-  createdAt        DateTime     @default(now()) @db.Timestamptz(6)
-  updatedAt        DateTime     @default(now()) @updatedAt @db.Timestamptz(6)
-  email            String       @unique
-  name             String?
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  email     String   @unique
+  name      String?
+
+  /// @HideField({ output: true, input: false })
   password         String       @db.VarChar
   emailConfirmedAt DateTime?
   confirmationCode String       @unique

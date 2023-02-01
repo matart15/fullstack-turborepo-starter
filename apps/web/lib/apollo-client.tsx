@@ -24,7 +24,7 @@ export const setAccessToken: (value: AccessToken) => void = value => {
 let apolloClient: ApolloClient<NormalizedCacheObject>;
 const createApolloClient = (context?: GetServerSidePropsContext): ApolloClient<NormalizedCacheObject> => {
   const httpLink = createHttpLink({
-    uri: process.env.NEXT_PUBLIC_GRQPHQL_API_ENDPOINT || 'http://localhost:8080/v1/graphql',
+    uri: process.env.NEXT_PUBLIC_GRQPHQL_API_ENDPOINT || 'http://localhost:5000/graphql',
   });
 
   const authLink = setContext((_, { headers }) => {

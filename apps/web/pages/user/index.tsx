@@ -4,7 +4,7 @@ import { GetServerSideProps } from 'next';
 import { SiteLayout } from 'ui/components/Layout';
 import { UserListView } from 'ui/views/UserListView';
 
-const UserList = (data: { userList: UserListQuery['User'] }): JSX.Element => {
+const UserList = (data: { userList: UserListQuery['findManyUsers'] }): JSX.Element => {
   const { userList } = data;
   return (
     <SiteLayout breadCrumbItems={['Home', 'User']}>
@@ -17,12 +17,12 @@ export const getServerSideProps: GetServerSideProps = async context => {
     context,
   });
   try {
-    const currentUserQueryResult = await client.query<UserListQuery>({
+    const userListQueryResult = await client.query<UserListQuery>({
       query: UserListDocument,
     });
     return {
       props: {
-        userList: currentUserQueryResult.data.User,
+        userList: userListQueryResult.data.findManyUsers,
       },
     };
   } catch (_error) {

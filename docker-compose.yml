@@ -25,31 +25,6 @@ services:
       - '5432:5432'
     networks:
       - default_network
-  hasura:
-    # image: hasura/graphql-engine:v2.16.1
-    build:
-      context: .
-      dockerfile: ./apps/hasura/Dockerfile.hasura.development
-    volumes:
-      - ./apps/hasura:/tmp/hasura-project/hasura
-    ports:
-      - '8080:8080'
-    depends_on:
-      - 'postgres'
-    restart: always
-    environment:
-      HASURA_GRAPHQL_DATABASE_URL: postgresql://test:test@postgres:5432/mydb
-      REMOTE_SCHEMA_ENDPOINT: http://host.docker.internal:5000/graphql
-      HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
-      HASURA_GRAPHQL_JWT_SECRET: '{"type": "HS512", "key": "3EK6FD+o0+c7tzBNVfjpMkNDi2yARAAKzQlk8O2IKoxQu4nF7EdAh8s3TwpHwrdWT6R"}'
-      HASURA_GRAPHQL_DEV_MODE: 'true'
-      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
-      HASURA_GRAPHQL_MIGRATIONS_DIR: '/tmp/hasura-project/migrations'
-      HASURA_GRAPHQL_METADATA_DIR: '/tmp/hasura-project/metadata'
-      HASURA_GRAPHQL_ENABLE_REMOTE_SCHEMA_PERMISSIONS: 'true'
-      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: 'anonymous'
-    networks:
-      - default_network
   maildev:
     image: maildev/maildev
     ports:

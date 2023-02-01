@@ -15,7 +15,9 @@ import { ContextInterceptor } from './libs/application/context/ContextIntercepto
 import { ExceptionInterceptor } from './libs/application/interceptors/exception.interceptor';
 import { AuthModule } from './modules/auth/auth.module';
 import { MailModule } from './modules/mail/mail.module';
-import { UsersModule } from './modules/users/users.module';
+import { PermissionModule } from './modules/permission/permission.module';
+import { RoleModule } from './modules/role/role.module';
+import { UserModule } from './modules/user/user.module';
 
 const interceptors = [
   {
@@ -62,9 +64,11 @@ const interceptors = [
     //   },
     // }),
     AuthModule,
-    UsersModule,
+    UserModule,
     RequestContextModule,
     MailModule,
+    PermissionModule,
+    RoleModule,
   ],
   controllers: [],
   providers: [AppResolver, ...interceptors],

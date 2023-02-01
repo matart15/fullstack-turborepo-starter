@@ -215,6 +215,7 @@ module.exports = {
                   '@storybook/react',
                   '@storybook/testing-library',
                   '@storybook/jest',
+                  '@nestjs/testing',
                 ],
               ],
               // 'no-import-side-effect': true,

@@ -1,0 +1,14 @@
+query RoleList(
+  $cursor: RoleWhereUniqueInput
+  $distinct: [RoleScalarFieldEnum!]
+  $orderBy: [RoleOrderByWithRelationInput!]
+  $skip: Int
+  $take: Int
+  $where: RoleWhereInput
+) {
+  findManyRoles(cursor: $cursor, distinct: $distinct, orderBy: $orderBy, skip: $skip, take: $take, where: $where) {
+    id
+    name
+    description
+  }
+}

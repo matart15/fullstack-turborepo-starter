@@ -1,0 +1,15 @@
+query UserList(
+  $cursor: UserWhereUniqueInput
+  $distinct: [UserScalarFieldEnum!]
+  $orderBy: [UserOrderByWithRelationInput!]
+  $skip: Int
+  $take: Int
+  $where: UserWhereInput
+) {
+  findManyUsers(cursor: $cursor, distinct: $distinct, orderBy: $orderBy, skip: $skip, take: $take, where: $where) {
+    email
+    emailConfirmedAt
+    id
+    name
+  }
+}

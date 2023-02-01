@@ -1,0 +1,24 @@
+query CurrentUser {
+  currentUser {
+    id
+    createdAt
+    updatedAt
+    email
+    name
+    emailConfirmedAt
+    confirmationCode
+  }
+}
+
+mutation SignUpUser($data: UserSignUpInput!) {
+  signUpUser(data: $data)
+}
+
+mutation SignInUser($data: UserSignInInput!) {
+  signInUser(data: $data) {
+    jwtToken
+  }
+}
+mutation ConfirmUserEmail($token: String!) {
+  confirmUserEmail(token: $token)
+}

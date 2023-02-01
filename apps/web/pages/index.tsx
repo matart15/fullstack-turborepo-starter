@@ -1,10 +1,10 @@
+import { AllowedLanguages } from 'constants/index';
 import { CurrentUserDocument, CurrentUserQuery } from 'graphql/generated';
 import { initializeApollo } from 'lib/apollo-client';
 import { changeLocale } from 'lib/changeLocale';
 import { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { SiteLayout } from 'ui/components/Layout';
-import { AllowedLanguages } from 'ui/utils/common';
 import { ProfileView } from 'ui/views/ProfileView';
 
 const Web: NextPage<CurrentUserQuery> = (data: CurrentUserQuery): JSX.Element => {

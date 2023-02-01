@@ -1,5 +1,0 @@
-- "!include public_Permission.yaml"
-- "!include public_Role.yaml"
-- "!include public_User.yaml"
-- "!include public__PermissionToRole.yaml"
-- "!include public__PermissionToUser.yaml"

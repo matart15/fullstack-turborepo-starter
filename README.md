@@ -18,7 +18,7 @@ This is fullstack turborepo starter. It comes with the following features.
   - pagename / component name translation
 - [ ] not use hardcoded string for routes
 - ✅ Authentication
-- ✅ Authorization ( via hasura )
+- ✅ Authorization
 - ✅ Github Actions
 - ✅ Reverse Proxy using Nginx
 - ✅ Docker Integration
@@ -90,7 +90,6 @@ nps dev
 ```
 
 - open http://localhost:3000 ( web )
-- open http://localhost:8080 ( hasura )
 - open http://localhost:5000/graphql ( api )
 
 login data can be found in `seed.ts`

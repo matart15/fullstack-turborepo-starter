@@ -4,7 +4,7 @@ import { GetServerSideProps } from 'next';
 import { SiteLayout } from 'ui/components/Layout';
 import { RoleListView } from 'ui/views/RoleListView';
 
-const RoleList = (data: { roleList: RoleListQuery['Role'] }): JSX.Element => {
+const RoleList = (data: { roleList: RoleListQuery['findManyRoles'] }): JSX.Element => {
   const { roleList } = data;
   return (
     <SiteLayout breadCrumbItems={['Home', 'Role']}>
@@ -22,7 +22,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
     });
     return {
       props: {
-        roleList: currentRoleQueryResult.data.Role,
+        roleList: currentRoleQueryResult.data.findManyRoles,
       },
     };
   } catch (_error) {

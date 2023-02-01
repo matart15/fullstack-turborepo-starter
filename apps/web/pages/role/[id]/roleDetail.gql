@@ -1,0 +1,7 @@
+query RoleDetail($where: RoleWhereUniqueInput!) {
+  findUniqueRole(where: $where) {
+    id
+    name
+    description
+  }
+}
