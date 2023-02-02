@@ -4,7 +4,7 @@
 module.exports = [
   {
     type: 'input',
-    name: 'message',
-    message: "What's your message?"
-  }
-]
+    name: 'name',
+    message: "What's your page name?",
+  },
+];

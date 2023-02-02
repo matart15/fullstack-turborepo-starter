@@ -33,7 +33,7 @@ module.exports = {
       ui: `cd ${uiPath} && yarn lint:fix`,
     },
     test: {
-      default: `nps test.web test.api`,
+      default: `nps test.validation`,
       web: `cd ${webPath} && yarn test`,
       api: `cd ${apiPath} && yarn test`,
       validation: `cd ${validationPath} && yarn test`,

@@ -40,10 +40,10 @@ export const useTranslatedTexts = (): {
   const currentLocale = useCurrentLocale();
   i18n.changeLanguage(currentLocale); // hack. We could not easily set language on react component from next  path
   const yupSync = converSchemaToAntdRule(schemaValidate(currentLocale));
-  const titleSignUp = i18n.t('signUp.form.titleSignUp');
-  const emailLabel = i18n.t('signUp.form.emailAddress');
-  const passwordLabel = i18n.t('signUp.form.password');
-  const passwordConfirmLabel = i18n.t('signUp.form.passwordConfirm');
-  const signUpLabel = i18n.t('signUp.form.titleSignUp');
+  const titleSignUp = i18n.t('pages.signUp.form.titleSignUp');
+  const emailLabel = i18n.t('pages.signUp.form.emailAddress');
+  const passwordLabel = i18n.t('pages.signUp.form.password');
+  const passwordConfirmLabel = i18n.t('pages.signUp.form.passwordConfirm');
+  const signUpLabel = i18n.t('pages.signUp.form.titleSignUp');
   return { yupSync, titleSignUp, emailLabel, passwordLabel, passwordConfirmLabel, signUpLabel };
 };

@@ -43,13 +43,15 @@ export const useTranslatedTexts = (
   i18n.changeLanguage(currentLocale); // hack. We could not easily set language on react component from next  path
   const yupSync = converSchemaToAntdRule(schemaValidate(currentLocale));
   const titleSignIn =
-    signInType === SignInType.Admin ? i18n.t('signIn.form.titleAdminSignIn') : i18n.t('signIn.form.titleSignIn');
-  const emailLabel = i18n.t('signIn.form.emailAddress');
-  const passwordLabel = i18n.t('signIn.form.password');
-  const forgotYourPasswordLabel = i18n.t('signIn.form.forgotYourPassword');
-  const clickHereLabel = i18n.t('signIn.form.clickHere');
-  const signInLabel = i18n.t('signIn.form.titleSignIn');
-  const signupLabel = i18n.t('signIn.form.signup');
+    signInType === SignInType.Admin
+      ? i18n.t('pages.signIn.form.titleAdminSignIn')
+      : i18n.t('pages.signIn.form.titleSignIn');
+  const emailLabel = i18n.t('pages.signIn.form.emailAddress');
+  const passwordLabel = i18n.t('pages.signIn.form.password');
+  const forgotYourPasswordLabel = i18n.t('pages.signIn.form.forgotYourPassword');
+  const clickHereLabel = i18n.t('pages.signIn.form.clickHere');
+  const signInLabel = i18n.t('pages.signIn.form.titleSignIn');
+  const signupLabel = i18n.t('pages.signIn.form.signup');
   return {
     yupSync,
     titleSignIn,

@@ -1,42 +1,8 @@
 {
   "common": {
-    "page": "page"
-  },
-  "signUp": {
-    "successMessage": "You are now logged",
-    "notAccess": "You do not have access",
-    "emailSignUp": "Email",
-    "passwordSignUp": "Password",
-    "form": {
-      "titleSignUp": "Sign Up",
-      "emailAddress": "email",
-      "password": "password",
-      "passwordConfirm": "confirm password"
-    }
-  },
-  "signIn": {
-    "successMessage": "You are now logged",
-    "notAccess": "You do not have access",
-    "emailSignIn": "Email",
-    "passwordSignIn": "Password",
-    "form": {
-      "titleSignIn": "SignIn",
-      "titleAdminSignIn": "Admin signIn",
-      "emailAddress": "email",
-      "password": "password",
-      "forgotYourPassword": "Forgot password",
-      "signup": "Sign Up",
-      "clickHere": "Click here"
-    }
-  },
-  "changePassword": {
-    "successMessage": "email sent",
-    "form": {
-      "titleChangePassword": "change password",
-      "password": "password",
-      "passwordConfirm": "confirm password",
-      "changePassword": "send email"
-    }
+    "page": "page",
+    "search": "search",
+    "ok": "OK"
   },
   "validation": {
     "common": {
@@ -58,6 +24,44 @@
     },
     "resetPassword": {
       "confirmRepass": "The two passwords that you entered do not match"
+    }
+  },
+  "pages": {
+    "signUp": {
+      "successMessage": "You are now logged",
+      "notAccess": "You do not have access",
+      "emailSignUp": "Email",
+      "passwordSignUp": "Password",
+      "form": {
+        "titleSignUp": "Sign Up",
+        "emailAddress": "email",
+        "password": "password",
+        "passwordConfirm": "confirm password"
+      }
+    },
+    "signIn": {
+      "successMessage": "You are now logged",
+      "notAccess": "You do not have access",
+      "emailSignIn": "Email",
+      "passwordSignIn": "Password",
+      "form": {
+        "titleSignIn": "SignIn",
+        "titleAdminSignIn": "Admin signIn",
+        "emailAddress": "email",
+        "password": "password",
+        "forgotYourPassword": "Forgot password",
+        "signup": "Sign Up",
+        "clickHere": "Click here"
+      }
+    },
+    "changePassword": {
+      "successMessage": "email sent",
+      "form": {
+        "titleChangePassword": "change password",
+        "password": "password",
+        "passwordConfirm": "confirm password",
+        "changePassword": "send email"
+      }
     }
   }
 }

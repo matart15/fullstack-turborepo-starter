@@ -1,22 +1,24 @@
+---
+to: packages/validations/<%= h.changeCase.pascal(name) %>/index.ts
+---
+
 import * as Yup from 'yup';
 import i18n from 'translation/index';
-import { AllowedLanguages, PASSWORD_REG } from 'constants/index';
-import { getEmailRule } from '../sharedValidationRules';
+import { AllowedLanguages } from 'constants/index';
 
 export const schemaValidate = (currentLocale: AllowedLanguages) => {
   i18n.changeLanguage(currentLocale); // hack. We could not easily set language on react component from next  path
   return Yup.object().shape({
-    email: getEmailRule(),
-    password: Yup.string()
+    field: Yup.string()
       .required(
         i18n.t('validation.common.required', {
-          fieldName: i18n.t('pages.signIn.passwordSignIn'),
+          fieldName: i18n.t('pages.<%= h.changeCase.camel(name) %>.field'),
         }),
       )
       .min(
         8,
         i18n.t('validation.common.minLength', {
-          fieldName: i18n.t('pages.signIn.passwordSignIn'),
+          fieldName: i18n.t('pages.<%= h.changeCase.camel(name) %>.field'),
           context: 'withName',
           minLength: 8,
         }),
@@ -24,15 +26,9 @@ export const schemaValidate = (currentLocale: AllowedLanguages) => {
       .max(
         50,
         i18n.t('validation.common.maxLength', {
-          fieldName: i18n.t('pages.signIn.passwordSignIn'),
+          fieldName: i18n.t('pages.<%= h.changeCase.camel(name) %>.field'),
           context: 'withName',
           maxLength: 50,
-        }),
-      )
-      .matches(
-        PASSWORD_REG,
-        i18n.t('validation.common.requiredEnterCharacterAndNumber', {
-          fieldName: i18n.t('pages.signIn.passwordSignIn'),
         }),
       ),
   });

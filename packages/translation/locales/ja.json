@@ -1,42 +1,8 @@
 {
   "common": {
-    "page": "ページ"
-  },
-  "signUp": {
-    "successMessage": "ログインしました。",
-    "notAccess": "アクセスできません",
-    "emailSignUp": "メールアドレス",
-    "passwordSignUp": "パスワード",
-    "form": {
-      "titleSignUp": "新規会員登録",
-      "emailAddress": "メールアドレス",
-      "password": "パスワード",
-      "passwordConfirm": "パスワード確認"
-    }
-  },
-  "signIn": {
-    "successMessage": "ログインしました。",
-    "notAccess": "アクセスできません",
-    "emailSignIn": "メールアドレス",
-    "passwordSignIn": "パスワード",
-    "form": {
-      "titleSignIn": "ログイン",
-      "titleAdminSignIn": "管理者ログイン",
-      "emailAddress": "メールアドレス",
-      "password": "パスワード",
-      "forgotYourPassword": "パスワードを忘れた方は",
-      "signup": "新規会員登録",
-      "clickHere": "こちら"
-    }
-  },
-  "changePassword": {
-    "successMessage": "メール送信しました。",
-    "form": {
-      "titleChangePassword": "パスワード変更",
-      "password": "パスワード",
-      "passwordConfirm": "パスワード確認",
-      "changePassword": "メール送信"
-    }
+    "page": "ページ",
+    "search": "検索",
+    "ok": "OK"
   },
   "validation": {
     "common": {
@@ -58,6 +24,44 @@
     },
     "resetPassword": {
       "confirmRepass": "パスワード確認が一致しません"
+    }
+  },
+  "pages": {
+    "signUp": {
+      "successMessage": "ログインしました。",
+      "notAccess": "アクセスできません",
+      "emailSignUp": "メールアドレス",
+      "passwordSignUp": "パスワード",
+      "form": {
+        "titleSignUp": "新規会員登録",
+        "emailAddress": "メールアドレス",
+        "password": "パスワード",
+        "passwordConfirm": "パスワード確認"
+      }
+    },
+    "signIn": {
+      "successMessage": "ログインしました。",
+      "notAccess": "アクセスできません",
+      "emailSignIn": "メールアドレス",
+      "passwordSignIn": "パスワード",
+      "form": {
+        "titleSignIn": "ログイン",
+        "titleAdminSignIn": "管理者ログイン",
+        "emailAddress": "メールアドレス",
+        "password": "パスワード",
+        "forgotYourPassword": "パスワードを忘れた方は",
+        "signup": "新規会員登録",
+        "clickHere": "こちら"
+      }
+    },
+    "changePassword": {
+      "successMessage": "メール送信しました。",
+      "form": {
+        "titleChangePassword": "パスワード変更",
+        "password": "パスワード",
+        "passwordConfirm": "パスワード確認",
+        "changePassword": "メール送信"
+      }
     }
   }
 }

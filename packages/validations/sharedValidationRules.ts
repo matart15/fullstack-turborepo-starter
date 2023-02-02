@@ -7,12 +7,12 @@ export const getEmailRule = (): RequiredStringSchema<string | undefined, AnyObje
   return Yup.string()
     .required(
       i18n.t('validation.common.required', {
-        fieldName: i18n.t('signIn.form.emailAddress'),
+        fieldName: i18n.t('pages.signIn.form.emailAddress'),
       }),
     )
     .email(
       i18n.t('validation.common.formatIncorrect', {
-        fieldName: i18n.t('signIn.form.emailAddress'),
+        fieldName: i18n.t('pages.signIn.form.emailAddress'),
       }),
     );
 };
