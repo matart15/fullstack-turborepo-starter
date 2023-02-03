@@ -1,44 +1,47 @@
-import { Field, HideField, ID, ObjectType } from '@nestjs/graphql';
-
-import { Permission } from '../../permission/model/permission.model';
+import { Field } from '@nestjs/graphql';
+import { ObjectType } from '@nestjs/graphql';
+import { ID } from '@nestjs/graphql';
+import { HideField } from '@nestjs/graphql';
 import { Role } from '../../role/model/role.model';
+import { Permission } from '../../permission/model/permission.model';
 import { UserCount } from '../output/user-count.output';
 
 @ObjectType()
 export class User {
-  @Field(() => ID, { nullable: false })
-  id!: string;
 
-  @Field(() => Date, { nullable: false })
-  createdAt!: Date;
+    @Field(() => ID, {nullable:false})
+    id!: string;
 
-  @Field(() => Date, { nullable: false })
-  updatedAt!: Date;
+    @Field(() => Date, {nullable:false})
+    createdAt!: Date;
 
-  @Field(() => String, { nullable: false })
-  email!: string;
+    @Field(() => Date, {nullable:false})
+    updatedAt!: Date;
 
-  @Field(() => String, { nullable: true })
-  name!: string | null;
+    @Field(() => String, {nullable:false})
+    email!: string;
 
-  @HideField()
-  password!: string;
+    @Field(() => String, {nullable:true})
+    name!: string | null;
 
-  @Field(() => Date, { nullable: true })
-  emailConfirmedAt!: Date | null;
+    @HideField()
+    password!: string;
 
-  @Field(() => String, { nullable: false })
-  confirmationCode!: string;
+    @Field(() => Date, {nullable:true})
+    emailConfirmedAt!: Date | null;
 
-  @Field(() => Role, { nullable: false })
-  role?: Role;
+    @Field(() => String, {nullable:false})
+    confirmationCode!: string;
 
-  @Field(() => String, { nullable: false })
-  roleId!: string;
+    @Field(() => Role, {nullable:false})
+    role?: Role;
 
-  @Field(() => [Permission], { nullable: true })
-  permissions?: Array<Permission>;
+    @Field(() => String, {nullable:false})
+    roleId!: string;
 
-  @Field(() => UserCount, { nullable: false })
-  _count?: UserCount;
+    @Field(() => [Permission], {nullable:true})
+    permissions?: Array<Permission>;
+
+    @Field(() => UserCount, {nullable:false})
+    _count?: UserCount;
 }

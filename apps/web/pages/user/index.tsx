@@ -1,16 +1,30 @@
-import { UserListDocument, UserListQuery } from 'graphql/generated';
+import { useDeleteUserMutation, UserListDocument, UserListQuery } from 'graphql/generated';
 import { initializeApollo } from 'lib/apollo-client';
 import { GetServerSideProps } from 'next';
-import { SiteLayout } from 'ui/components/Layout';
+import i18n from 'translation';
+import { popup } from 'ui/components/popup';
+import { useCurrentLocale } from 'ui/utils/common';
 import { UserListView } from 'ui/views/UserListView';
 
 const UserList = (data: { userList: UserListQuery['findManyUsers'] }): JSX.Element => {
   const { userList } = data;
-  return (
-    <SiteLayout breadCrumbItems={['Home', 'User']}>
-      <UserListView users={userList} />
-    </SiteLayout>
-  );
+  const currentLocale = useCurrentLocale();
+  i18n.changeLanguage(currentLocale); // hack. We could not easily set language on react component from next  path
+  const [deleteUserMutation] = useDeleteUserMutation();
+  const handleDelete = async (id: string): Promise<void> => {
+    try {
+      await deleteUserMutation({
+        variables: {
+          id,
+        },
+        refetchQueries: [{ query: UserListDocument }],
+      });
+      popup.success(i18n.t('common.succeeded'));
+    } catch (error) {
+      popup.error(error);
+    }
+  };
+  return <UserListView users={userList} handleDelete={handleDelete} />;
 };
 export const getServerSideProps: GetServerSideProps = async context => {
   const client = initializeApollo({

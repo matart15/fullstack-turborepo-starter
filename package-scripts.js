@@ -3,6 +3,7 @@ const path = require('path');
 const apiPath = path.resolve(__dirname, 'apps/api');
 const uiPath = path.resolve(__dirname, 'packages/ui');
 const validationPath = path.resolve(__dirname, 'packages/validations');
+const translationPath = path.resolve(__dirname, 'packages/translation');
 const webPath = path.resolve(__dirname, 'apps/web');
 
 const ciApiPath = path.resolve(__dirname, 'out/apps/api');
@@ -27,10 +28,11 @@ module.exports = {
       },
     },
     lint: {
-      default: `nps lint.web lint.api lint.ui`,
+      default: `nps lint.web lint.api lint.ui lint.translation`,
       web: `cd ${webPath} && yarn lint:fix`,
       api: `cd ${apiPath} && yarn lint:fix`,
       ui: `cd ${uiPath} && yarn lint:fix`,
+      translation: `cd ${translationPath} && yarn lint:fix`,
     },
     test: {
       default: `nps test.validation`,
@@ -58,6 +60,17 @@ module.exports = {
     codegen: {
       default: 'nps codegen.web',
       web: `cd ${webPath} && yarn codegen`,
+    },
+    generate: {
+      page: {
+        list: 'hygen page list',
+        edit: 'hygen page edit',
+      },
+      component: {
+        list: 'hygen component list',
+        form: 'hygen component form',
+      },
+      validation: 'hygen validation new',
     },
     build: {
       default: 'npx turbo run build',

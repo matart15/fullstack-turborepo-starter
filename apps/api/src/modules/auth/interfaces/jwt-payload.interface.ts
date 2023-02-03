@@ -6,11 +6,11 @@ export declare enum HasuraAllowedRoles {
 export type HasuraAllowedRolesString = keyof typeof HasuraAllowedRoles;
 
 export interface JwtHasuraClaims {
-  'x-hasura-allowed-permissions': string;
-  'x-hasura-allowed-roles': HasuraAllowedRolesString[];
-  'x-hasura-default-role': HasuraAllowedRolesString;
+  // 'x-hasura-allowed-permissions': string;
+  // 'x-hasura-allowed-roles': HasuraAllowedRolesString[];
+  // 'x-hasura-default-role': HasuraAllowedRolesString;
   'x-hasura-user-id': string;
-  'x-hasura-role': HasuraAllowedRolesString;
+  // 'x-hasura-role': HasuraAllowedRolesString;
 }
 
 export interface JwtPayload {

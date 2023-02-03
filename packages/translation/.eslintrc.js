@@ -1,9 +1,8 @@
-const baseSetting = require('config/eslint.base.js')
 module.exports = {
-  ...baseSetting,
-  rules: {
-    'import/no-default-export': 'off'
-  },
+  root: true,
+  // This tells ESLint to load the config from the package `eslint-config-custom`
+  extends: ['custom'],
+  // ignorePatterns: ['src/ui-components/*'],
   parserOptions: {
     tsconfigRootDir: __dirname,
     project: './tsconfig.json',
@@ -11,4 +10,4 @@ module.exports = {
   globals: {
     JSX: true,
   },
-}
+};

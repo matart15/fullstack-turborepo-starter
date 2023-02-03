@@ -107,13 +107,13 @@ export class AuthService {
   ): Promise<UserSignInResponse> {
     const payload: JwtPayload = {
       'https://hasura.io/jwt/claims': {
-        'x-hasura-allowed-permissions': `{${[...user.role.permissions, ...user.permissions]
-          .map(permission => `${permission.tableName}:${permission.operation}`)
-          .join(',')}}`,
-        'x-hasura-allowed-roles': ['admin', 'user'],
-        'x-hasura-default-role': 'user',
+        // 'x-hasura-allowed-permissions': `{${[...user.role.permissions, ...user.permissions]
+        //   .map(permission => `${permission.tableName}:${permission.operation}`)
+        //   .join(',')}}`,
+        // 'x-hasura-allowed-roles': ['admin', 'user'],
+        // 'x-hasura-default-role': 'user',
         'x-hasura-user-id': user.id.toString(),
-        'x-hasura-role': 'user',
+        // 'x-hasura-role': 'user',
       },
       sub: user.id.toString(),
       iat: Date.now() / 1000,

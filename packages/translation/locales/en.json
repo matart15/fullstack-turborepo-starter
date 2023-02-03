@@ -2,6 +2,7 @@
   "common": {
     "page": "page",
     "search": "search",
+    "succeeded": "operation succeeded",
     "ok": "OK"
   },
   "validation": {

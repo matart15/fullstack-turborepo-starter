@@ -1,0 +1,21 @@
+mutation UpdateUser($id: String!, $data: UserUpdateInput!) {
+  updateUser(where: { id: $id }, data: $data) {
+    confirmationCode
+    createdAt
+    email
+    emailConfirmedAt
+    id
+    name
+    permissions {
+      id
+      tableName
+      operation
+    }
+    role {
+      id
+      name
+    }
+    roleId
+    updatedAt
+  }
+}

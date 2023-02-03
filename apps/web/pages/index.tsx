@@ -4,24 +4,21 @@ import { initializeApollo } from 'lib/apollo-client';
 import { changeLocale } from 'lib/changeLocale';
 import { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { SiteLayout } from 'ui/components/Layout';
 import { ProfileView } from 'ui/views/ProfileView';
 
 const Web: NextPage<CurrentUserQuery> = (data: CurrentUserQuery): JSX.Element => {
   const router = useRouter();
   const { currentUser } = data;
   return (
-    <SiteLayout breadCrumbItems={['Home', 'App', 'Dashboard']}>
-      <ProfileView
-        user={currentUser}
-        handleLocaleChange={(newLocale: AllowedLanguages): void => {
-          changeLocale({
-            locale: newLocale,
-            router,
-          });
-        }}
-      />
-    </SiteLayout>
+    <ProfileView
+      user={currentUser}
+      handleLocaleChange={(newLocale: AllowedLanguages): void => {
+        changeLocale({
+          locale: newLocale,
+          router,
+        });
+      }}
+    />
   );
 };
 export const getServerSideProps: GetServerSideProps = async context => {

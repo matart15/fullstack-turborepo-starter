@@ -1,27 +1,29 @@
-import { Field, ID, ObjectType } from '@nestjs/graphql';
-
+import { Field } from '@nestjs/graphql';
+import { ObjectType } from '@nestjs/graphql';
+import { ID } from '@nestjs/graphql';
 import { PermissionOperation } from '../../prisma/enum/permission-operation.enum';
-import { Role } from '../../role/model/role.model';
 import { User } from '../../user/model/user.model';
+import { Role } from '../../role/model/role.model';
 import { PermissionCount } from '../output/permission-count.output';
 
 @ObjectType()
 export class Permission {
-  @Field(() => ID, { nullable: false })
-  id!: string;
 
-  @Field(() => String, { nullable: false })
-  tableName!: string;
+    @Field(() => ID, {nullable:false})
+    id!: string;
 
-  @Field(() => PermissionOperation, { nullable: false })
-  operation!: keyof typeof PermissionOperation;
+    @Field(() => String, {nullable:false})
+    tableName!: string;
 
-  @Field(() => [User], { nullable: true })
-  users?: Array<User>;
+    @Field(() => PermissionOperation, {nullable:false})
+    operation!: keyof typeof PermissionOperation;
 
-  @Field(() => [Role], { nullable: true })
-  roles?: Array<Role>;
+    @Field(() => [User], {nullable:true})
+    users?: Array<User>;
 
-  @Field(() => PermissionCount, { nullable: false })
-  _count?: PermissionCount;
+    @Field(() => [Role], {nullable:true})
+    roles?: Array<Role>;
+
+    @Field(() => PermissionCount, {nullable:false})
+    _count?: PermissionCount;
 }

@@ -1,41 +1,43 @@
-import { ArgsType, Field, Int } from '@nestjs/graphql';
-import { Type } from 'class-transformer';
-
-import { RoleScalarFieldEnum } from '../enum/role-scalar-field.enum';
-import { RoleCountAggregateInput } from '../input/role-count-aggregate.input';
-import { RoleMaxAggregateInput } from '../input/role-max-aggregate.input';
-import { RoleMinAggregateInput } from '../input/role-min-aggregate.input';
-import { RoleOrderByWithAggregationInput } from '../input/role-order-by-with-aggregation.input';
-import { RoleScalarWhereWithAggregatesInput } from '../input/role-scalar-where-with-aggregates.input';
+import { Field } from '@nestjs/graphql';
+import { ArgsType } from '@nestjs/graphql';
 import { RoleWhereInput } from '../input/role-where.input';
+import { Type } from 'class-transformer';
+import { RoleOrderByWithAggregationInput } from '../input/role-order-by-with-aggregation.input';
+import { RoleScalarFieldEnum } from '../enum/role-scalar-field.enum';
+import { RoleScalarWhereWithAggregatesInput } from '../input/role-scalar-where-with-aggregates.input';
+import { Int } from '@nestjs/graphql';
+import { RoleCountAggregateInput } from '../input/role-count-aggregate.input';
+import { RoleMinAggregateInput } from '../input/role-min-aggregate.input';
+import { RoleMaxAggregateInput } from '../input/role-max-aggregate.input';
 
 @ArgsType()
 export class RoleGroupByArgs {
-  @Field(() => RoleWhereInput, { nullable: true })
-  @Type(() => RoleWhereInput)
-  where?: RoleWhereInput;
 
-  @Field(() => [RoleOrderByWithAggregationInput], { nullable: true })
-  orderBy?: Array<RoleOrderByWithAggregationInput>;
+    @Field(() => RoleWhereInput, {nullable:true})
+    @Type(() => RoleWhereInput)
+    where?: RoleWhereInput;
 
-  @Field(() => [RoleScalarFieldEnum], { nullable: false })
-  by!: Array<keyof typeof RoleScalarFieldEnum>;
+    @Field(() => [RoleOrderByWithAggregationInput], {nullable:true})
+    orderBy?: Array<RoleOrderByWithAggregationInput>;
 
-  @Field(() => RoleScalarWhereWithAggregatesInput, { nullable: true })
-  having?: RoleScalarWhereWithAggregatesInput;
+    @Field(() => [RoleScalarFieldEnum], {nullable:false})
+    by!: Array<keyof typeof RoleScalarFieldEnum>;
 
-  @Field(() => Int, { nullable: true })
-  take?: number;
+    @Field(() => RoleScalarWhereWithAggregatesInput, {nullable:true})
+    having?: RoleScalarWhereWithAggregatesInput;
 
-  @Field(() => Int, { nullable: true })
-  skip?: number;
+    @Field(() => Int, {nullable:true})
+    take?: number;
 
-  @Field(() => RoleCountAggregateInput, { nullable: true })
-  _count?: RoleCountAggregateInput;
+    @Field(() => Int, {nullable:true})
+    skip?: number;
 
-  @Field(() => RoleMinAggregateInput, { nullable: true })
-  _min?: RoleMinAggregateInput;
+    @Field(() => RoleCountAggregateInput, {nullable:true})
+    _count?: RoleCountAggregateInput;
 
-  @Field(() => RoleMaxAggregateInput, { nullable: true })
-  _max?: RoleMaxAggregateInput;
+    @Field(() => RoleMinAggregateInput, {nullable:true})
+    _min?: RoleMinAggregateInput;
+
+    @Field(() => RoleMaxAggregateInput, {nullable:true})
+    _max?: RoleMaxAggregateInput;
 }

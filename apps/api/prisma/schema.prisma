@@ -25,6 +25,7 @@ model User {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now()) @db.Timestamptz(6)
   updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  /// @HideField({ match: 'UserWhereUniqueInput' })
   email     String   @unique
   name      String?
 

@@ -17,6 +17,10 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+input DateTimeFieldUpdateOperationsInput {
+  set: DateTime
+}
+
 input DateTimeFilter {
   equals: DateTime
   gt: DateTime
@@ -39,6 +43,10 @@ input DateTimeNullableFilter {
   notIn: [DateTime!]
 }
 
+input EnumPermissionOperationFieldUpdateOperationsInput {
+  set: PermissionOperation
+}
+
 input EnumPermissionOperationFilter {
   equals: PermissionOperation
   in: [PermissionOperation!]
@@ -49,8 +57,10 @@ input EnumPermissionOperationFilter {
 type Mutation {
   changePassword(data: UserChangePasswordInput!): Boolean!
   confirmUserEmail(token: String!): Boolean!
+  deleteUser(id: String!): User!
   signInUser(data: UserSignInInput!): UserSignInResponse!
   signUpUser(data: UserSignUpInput!): Boolean!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User!
 }
 
 input NestedDateTimeFilter {
@@ -110,6 +120,14 @@ input NestedStringNullableFilter {
   startsWith: String
 }
 
+input NullableDateTimeFieldUpdateOperationsInput {
+  set: DateTime
+}
+
+input NullableStringFieldUpdateOperationsInput {
+  set: String
+}
+
 type Permission {
   _count: PermissionCount!
   id: ID!
@@ -122,6 +140,42 @@ type Permission {
 type PermissionCount {
   roles: Int!
   users: Int!
+}
+
+input PermissionCreateNestedManyWithoutRolesInput {
+  connect: [PermissionWhereUniqueInput!]
+  connectOrCreate: [PermissionCreateOrConnectWithoutRolesInput!]
+  create: [PermissionCreateWithoutRolesInput!]
+}
+
+input PermissionCreateNestedManyWithoutUsersInput {
+  connect: [PermissionWhereUniqueInput!]
+  connectOrCreate: [PermissionCreateOrConnectWithoutUsersInput!]
+  create: [PermissionCreateWithoutUsersInput!]
+}
+
+input PermissionCreateOrConnectWithoutRolesInput {
+  create: PermissionCreateWithoutRolesInput!
+  where: PermissionWhereUniqueInput!
+}
+
+input PermissionCreateOrConnectWithoutUsersInput {
+  create: PermissionCreateWithoutUsersInput!
+  where: PermissionWhereUniqueInput!
+}
+
+input PermissionCreateWithoutRolesInput {
+  id: String
+  operation: PermissionOperation!
+  tableName: String!
+  users: UserCreateNestedManyWithoutPermissionsInput
+}
+
+input PermissionCreateWithoutUsersInput {
+  id: String
+  operation: PermissionOperation!
+  roles: RoleCreateNestedManyWithoutPermissionsInput
+  tableName: String!
 }
 
 input PermissionListRelationFilter {
@@ -153,6 +207,93 @@ enum PermissionScalarFieldEnum {
   id
   operation
   tableName
+}
+
+input PermissionScalarWhereInput {
+  AND: [PermissionScalarWhereInput!]
+  NOT: [PermissionScalarWhereInput!]
+  OR: [PermissionScalarWhereInput!]
+  id: StringFilter
+  operation: EnumPermissionOperationFilter
+  tableName: StringFilter
+}
+
+input PermissionUpdateManyMutationInput {
+  id: StringFieldUpdateOperationsInput
+  operation: EnumPermissionOperationFieldUpdateOperationsInput
+  tableName: StringFieldUpdateOperationsInput
+}
+
+input PermissionUpdateManyWithWhereWithoutRolesInput {
+  data: PermissionUpdateManyMutationInput!
+  where: PermissionScalarWhereInput!
+}
+
+input PermissionUpdateManyWithWhereWithoutUsersInput {
+  data: PermissionUpdateManyMutationInput!
+  where: PermissionScalarWhereInput!
+}
+
+input PermissionUpdateManyWithoutRolesNestedInput {
+  connect: [PermissionWhereUniqueInput!]
+  connectOrCreate: [PermissionCreateOrConnectWithoutRolesInput!]
+  create: [PermissionCreateWithoutRolesInput!]
+  delete: [PermissionWhereUniqueInput!]
+  deleteMany: [PermissionScalarWhereInput!]
+  disconnect: [PermissionWhereUniqueInput!]
+  set: [PermissionWhereUniqueInput!]
+  update: [PermissionUpdateWithWhereUniqueWithoutRolesInput!]
+  updateMany: [PermissionUpdateManyWithWhereWithoutRolesInput!]
+  upsert: [PermissionUpsertWithWhereUniqueWithoutRolesInput!]
+}
+
+input PermissionUpdateManyWithoutUsersNestedInput {
+  connect: [PermissionWhereUniqueInput!]
+  connectOrCreate: [PermissionCreateOrConnectWithoutUsersInput!]
+  create: [PermissionCreateWithoutUsersInput!]
+  delete: [PermissionWhereUniqueInput!]
+  deleteMany: [PermissionScalarWhereInput!]
+  disconnect: [PermissionWhereUniqueInput!]
+  set: [PermissionWhereUniqueInput!]
+  update: [PermissionUpdateWithWhereUniqueWithoutUsersInput!]
+  updateMany: [PermissionUpdateManyWithWhereWithoutUsersInput!]
+  upsert: [PermissionUpsertWithWhereUniqueWithoutUsersInput!]
+}
+
+input PermissionUpdateWithWhereUniqueWithoutRolesInput {
+  data: PermissionUpdateWithoutRolesInput!
+  where: PermissionWhereUniqueInput!
+}
+
+input PermissionUpdateWithWhereUniqueWithoutUsersInput {
+  data: PermissionUpdateWithoutUsersInput!
+  where: PermissionWhereUniqueInput!
+}
+
+input PermissionUpdateWithoutRolesInput {
+  id: StringFieldUpdateOperationsInput
+  operation: EnumPermissionOperationFieldUpdateOperationsInput
+  tableName: StringFieldUpdateOperationsInput
+  users: UserUpdateManyWithoutPermissionsNestedInput
+}
+
+input PermissionUpdateWithoutUsersInput {
+  id: StringFieldUpdateOperationsInput
+  operation: EnumPermissionOperationFieldUpdateOperationsInput
+  roles: RoleUpdateManyWithoutPermissionsNestedInput
+  tableName: StringFieldUpdateOperationsInput
+}
+
+input PermissionUpsertWithWhereUniqueWithoutRolesInput {
+  create: PermissionCreateWithoutRolesInput!
+  update: PermissionUpdateWithoutRolesInput!
+  where: PermissionWhereUniqueInput!
+}
+
+input PermissionUpsertWithWhereUniqueWithoutUsersInput {
+  create: PermissionCreateWithoutUsersInput!
+  update: PermissionUpdateWithoutUsersInput!
+  where: PermissionWhereUniqueInput!
 }
 
 input PermissionWhereInput {
@@ -199,6 +340,42 @@ type RoleCount {
   users: Int!
 }
 
+input RoleCreateNestedManyWithoutPermissionsInput {
+  connect: [RoleWhereUniqueInput!]
+  connectOrCreate: [RoleCreateOrConnectWithoutPermissionsInput!]
+  create: [RoleCreateWithoutPermissionsInput!]
+}
+
+input RoleCreateNestedOneWithoutUsersInput {
+  connect: RoleWhereUniqueInput
+  connectOrCreate: RoleCreateOrConnectWithoutUsersInput
+  create: RoleCreateWithoutUsersInput
+}
+
+input RoleCreateOrConnectWithoutPermissionsInput {
+  create: RoleCreateWithoutPermissionsInput!
+  where: RoleWhereUniqueInput!
+}
+
+input RoleCreateOrConnectWithoutUsersInput {
+  create: RoleCreateWithoutUsersInput!
+  where: RoleWhereUniqueInput!
+}
+
+input RoleCreateWithoutPermissionsInput {
+  description: String
+  id: String
+  name: String!
+  users: UserCreateNestedManyWithoutRoleInput
+}
+
+input RoleCreateWithoutUsersInput {
+  description: String
+  id: String
+  name: String!
+  permissions: PermissionCreateNestedManyWithoutRolesInput
+}
+
 input RoleListRelationFilter {
   every: RoleWhereInput
   none: RoleWhereInput
@@ -228,6 +405,77 @@ enum RoleScalarFieldEnum {
   name
 }
 
+input RoleScalarWhereInput {
+  AND: [RoleScalarWhereInput!]
+  NOT: [RoleScalarWhereInput!]
+  OR: [RoleScalarWhereInput!]
+  description: StringNullableFilter
+  id: StringFilter
+  name: StringFilter
+}
+
+input RoleUpdateManyMutationInput {
+  description: NullableStringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+}
+
+input RoleUpdateManyWithWhereWithoutPermissionsInput {
+  data: RoleUpdateManyMutationInput!
+  where: RoleScalarWhereInput!
+}
+
+input RoleUpdateManyWithoutPermissionsNestedInput {
+  connect: [RoleWhereUniqueInput!]
+  connectOrCreate: [RoleCreateOrConnectWithoutPermissionsInput!]
+  create: [RoleCreateWithoutPermissionsInput!]
+  delete: [RoleWhereUniqueInput!]
+  deleteMany: [RoleScalarWhereInput!]
+  disconnect: [RoleWhereUniqueInput!]
+  set: [RoleWhereUniqueInput!]
+  update: [RoleUpdateWithWhereUniqueWithoutPermissionsInput!]
+  updateMany: [RoleUpdateManyWithWhereWithoutPermissionsInput!]
+  upsert: [RoleUpsertWithWhereUniqueWithoutPermissionsInput!]
+}
+
+input RoleUpdateOneRequiredWithoutUsersNestedInput {
+  connect: RoleWhereUniqueInput
+  connectOrCreate: RoleCreateOrConnectWithoutUsersInput
+  create: RoleCreateWithoutUsersInput
+  update: RoleUpdateWithoutUsersInput
+  upsert: RoleUpsertWithoutUsersInput
+}
+
+input RoleUpdateWithWhereUniqueWithoutPermissionsInput {
+  data: RoleUpdateWithoutPermissionsInput!
+  where: RoleWhereUniqueInput!
+}
+
+input RoleUpdateWithoutPermissionsInput {
+  description: NullableStringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  users: UserUpdateManyWithoutRoleNestedInput
+}
+
+input RoleUpdateWithoutUsersInput {
+  description: NullableStringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  permissions: PermissionUpdateManyWithoutRolesNestedInput
+}
+
+input RoleUpsertWithWhereUniqueWithoutPermissionsInput {
+  create: RoleCreateWithoutPermissionsInput!
+  update: RoleUpdateWithoutPermissionsInput!
+  where: RoleWhereUniqueInput!
+}
+
+input RoleUpsertWithoutUsersInput {
+  create: RoleCreateWithoutUsersInput!
+  update: RoleUpdateWithoutUsersInput!
+}
+
 input RoleWhereInput {
   AND: [RoleWhereInput!]
   NOT: [RoleWhereInput!]
@@ -246,6 +494,10 @@ input RoleWhereUniqueInput {
 enum SortOrder {
   asc
   desc
+}
+
+input StringFieldUpdateOperationsInput {
+  set: String
 }
 
 input StringFilter {
@@ -300,6 +552,69 @@ type UserCount {
   permissions: Int!
 }
 
+input UserCreateManyRoleInput {
+  confirmationCode: String!
+  createdAt: DateTime
+  email: String!
+  emailConfirmedAt: DateTime
+  id: String
+  name: String
+  password: String!
+  updatedAt: DateTime
+}
+
+input UserCreateManyRoleInputEnvelope {
+  data: [UserCreateManyRoleInput!]!
+  skipDuplicates: Boolean
+}
+
+input UserCreateNestedManyWithoutPermissionsInput {
+  connect: [UserWhereUniqueInput!]
+  connectOrCreate: [UserCreateOrConnectWithoutPermissionsInput!]
+  create: [UserCreateWithoutPermissionsInput!]
+}
+
+input UserCreateNestedManyWithoutRoleInput {
+  connect: [UserWhereUniqueInput!]
+  connectOrCreate: [UserCreateOrConnectWithoutRoleInput!]
+  create: [UserCreateWithoutRoleInput!]
+  createMany: UserCreateManyRoleInputEnvelope
+}
+
+input UserCreateOrConnectWithoutPermissionsInput {
+  create: UserCreateWithoutPermissionsInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateOrConnectWithoutRoleInput {
+  create: UserCreateWithoutRoleInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateWithoutPermissionsInput {
+  confirmationCode: String!
+  createdAt: DateTime
+  email: String!
+  emailConfirmedAt: DateTime
+  id: String
+  name: String
+  password: String!
+  role: RoleCreateNestedOneWithoutUsersInput!
+  updatedAt: DateTime
+}
+
+input UserCreateWithoutRoleInput {
+  confirmationCode: String!
+  createdAt: DateTime
+  email: String!
+  emailConfirmedAt: DateTime
+  id: String
+  name: String
+  password: String!
+  permissions: PermissionCreateNestedManyWithoutUsersInput
+  updatedAt: DateTime
+}
+
 input UserListRelationFilter {
   every: UserWhereInput
   none: UserWhereInput
@@ -336,6 +651,21 @@ enum UserScalarFieldEnum {
   updatedAt
 }
 
+input UserScalarWhereInput {
+  AND: [UserScalarWhereInput!]
+  NOT: [UserScalarWhereInput!]
+  OR: [UserScalarWhereInput!]
+  confirmationCode: StringFilter
+  createdAt: DateTimeFilter
+  email: StringFilter
+  emailConfirmedAt: DateTimeNullableFilter
+  id: StringFilter
+  name: StringNullableFilter
+  password: StringFilter
+  roleId: StringFilter
+  updatedAt: DateTimeFilter
+}
+
 input UserSignInInput {
   email: String!
   password: String!
@@ -348,6 +678,113 @@ type UserSignInResponse {
 input UserSignUpInput {
   email: String!
   password: String!
+}
+
+input UserUpdateInput {
+  confirmationCode: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  emailConfirmedAt: NullableDateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: NullableStringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  permissions: PermissionUpdateManyWithoutUsersNestedInput
+  role: RoleUpdateOneRequiredWithoutUsersNestedInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input UserUpdateManyMutationInput {
+  confirmationCode: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  emailConfirmedAt: NullableDateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: NullableStringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input UserUpdateManyWithWhereWithoutPermissionsInput {
+  data: UserUpdateManyMutationInput!
+  where: UserScalarWhereInput!
+}
+
+input UserUpdateManyWithWhereWithoutRoleInput {
+  data: UserUpdateManyMutationInput!
+  where: UserScalarWhereInput!
+}
+
+input UserUpdateManyWithoutPermissionsNestedInput {
+  connect: [UserWhereUniqueInput!]
+  connectOrCreate: [UserCreateOrConnectWithoutPermissionsInput!]
+  create: [UserCreateWithoutPermissionsInput!]
+  delete: [UserWhereUniqueInput!]
+  deleteMany: [UserScalarWhereInput!]
+  disconnect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutPermissionsInput!]
+  updateMany: [UserUpdateManyWithWhereWithoutPermissionsInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutPermissionsInput!]
+}
+
+input UserUpdateManyWithoutRoleNestedInput {
+  connect: [UserWhereUniqueInput!]
+  connectOrCreate: [UserCreateOrConnectWithoutRoleInput!]
+  create: [UserCreateWithoutRoleInput!]
+  createMany: UserCreateManyRoleInputEnvelope
+  delete: [UserWhereUniqueInput!]
+  deleteMany: [UserScalarWhereInput!]
+  disconnect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutRoleInput!]
+  updateMany: [UserUpdateManyWithWhereWithoutRoleInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutRoleInput!]
+}
+
+input UserUpdateWithWhereUniqueWithoutPermissionsInput {
+  data: UserUpdateWithoutPermissionsInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserUpdateWithWhereUniqueWithoutRoleInput {
+  data: UserUpdateWithoutRoleInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserUpdateWithoutPermissionsInput {
+  confirmationCode: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  emailConfirmedAt: NullableDateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: NullableStringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  role: RoleUpdateOneRequiredWithoutUsersNestedInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input UserUpdateWithoutRoleInput {
+  confirmationCode: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  emailConfirmedAt: NullableDateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: NullableStringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  permissions: PermissionUpdateManyWithoutUsersNestedInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input UserUpsertWithWhereUniqueWithoutPermissionsInput {
+  create: UserCreateWithoutPermissionsInput!
+  update: UserUpdateWithoutPermissionsInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutRoleInput {
+  create: UserCreateWithoutRoleInput!
+  update: UserUpdateWithoutRoleInput!
+  where: UserWhereUniqueInput!
 }
 
 input UserWhereInput {
@@ -369,6 +806,5 @@ input UserWhereInput {
 
 input UserWhereUniqueInput {
   confirmationCode: String
-  email: String
   id: String
 }

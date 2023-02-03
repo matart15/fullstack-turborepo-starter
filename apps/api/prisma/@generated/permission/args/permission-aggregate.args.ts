@@ -1,37 +1,39 @@
-import { ArgsType, Field, Int } from '@nestjs/graphql';
-import { Type } from 'class-transformer';
-
-import { PermissionCountAggregateInput } from '../input/permission-count-aggregate.input';
-import { PermissionMaxAggregateInput } from '../input/permission-max-aggregate.input';
-import { PermissionMinAggregateInput } from '../input/permission-min-aggregate.input';
-import { PermissionOrderByWithRelationInput } from '../input/permission-order-by-with-relation.input';
+import { Field } from '@nestjs/graphql';
+import { ArgsType } from '@nestjs/graphql';
 import { PermissionWhereInput } from '../input/permission-where.input';
+import { Type } from 'class-transformer';
+import { PermissionOrderByWithRelationInput } from '../input/permission-order-by-with-relation.input';
 import { PermissionWhereUniqueInput } from '../input/permission-where-unique.input';
+import { Int } from '@nestjs/graphql';
+import { PermissionCountAggregateInput } from '../input/permission-count-aggregate.input';
+import { PermissionMinAggregateInput } from '../input/permission-min-aggregate.input';
+import { PermissionMaxAggregateInput } from '../input/permission-max-aggregate.input';
 
 @ArgsType()
 export class PermissionAggregateArgs {
-  @Field(() => PermissionWhereInput, { nullable: true })
-  @Type(() => PermissionWhereInput)
-  where?: PermissionWhereInput;
 
-  @Field(() => [PermissionOrderByWithRelationInput], { nullable: true })
-  orderBy?: Array<PermissionOrderByWithRelationInput>;
+    @Field(() => PermissionWhereInput, {nullable:true})
+    @Type(() => PermissionWhereInput)
+    where?: PermissionWhereInput;
 
-  @Field(() => PermissionWhereUniqueInput, { nullable: true })
-  cursor?: PermissionWhereUniqueInput;
+    @Field(() => [PermissionOrderByWithRelationInput], {nullable:true})
+    orderBy?: Array<PermissionOrderByWithRelationInput>;
 
-  @Field(() => Int, { nullable: true })
-  take?: number;
+    @Field(() => PermissionWhereUniqueInput, {nullable:true})
+    cursor?: PermissionWhereUniqueInput;
 
-  @Field(() => Int, { nullable: true })
-  skip?: number;
+    @Field(() => Int, {nullable:true})
+    take?: number;
 
-  @Field(() => PermissionCountAggregateInput, { nullable: true })
-  _count?: PermissionCountAggregateInput;
+    @Field(() => Int, {nullable:true})
+    skip?: number;
 
-  @Field(() => PermissionMinAggregateInput, { nullable: true })
-  _min?: PermissionMinAggregateInput;
+    @Field(() => PermissionCountAggregateInput, {nullable:true})
+    _count?: PermissionCountAggregateInput;
 
-  @Field(() => PermissionMaxAggregateInput, { nullable: true })
-  _max?: PermissionMaxAggregateInput;
+    @Field(() => PermissionMinAggregateInput, {nullable:true})
+    _min?: PermissionMinAggregateInput;
+
+    @Field(() => PermissionMaxAggregateInput, {nullable:true})
+    _max?: PermissionMaxAggregateInput;
 }

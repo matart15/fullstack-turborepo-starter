@@ -1,7 +1,10 @@
-import { RoleList, RoleListProps } from '../components/RoleList';
-
-export type { SignInInterface } from '../components/SignIn/SignIn.interface';
+import { SiteLayout } from '../components/common/Layout';
+import { RoleList, RoleListProps } from '../components/role/RoleList';
 
 export const RoleListView = (p: RoleListProps): JSX.Element => {
-  return <RoleList {...p} />;
+  return (
+    <SiteLayout breadCrumbItems={['Home', 'Role']}>
+      <RoleList {...p} />
+    </SiteLayout>
+  );
 };

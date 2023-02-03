@@ -1,17 +1,12 @@
 import { RoleDetailDocument, RoleDetailQuery } from 'graphql/generated';
 import { initializeApollo } from 'lib/apollo-client';
 import { GetServerSideProps, NextPage } from 'next';
-import { SiteLayout } from 'ui/components/Layout';
 import { RoleDetailView } from 'ui/views/RoleDetailView';
 
 type RoleDetailProps = { role: RoleDetailQuery['findUniqueRole'] };
 const RoleDetail: NextPage<RoleDetailProps> = (data: RoleDetailProps): JSX.Element => {
   const { role } = data;
-  return (
-    <SiteLayout breadCrumbItems={['Home', 'Role', 'Detail']}>
-      <RoleDetailView role={role} />
-    </SiteLayout>
-  );
+  return <RoleDetailView role={role} />;
 };
 export const getServerSideProps: GetServerSideProps = async context => {
   // const cookies = context.req.headers.cookie;

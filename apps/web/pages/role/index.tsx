@@ -1,16 +1,11 @@
 import { RoleListDocument, RoleListQuery } from 'graphql/generated';
 import { initializeApollo } from 'lib/apollo-client';
 import { GetServerSideProps } from 'next';
-import { SiteLayout } from 'ui/components/Layout';
 import { RoleListView } from 'ui/views/RoleListView';
 
 const RoleList = (data: { roleList: RoleListQuery['findManyRoles'] }): JSX.Element => {
   const { roleList } = data;
-  return (
-    <SiteLayout breadCrumbItems={['Home', 'Role']}>
-      <RoleListView roles={roleList} />
-    </SiteLayout>
-  );
+  return <RoleListView roles={roleList} />;
 };
 export const getServerSideProps: GetServerSideProps = async context => {
   const client = initializeApollo({

@@ -1,11 +1,12 @@
-import { ArgsType, Field } from '@nestjs/graphql';
-import { Type } from 'class-transformer';
-
+import { Field } from '@nestjs/graphql';
+import { ArgsType } from '@nestjs/graphql';
 import { PermissionCreateInput } from '../input/permission-create.input';
+import { Type } from 'class-transformer';
 
 @ArgsType()
 export class CreateOnePermissionArgs {
-  @Field(() => PermissionCreateInput, { nullable: false })
-  @Type(() => PermissionCreateInput)
-  data!: PermissionCreateInput;
+
+    @Field(() => PermissionCreateInput, {nullable:false})
+    @Type(() => PermissionCreateInput)
+    data!: PermissionCreateInput;
 }

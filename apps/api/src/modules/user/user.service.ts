@@ -37,7 +37,7 @@ export class UserService {
       ...args,
       data: {
         ...args.data,
-        password: await this.hashUserPassword(args),
+        password: args.data.password ? await this.hashUserPassword(args) : undefined,
       },
     });
   }

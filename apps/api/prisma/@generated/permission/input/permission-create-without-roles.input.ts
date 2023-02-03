@@ -1,19 +1,20 @@
-import { Field, InputType } from '@nestjs/graphql';
-
+import { Field } from '@nestjs/graphql';
+import { InputType } from '@nestjs/graphql';
 import { PermissionOperation } from '../../prisma/enum/permission-operation.enum';
 import { UserCreateNestedManyWithoutPermissionsInput } from '../../user/input/user-create-nested-many-without-permissions.input';
 
 @InputType()
 export class PermissionCreateWithoutRolesInput {
-  @Field(() => String, { nullable: true })
-  id?: string;
 
-  @Field(() => String, { nullable: false })
-  tableName!: string;
+    @Field(() => String, {nullable:true})
+    id?: string;
 
-  @Field(() => PermissionOperation, { nullable: false })
-  operation!: keyof typeof PermissionOperation;
+    @Field(() => String, {nullable:false})
+    tableName!: string;
 
-  @Field(() => UserCreateNestedManyWithoutPermissionsInput, { nullable: true })
-  users?: UserCreateNestedManyWithoutPermissionsInput;
+    @Field(() => PermissionOperation, {nullable:false})
+    operation!: keyof typeof PermissionOperation;
+
+    @Field(() => UserCreateNestedManyWithoutPermissionsInput, {nullable:true})
+    users?: UserCreateNestedManyWithoutPermissionsInput;
 }

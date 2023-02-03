@@ -2,6 +2,7 @@
   "common": {
     "page": "ページ",
     "search": "検索",
+    "succeeded": "成功しました",
     "ok": "OK"
   },
   "validation": {

@@ -1,11 +1,12 @@
-import { ArgsType, Field } from '@nestjs/graphql';
-import { Type } from 'class-transformer';
-
+import { Field } from '@nestjs/graphql';
+import { ArgsType } from '@nestjs/graphql';
 import { PermissionWhereUniqueInput } from '../input/permission-where-unique.input';
+import { Type } from 'class-transformer';
 
 @ArgsType()
 export class FindUniquePermissionOrThrowArgs {
-  @Field(() => PermissionWhereUniqueInput, { nullable: false })
-  @Type(() => PermissionWhereUniqueInput)
-  where!: PermissionWhereUniqueInput;
+
+    @Field(() => PermissionWhereUniqueInput, {nullable:false})
+    @Type(() => PermissionWhereUniqueInput)
+    where!: PermissionWhereUniqueInput;
 }

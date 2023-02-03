@@ -7,12 +7,15 @@
   "packageManager": "yarn@3.2.0",
   "scripts": {
     "clean": "rm -rf .turbo && rm -rf node_modules",
-    "lint": "TIMING=1 eslint --fix ."
+    "check-translations": "i18next-scanner && ./find_untranslated_string.sh",
+    "lint:fix": "TIMING=1 eslint --fix ."
   },
   "dependencies": {
     "constants": "workspace:^",
     "i18next": "22.4.9",
-    "i18next-scanner": "4.1.1",
-    "react-i18next": "12.1.4"
+    "react-i18next": "12.1.5"
+  },
+  "devDependencies": {
+    "i18next-scanner": "^4.1.1"
   }
 }

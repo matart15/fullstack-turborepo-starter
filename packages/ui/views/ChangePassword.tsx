@@ -1,6 +1,6 @@
-import { ChangePassword } from '../components/ChangePassword';
+import { ChangePassword } from '../components/auth/ChangePassword';
 
-export type { ChangePasswordInterface } from '../components/ChangePassword/ChangePassword.interface';
+export type { ChangePasswordInterface } from '../components/auth/ChangePassword/ChangePassword.interface';
 
 type ChangePasswordProps = React.ComponentProps<typeof ChangePassword>;
 

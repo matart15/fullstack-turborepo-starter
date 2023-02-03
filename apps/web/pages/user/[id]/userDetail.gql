@@ -8,9 +8,12 @@ query UserDetail($where: UserWhereUniqueInput!) {
     name
     permissions {
       id
+      tableName
+      operation
     }
     role {
       id
+      name
     }
     roleId
     updatedAt

@@ -1,44 +1,46 @@
-import { Field, HideField, ObjectType } from '@nestjs/graphql';
-
+import { Field } from '@nestjs/graphql';
+import { ObjectType } from '@nestjs/graphql';
+import { HideField } from '@nestjs/graphql';
 import { UserCountAggregate } from './user-count-aggregate.output';
-import { UserMaxAggregate } from './user-max-aggregate.output';
 import { UserMinAggregate } from './user-min-aggregate.output';
+import { UserMaxAggregate } from './user-max-aggregate.output';
 
 @ObjectType()
 export class UserGroupBy {
-  @Field(() => String, { nullable: false })
-  id!: string;
 
-  @Field(() => Date, { nullable: false })
-  createdAt!: Date | string;
+    @Field(() => String, {nullable:false})
+    id!: string;
 
-  @Field(() => Date, { nullable: false })
-  updatedAt!: Date | string;
+    @Field(() => Date, {nullable:false})
+    createdAt!: Date | string;
 
-  @Field(() => String, { nullable: false })
-  email!: string;
+    @Field(() => Date, {nullable:false})
+    updatedAt!: Date | string;
 
-  @Field(() => String, { nullable: true })
-  name?: string;
+    @Field(() => String, {nullable:false})
+    email!: string;
 
-  @HideField()
-  password!: string;
+    @Field(() => String, {nullable:true})
+    name?: string;
 
-  @Field(() => Date, { nullable: true })
-  emailConfirmedAt?: Date | string;
+    @HideField()
+    password!: string;
 
-  @Field(() => String, { nullable: false })
-  confirmationCode!: string;
+    @Field(() => Date, {nullable:true})
+    emailConfirmedAt?: Date | string;
 
-  @Field(() => String, { nullable: false })
-  roleId!: string;
+    @Field(() => String, {nullable:false})
+    confirmationCode!: string;
 
-  @Field(() => UserCountAggregate, { nullable: true })
-  _count?: UserCountAggregate;
+    @Field(() => String, {nullable:false})
+    roleId!: string;
 
-  @Field(() => UserMinAggregate, { nullable: true })
-  _min?: UserMinAggregate;
+    @Field(() => UserCountAggregate, {nullable:true})
+    _count?: UserCountAggregate;
 
-  @Field(() => UserMaxAggregate, { nullable: true })
-  _max?: UserMaxAggregate;
+    @Field(() => UserMinAggregate, {nullable:true})
+    _min?: UserMinAggregate;
+
+    @Field(() => UserMaxAggregate, {nullable:true})
+    _max?: UserMaxAggregate;
 }

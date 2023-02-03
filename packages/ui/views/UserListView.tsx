@@ -1,7 +1,10 @@
-import { UserList, UserListProps } from '../components/UserList';
-
-export type { SignInInterface } from '../components/SignIn/SignIn.interface';
+import { SiteLayout } from '../components/common/Layout';
+import { UserList, UserListProps } from '../components/user/UserList';
 
 export const UserListView = (p: UserListProps): JSX.Element => {
-  return <UserList {...p} />;
+  return (
+    <SiteLayout breadCrumbItems={['Home', 'User']}>
+      <UserList {...p} />
+    </SiteLayout>
+  );
 };

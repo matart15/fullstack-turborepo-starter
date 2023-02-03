@@ -1,24 +1,25 @@
-import { Field, InputType } from '@nestjs/graphql';
-
-import { EnumPermissionOperationFieldUpdateOperationsInput } from '../../prisma/input/enum-permission-operation-field-update-operations.input';
+import { Field } from '@nestjs/graphql';
+import { InputType } from '@nestjs/graphql';
 import { StringFieldUpdateOperationsInput } from '../../prisma/input/string-field-update-operations.input';
-import { RoleUncheckedUpdateManyWithoutPermissionsNestedInput } from '../../role/input/role-unchecked-update-many-without-permissions-nested.input';
+import { EnumPermissionOperationFieldUpdateOperationsInput } from '../../prisma/input/enum-permission-operation-field-update-operations.input';
 import { UserUncheckedUpdateManyWithoutPermissionsNestedInput } from '../../user/input/user-unchecked-update-many-without-permissions-nested.input';
+import { RoleUncheckedUpdateManyWithoutPermissionsNestedInput } from '../../role/input/role-unchecked-update-many-without-permissions-nested.input';
 
 @InputType()
 export class PermissionUncheckedUpdateInput {
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  id?: StringFieldUpdateOperationsInput;
 
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  tableName?: StringFieldUpdateOperationsInput;
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    id?: StringFieldUpdateOperationsInput;
 
-  @Field(() => EnumPermissionOperationFieldUpdateOperationsInput, { nullable: true })
-  operation?: EnumPermissionOperationFieldUpdateOperationsInput;
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    tableName?: StringFieldUpdateOperationsInput;
 
-  @Field(() => UserUncheckedUpdateManyWithoutPermissionsNestedInput, { nullable: true })
-  users?: UserUncheckedUpdateManyWithoutPermissionsNestedInput;
+    @Field(() => EnumPermissionOperationFieldUpdateOperationsInput, {nullable:true})
+    operation?: EnumPermissionOperationFieldUpdateOperationsInput;
 
-  @Field(() => RoleUncheckedUpdateManyWithoutPermissionsNestedInput, { nullable: true })
-  roles?: RoleUncheckedUpdateManyWithoutPermissionsNestedInput;
+    @Field(() => UserUncheckedUpdateManyWithoutPermissionsNestedInput, {nullable:true})
+    users?: UserUncheckedUpdateManyWithoutPermissionsNestedInput;
+
+    @Field(() => RoleUncheckedUpdateManyWithoutPermissionsNestedInput, {nullable:true})
+    roles?: RoleUncheckedUpdateManyWithoutPermissionsNestedInput;
 }

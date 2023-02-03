@@ -1,7 +1,7 @@
 import { DatePicker, Form, Input, Typography } from 'antd';
 import dayjs from 'dayjs';
 
-import { User } from '../UserList/hooks';
+import { User } from '../user/UserList/hooks';
 
 const formatDate = (date: string | number | Date): dayjs.Dayjs => {
   return dayjs(date);

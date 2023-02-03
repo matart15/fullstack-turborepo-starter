@@ -1,4 +1,6 @@
 import { useChangePasswordMutation } from 'graphql/generated';
+import i18n from 'translation';
+import { popup } from 'ui/components/popup';
 import { ChangePasswordInterface, ChangePasswordView } from 'ui/views/ChangePassword';
 
 const ChangePasswordPage = (): JSX.Element => {
@@ -17,7 +19,7 @@ const ChangePasswordPage = (): JSX.Element => {
               },
             },
           });
-          console.warn('success');
+          popup.success(i18n.t('common.succeeded'));
         } catch (error: unknown) {
           if (error instanceof Error) {
             console.error(error.message);

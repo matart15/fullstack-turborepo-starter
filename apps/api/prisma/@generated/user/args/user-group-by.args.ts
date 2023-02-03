@@ -1,41 +1,43 @@
-import { ArgsType, Field, Int } from '@nestjs/graphql';
-import { Type } from 'class-transformer';
-
-import { UserScalarFieldEnum } from '../enum/user-scalar-field.enum';
-import { UserCountAggregateInput } from '../input/user-count-aggregate.input';
-import { UserMaxAggregateInput } from '../input/user-max-aggregate.input';
-import { UserMinAggregateInput } from '../input/user-min-aggregate.input';
-import { UserOrderByWithAggregationInput } from '../input/user-order-by-with-aggregation.input';
-import { UserScalarWhereWithAggregatesInput } from '../input/user-scalar-where-with-aggregates.input';
+import { Field } from '@nestjs/graphql';
+import { ArgsType } from '@nestjs/graphql';
 import { UserWhereInput } from '../input/user-where.input';
+import { Type } from 'class-transformer';
+import { UserOrderByWithAggregationInput } from '../input/user-order-by-with-aggregation.input';
+import { UserScalarFieldEnum } from '../enum/user-scalar-field.enum';
+import { UserScalarWhereWithAggregatesInput } from '../input/user-scalar-where-with-aggregates.input';
+import { Int } from '@nestjs/graphql';
+import { UserCountAggregateInput } from '../input/user-count-aggregate.input';
+import { UserMinAggregateInput } from '../input/user-min-aggregate.input';
+import { UserMaxAggregateInput } from '../input/user-max-aggregate.input';
 
 @ArgsType()
 export class UserGroupByArgs {
-  @Field(() => UserWhereInput, { nullable: true })
-  @Type(() => UserWhereInput)
-  where?: UserWhereInput;
 
-  @Field(() => [UserOrderByWithAggregationInput], { nullable: true })
-  orderBy?: Array<UserOrderByWithAggregationInput>;
+    @Field(() => UserWhereInput, {nullable:true})
+    @Type(() => UserWhereInput)
+    where?: UserWhereInput;
 
-  @Field(() => [UserScalarFieldEnum], { nullable: false })
-  by!: Array<keyof typeof UserScalarFieldEnum>;
+    @Field(() => [UserOrderByWithAggregationInput], {nullable:true})
+    orderBy?: Array<UserOrderByWithAggregationInput>;
 
-  @Field(() => UserScalarWhereWithAggregatesInput, { nullable: true })
-  having?: UserScalarWhereWithAggregatesInput;
+    @Field(() => [UserScalarFieldEnum], {nullable:false})
+    by!: Array<keyof typeof UserScalarFieldEnum>;
 
-  @Field(() => Int, { nullable: true })
-  take?: number;
+    @Field(() => UserScalarWhereWithAggregatesInput, {nullable:true})
+    having?: UserScalarWhereWithAggregatesInput;
 
-  @Field(() => Int, { nullable: true })
-  skip?: number;
+    @Field(() => Int, {nullable:true})
+    take?: number;
 
-  @Field(() => UserCountAggregateInput, { nullable: true })
-  _count?: UserCountAggregateInput;
+    @Field(() => Int, {nullable:true})
+    skip?: number;
 
-  @Field(() => UserMinAggregateInput, { nullable: true })
-  _min?: UserMinAggregateInput;
+    @Field(() => UserCountAggregateInput, {nullable:true})
+    _count?: UserCountAggregateInput;
 
-  @Field(() => UserMaxAggregateInput, { nullable: true })
-  _max?: UserMaxAggregateInput;
+    @Field(() => UserMinAggregateInput, {nullable:true})
+    _min?: UserMinAggregateInput;
+
+    @Field(() => UserMaxAggregateInput, {nullable:true})
+    _max?: UserMaxAggregateInput;
 }
