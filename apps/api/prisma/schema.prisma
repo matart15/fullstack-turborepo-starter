@@ -26,11 +26,12 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now()) @db.Timestamptz(6)
-  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime  @default(now()) @updatedAt @db.Timestamptz(6)
+  deletedAt DateTime?
   /// @HideField({ match: 'UserWhereUniqueInput' })
-  email     String   @unique
+  email     String    @unique
   name      String?
 
   /// @HideField({ output: true, input: false })
@@ -44,6 +45,7 @@ model User {
 
 model Role {
   id          String       @id @default(uuid())
+  deletedAt   DateTime?
   name        String
   description String?
   users       User[]
@@ -59,6 +61,7 @@ enum PermissionOperation {
 
 model Permission {
   id        String              @id @default(uuid())
+  deletedAt DateTime?
   tableName String
   operation PermissionOperation
   users     User[]

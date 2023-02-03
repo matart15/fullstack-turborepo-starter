@@ -62,6 +62,7 @@ module.exports = {
       web: `cd ${webPath} && yarn codegen`,
     },
     generate: {
+      api: `hygen api new`,
       page: {
         list: 'hygen page list',
         edit: 'hygen page edit',
