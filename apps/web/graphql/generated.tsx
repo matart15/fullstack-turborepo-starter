@@ -27,10 +27,6 @@ export type CurrentUserResponse = {
   updatedAt: Scalars['DateTime'];
 };
 
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: InputMaybe<Scalars['DateTime']>;
-};
-
 export type DateTimeFilter = {
   equals?: InputMaybe<Scalars['DateTime']>;
   gt?: InputMaybe<Scalars['DateTime']>;
@@ -51,10 +47,6 @@ export type DateTimeNullableFilter = {
   lte?: InputMaybe<Scalars['DateTime']>;
   not?: InputMaybe<NestedDateTimeNullableFilter>;
   notIn?: InputMaybe<Array<Scalars['DateTime']>>;
-};
-
-export type EnumPermissionOperationFieldUpdateOperationsInput = {
-  set?: InputMaybe<PermissionOperation>;
 };
 
 export type EnumPermissionOperationFilter = {
@@ -162,14 +154,6 @@ export type NestedStringNullableFilter = {
   startsWith?: InputMaybe<Scalars['String']>;
 };
 
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: InputMaybe<Scalars['DateTime']>;
-};
-
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: InputMaybe<Scalars['String']>;
-};
-
 export type Permission = {
   __typename?: 'Permission';
   _count: PermissionCount;
@@ -265,9 +249,9 @@ export type PermissionScalarWhereInput = {
 };
 
 export type PermissionUpdateManyMutationInput = {
-  id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  operation?: InputMaybe<EnumPermissionOperationFieldUpdateOperationsInput>;
-  tableName?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<Scalars['String']>;
+  operation?: InputMaybe<PermissionOperation>;
+  tableName?: InputMaybe<Scalars['String']>;
 };
 
 export type PermissionUpdateManyWithWhereWithoutRolesInput = {
@@ -317,17 +301,17 @@ export type PermissionUpdateWithWhereUniqueWithoutUsersInput = {
 };
 
 export type PermissionUpdateWithoutRolesInput = {
-  id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  operation?: InputMaybe<EnumPermissionOperationFieldUpdateOperationsInput>;
-  tableName?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<Scalars['String']>;
+  operation?: InputMaybe<PermissionOperation>;
+  tableName?: InputMaybe<Scalars['String']>;
   users?: InputMaybe<UserUpdateManyWithoutPermissionsNestedInput>;
 };
 
 export type PermissionUpdateWithoutUsersInput = {
-  id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  operation?: InputMaybe<EnumPermissionOperationFieldUpdateOperationsInput>;
+  id?: InputMaybe<Scalars['String']>;
+  operation?: InputMaybe<PermissionOperation>;
   roles?: InputMaybe<RoleUpdateManyWithoutPermissionsNestedInput>;
-  tableName?: InputMaybe<StringFieldUpdateOperationsInput>;
+  tableName?: InputMaybe<Scalars['String']>;
 };
 
 export type PermissionUpsertWithWhereUniqueWithoutRolesInput = {
@@ -354,7 +338,7 @@ export type PermissionWhereInput = {
 };
 
 export type PermissionWhereUniqueInput = {
-  id?: InputMaybe<Scalars['String']>;
+  id: Scalars['String'];
 };
 
 export type Query = {
@@ -506,9 +490,9 @@ export type RoleScalarWhereInput = {
 };
 
 export type RoleUpdateManyMutationInput = {
-  description?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  description?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
 };
 
 export type RoleUpdateManyWithWhereWithoutPermissionsInput = {
@@ -543,16 +527,16 @@ export type RoleUpdateWithWhereUniqueWithoutPermissionsInput = {
 };
 
 export type RoleUpdateWithoutPermissionsInput = {
-  description?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  description?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
   users?: InputMaybe<UserUpdateManyWithoutRoleNestedInput>;
 };
 
 export type RoleUpdateWithoutUsersInput = {
-  description?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  description?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
   permissions?: InputMaybe<PermissionUpdateManyWithoutRolesNestedInput>;
 };
 
@@ -579,7 +563,7 @@ export type RoleWhereInput = {
 };
 
 export type RoleWhereUniqueInput = {
-  id?: InputMaybe<Scalars['String']>;
+  id: Scalars['String'];
 };
 
 export const SortOrder = {
@@ -588,10 +572,6 @@ export const SortOrder = {
 } as const;
 
 export type SortOrder = typeof SortOrder[keyof typeof SortOrder];
-export type StringFieldUpdateOperationsInput = {
-  set?: InputMaybe<Scalars['String']>;
-};
-
 export type StringFilter = {
   contains?: InputMaybe<Scalars['String']>;
   endsWith?: InputMaybe<Scalars['String']>;
@@ -777,27 +757,27 @@ export type UserSignUpInput = {
 };
 
 export type UserUpdateInput = {
-  confirmationCode?: InputMaybe<StringFieldUpdateOperationsInput>;
-  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  email?: InputMaybe<StringFieldUpdateOperationsInput>;
-  emailConfirmedAt?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
-  id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  name?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  confirmationCode?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  email?: InputMaybe<Scalars['String']>;
+  emailConfirmedAt?: InputMaybe<Scalars['DateTime']>;
+  id?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  password?: InputMaybe<Scalars['String']>;
   permissions?: InputMaybe<PermissionUpdateManyWithoutUsersNestedInput>;
   role?: InputMaybe<RoleUpdateOneRequiredWithoutUsersNestedInput>;
-  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type UserUpdateManyMutationInput = {
-  confirmationCode?: InputMaybe<StringFieldUpdateOperationsInput>;
-  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  email?: InputMaybe<StringFieldUpdateOperationsInput>;
-  emailConfirmedAt?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
-  id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  name?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  password?: InputMaybe<StringFieldUpdateOperationsInput>;
-  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  confirmationCode?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  email?: InputMaybe<Scalars['String']>;
+  emailConfirmedAt?: InputMaybe<Scalars['DateTime']>;
+  id?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  password?: InputMaybe<Scalars['String']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type UserUpdateManyWithWhereWithoutPermissionsInput = {
@@ -848,27 +828,27 @@ export type UserUpdateWithWhereUniqueWithoutRoleInput = {
 };
 
 export type UserUpdateWithoutPermissionsInput = {
-  confirmationCode?: InputMaybe<StringFieldUpdateOperationsInput>;
-  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  email?: InputMaybe<StringFieldUpdateOperationsInput>;
-  emailConfirmedAt?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
-  id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  name?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  confirmationCode?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  email?: InputMaybe<Scalars['String']>;
+  emailConfirmedAt?: InputMaybe<Scalars['DateTime']>;
+  id?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  password?: InputMaybe<Scalars['String']>;
   role?: InputMaybe<RoleUpdateOneRequiredWithoutUsersNestedInput>;
-  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type UserUpdateWithoutRoleInput = {
-  confirmationCode?: InputMaybe<StringFieldUpdateOperationsInput>;
-  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  email?: InputMaybe<StringFieldUpdateOperationsInput>;
-  emailConfirmedAt?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
-  id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  name?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  confirmationCode?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  email?: InputMaybe<Scalars['String']>;
+  emailConfirmedAt?: InputMaybe<Scalars['DateTime']>;
+  id?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  password?: InputMaybe<Scalars['String']>;
   permissions?: InputMaybe<PermissionUpdateManyWithoutUsersNestedInput>;
-  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type UserUpsertWithWhereUniqueWithoutPermissionsInput = {

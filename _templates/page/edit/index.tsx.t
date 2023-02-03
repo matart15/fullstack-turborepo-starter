@@ -29,9 +29,7 @@ const <%= h.changeCase.pascal(name) %>Edit: NextPage<<%= h.changeCase.pascal(nam
               variables: {
                 id: value.id,
                 data: {
-                  field: {
-                    set: value.field,
-                  },
+                  field: value.field,
                 },
               },
             });

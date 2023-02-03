@@ -13,6 +13,10 @@ generator nestgraphql {
   outputFilePattern = "{model}/{type}/{name}.{type}.ts"
   tsConfigFilePath  = "./tsconfig.json"
 
+  requireSingleFieldsInWhereUniqueInput = true
+  noAtomicOperations                    = true
+
+  useInputType_WhereInput_ALL = "WhereInput"
   // for more configuration options, see https://github.com/unlight/prisma-nestjs-graphql
 }
 

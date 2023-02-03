@@ -1,20 +1,19 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
-import { StringFieldUpdateOperationsInput } from '../../prisma/input/string-field-update-operations.input';
-import { EnumPermissionOperationFieldUpdateOperationsInput } from '../../prisma/input/enum-permission-operation-field-update-operations.input';
+import { PermissionOperation } from '../../prisma/enum/permission-operation.enum';
 import { UserUncheckedUpdateManyWithoutPermissionsNestedInput } from '../../user/input/user-unchecked-update-many-without-permissions-nested.input';
 
 @InputType()
 export class PermissionUncheckedUpdateWithoutRolesInput {
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    id?: StringFieldUpdateOperationsInput;
+    @Field(() => String, {nullable:true})
+    id?: string;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    tableName?: StringFieldUpdateOperationsInput;
+    @Field(() => String, {nullable:true})
+    tableName?: string;
 
-    @Field(() => EnumPermissionOperationFieldUpdateOperationsInput, {nullable:true})
-    operation?: EnumPermissionOperationFieldUpdateOperationsInput;
+    @Field(() => PermissionOperation, {nullable:true})
+    operation?: keyof typeof PermissionOperation;
 
     @Field(() => UserUncheckedUpdateManyWithoutPermissionsNestedInput, {nullable:true})
     users?: UserUncheckedUpdateManyWithoutPermissionsNestedInput;

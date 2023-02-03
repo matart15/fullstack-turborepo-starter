@@ -1,37 +1,33 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
-import { StringFieldUpdateOperationsInput } from '../../prisma/input/string-field-update-operations.input';
-import { DateTimeFieldUpdateOperationsInput } from '../../prisma/input/date-time-field-update-operations.input';
-import { NullableStringFieldUpdateOperationsInput } from '../../prisma/input/nullable-string-field-update-operations.input';
-import { NullableDateTimeFieldUpdateOperationsInput } from '../../prisma/input/nullable-date-time-field-update-operations.input';
 
 @InputType()
 export class UserUncheckedUpdateManyInput {
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    id?: StringFieldUpdateOperationsInput;
+    @Field(() => String, {nullable:true})
+    id?: string;
 
-    @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
-    createdAt?: DateTimeFieldUpdateOperationsInput;
+    @Field(() => Date, {nullable:true})
+    createdAt?: Date | string;
 
-    @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
-    updatedAt?: DateTimeFieldUpdateOperationsInput;
+    @Field(() => Date, {nullable:true})
+    updatedAt?: Date | string;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    email?: StringFieldUpdateOperationsInput;
+    @Field(() => String, {nullable:true})
+    email?: string;
 
-    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
-    name?: NullableStringFieldUpdateOperationsInput;
+    @Field(() => String, {nullable:true})
+    name?: string;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    password?: StringFieldUpdateOperationsInput;
+    @Field(() => String, {nullable:true})
+    password?: string;
 
-    @Field(() => NullableDateTimeFieldUpdateOperationsInput, {nullable:true})
-    emailConfirmedAt?: NullableDateTimeFieldUpdateOperationsInput;
+    @Field(() => Date, {nullable:true})
+    emailConfirmedAt?: Date | string;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    confirmationCode?: StringFieldUpdateOperationsInput;
+    @Field(() => String, {nullable:true})
+    confirmationCode?: string;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    roleId?: StringFieldUpdateOperationsInput;
+    @Field(() => String, {nullable:true})
+    roleId?: string;
 }
