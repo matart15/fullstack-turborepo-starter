@@ -18,6 +18,9 @@ export class User {
     @Field(() => Date, {nullable:false})
     updatedAt!: Date;
 
+    @Field(() => Date, {nullable:true})
+    deletedAt!: Date | null;
+
     @Field(() => String, {nullable:false})
     email!: string;
 

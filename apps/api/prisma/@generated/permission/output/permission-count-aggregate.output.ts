@@ -9,6 +9,9 @@ export class PermissionCountAggregate {
     id!: number;
 
     @Field(() => Int, {nullable:false})
+    deletedAt!: number;
+
+    @Field(() => Int, {nullable:false})
     tableName!: number;
 
     @Field(() => Int, {nullable:false})

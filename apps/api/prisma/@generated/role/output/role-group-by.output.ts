@@ -10,6 +10,9 @@ export class RoleGroupBy {
     @Field(() => String, {nullable:false})
     id!: string;
 
+    @Field(() => Date, {nullable:true})
+    deletedAt?: Date | string;
+
     @Field(() => String, {nullable:false})
     name!: string;
 

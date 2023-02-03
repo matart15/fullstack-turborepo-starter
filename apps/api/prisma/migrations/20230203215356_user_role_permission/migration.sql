@@ -1,8 +1,12 @@
+-- CreateEnum
+CREATE TYPE "PermissionOperation" AS ENUM ('CREATE', 'READ', 'UPDATE', 'DELETE');
+
 -- CreateTable
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
     "createdAt" TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "deletedAt" TIMESTAMP(3),
     "email" TEXT NOT NULL,
     "name" TEXT,
     "password" VARCHAR NOT NULL,
@@ -16,6 +20,7 @@ CREATE TABLE "User" (
 -- CreateTable
 CREATE TABLE "Role" (
     "id" TEXT NOT NULL,
+    "deletedAt" TIMESTAMP(3),
     "name" TEXT NOT NULL,
     "description" TEXT,
 
@@ -25,8 +30,9 @@ CREATE TABLE "Role" (
 -- CreateTable
 CREATE TABLE "Permission" (
     "id" TEXT NOT NULL,
+    "deletedAt" TIMESTAMP(3),
     "tableName" TEXT NOT NULL,
-    "operation" TEXT NOT NULL,
+    "operation" "PermissionOperation" NOT NULL,
 
     CONSTRAINT "Permission_pkey" PRIMARY KEY ("id")
 );

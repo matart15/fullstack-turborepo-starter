@@ -8,6 +8,9 @@ export class PermissionCountAggregateInput {
     id?: true;
 
     @Field(() => Boolean, {nullable:true})
+    deletedAt?: true;
+
+    @Field(() => Boolean, {nullable:true})
     tableName?: true;
 
     @Field(() => Boolean, {nullable:true})

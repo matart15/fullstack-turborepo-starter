@@ -9,6 +9,9 @@ export class PermissionMinOrderByAggregateInput {
     id?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
+    deletedAt?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
     tableName?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})

@@ -14,6 +14,9 @@ export class UserMinAggregateInput {
     updatedAt?: true;
 
     @Field(() => Boolean, {nullable:true})
+    deletedAt?: true;
+
+    @Field(() => Boolean, {nullable:true})
     email?: true;
 
     @Field(() => Boolean, {nullable:true})

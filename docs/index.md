@@ -5,5 +5,13 @@
 2. `nps prisma.migrate`
 3. define seed data in `apps/api/prisma/seed.ts`
 4. `nps prisma.seed`
+   - if there is already same data exists, You may meet with `Unique constraint failed on the fields` error. because we can't input same data twice if it has unique field
+   - prisma migrate runs seed. So,
 5. `nps prisma.generate`
-6. `nps generate.api` and input model name. make sure to add modeuls and resolvers into `app.modeule.ts`
+6. `nps generate.api` and input model name.
+   - make sure to add modeuls and resolvers into `app.modeule.ts`
+   - this will create you CRUD operation api
+7. `nps generate.page.list` to generate list page
+   - it will create list page, list query and list component with `nps generate.component.list` command
+8. `nps generate.page.edit` to generate edit page
+   - it will create edit page, edit query, form component and validation with `nps generate.component.form` command

@@ -12,6 +12,9 @@ export class Permission {
     @Field(() => ID, {nullable:false})
     id!: string;
 
+    @Field(() => Date, {nullable:true})
+    deletedAt!: Date | null;
+
     @Field(() => String, {nullable:false})
     tableName!: string;
 

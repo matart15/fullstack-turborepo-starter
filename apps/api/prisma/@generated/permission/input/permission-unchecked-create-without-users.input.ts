@@ -9,6 +9,9 @@ export class PermissionUncheckedCreateWithoutUsersInput {
     @Field(() => String, {nullable:true})
     id?: string;
 
+    @Field(() => Date, {nullable:true})
+    deletedAt?: Date | string;
+
     @Field(() => String, {nullable:false})
     tableName!: string;
 

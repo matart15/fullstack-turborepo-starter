@@ -2,8 +2,8 @@ import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { StringFilter } from '../../prisma/input/string-filter.input';
 import { DateTimeFilter } from '../../prisma/input/date-time-filter.input';
-import { StringNullableFilter } from '../../prisma/input/string-nullable-filter.input';
 import { DateTimeNullableFilter } from '../../prisma/input/date-time-nullable-filter.input';
+import { StringNullableFilter } from '../../prisma/input/string-nullable-filter.input';
 
 @InputType()
 export class UserScalarWhereInput {
@@ -25,6 +25,9 @@ export class UserScalarWhereInput {
 
     @Field(() => DateTimeFilter, {nullable:true})
     updatedAt?: DateTimeFilter;
+
+    @Field(() => DateTimeNullableFilter, {nullable:true})
+    deletedAt?: DateTimeNullableFilter;
 
     @Field(() => StringFilter, {nullable:true})
     email?: StringFilter;

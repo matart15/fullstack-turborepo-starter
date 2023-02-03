@@ -4,6 +4,7 @@ export enum UserScalarFieldEnum {
     id = "id",
     createdAt = "createdAt",
     updatedAt = "updatedAt",
+    deletedAt = "deletedAt",
     email = "email",
     name = "name",
     password = "password",

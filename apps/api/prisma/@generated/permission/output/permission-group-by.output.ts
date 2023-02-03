@@ -11,6 +11,9 @@ export class PermissionGroupBy {
     @Field(() => String, {nullable:false})
     id!: string;
 
+    @Field(() => Date, {nullable:true})
+    deletedAt?: Date | string;
+
     @Field(() => String, {nullable:false})
     tableName!: string;
 

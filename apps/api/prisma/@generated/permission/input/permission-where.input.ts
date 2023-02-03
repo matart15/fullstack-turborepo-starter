@@ -1,6 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { StringFilter } from '../../prisma/input/string-filter.input';
+import { DateTimeNullableFilter } from '../../prisma/input/date-time-nullable-filter.input';
 import { EnumPermissionOperationFilter } from '../../prisma/input/enum-permission-operation-filter.input';
 import { UserListRelationFilter } from '../../user/input/user-list-relation-filter.input';
 import { RoleListRelationFilter } from '../../role/input/role-list-relation-filter.input';
@@ -19,6 +20,9 @@ export class PermissionWhereInput {
 
     @Field(() => StringFilter, {nullable:true})
     id?: StringFilter;
+
+    @Field(() => DateTimeNullableFilter, {nullable:true})
+    deletedAt?: DateTimeNullableFilter;
 
     @Field(() => StringFilter, {nullable:true})
     tableName?: StringFilter;

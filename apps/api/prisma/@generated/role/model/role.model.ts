@@ -11,6 +11,9 @@ export class Role {
     @Field(() => ID, {nullable:false})
     id!: string;
 
+    @Field(() => Date, {nullable:true})
+    deletedAt!: Date | null;
+
     @Field(() => String, {nullable:false})
     name!: string;
 

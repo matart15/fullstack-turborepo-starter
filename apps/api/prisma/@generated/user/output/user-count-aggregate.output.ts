@@ -16,6 +16,9 @@ export class UserCountAggregate {
     updatedAt!: number;
 
     @Field(() => Int, {nullable:false})
+    deletedAt!: number;
+
+    @Field(() => Int, {nullable:false})
     email!: number;
 
     @Field(() => Int, {nullable:false})

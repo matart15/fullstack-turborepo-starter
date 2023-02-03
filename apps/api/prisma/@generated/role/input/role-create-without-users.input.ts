@@ -8,6 +8,9 @@ export class RoleCreateWithoutUsersInput {
     @Field(() => String, {nullable:true})
     id?: string;
 
+    @Field(() => Date, {nullable:true})
+    deletedAt?: Date | string;
+
     @Field(() => String, {nullable:false})
     name!: string;
 

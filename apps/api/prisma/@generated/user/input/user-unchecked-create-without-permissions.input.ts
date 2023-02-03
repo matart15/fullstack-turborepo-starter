@@ -13,6 +13,9 @@ export class UserUncheckedCreateWithoutPermissionsInput {
     @Field(() => Date, {nullable:true})
     updatedAt?: Date | string;
 
+    @Field(() => Date, {nullable:true})
+    deletedAt?: Date | string;
+
     @Field(() => String, {nullable:false})
     email!: string;
 
