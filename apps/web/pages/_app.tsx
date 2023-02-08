@@ -1,5 +1,3 @@
-import '@aws-amplify/ui-react/styles.css';
-
 // import 'antd/dist/antd.css';
 import { ApolloProvider } from '@apollo/client';
 import { AuthProvider } from 'contexts/auth';
