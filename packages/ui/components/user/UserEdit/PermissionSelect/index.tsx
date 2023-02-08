@@ -13,7 +13,7 @@ export const PermissionsSelect = ({
 }: {
   permissions: Permission[];
   onChange?: (value: Permission) => void;
-  defaultValue?: string | string[] | Permission;
+  defaultValue?: Permission | Permission[];
 }): JSX.Element => {
   return (
     <Select

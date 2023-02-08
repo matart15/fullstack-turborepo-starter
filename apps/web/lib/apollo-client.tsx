@@ -1,5 +1,4 @@
-import { ApolloClient, createHttpLink, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
+import { ApolloClient, ApolloLink, concat, createHttpLink, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
 import { parse as cookieParse } from 'cookie';
 import merge from 'deepmerge';
 import Cookies from 'js-cookie';
@@ -27,19 +26,36 @@ const createApolloClient = (context?: GetServerSidePropsContext): ApolloClient<N
     uri: process.env.NEXT_PUBLIC_GRQPHQL_API_ENDPOINT || 'http://localhost:5000/graphql',
   });
 
-  const authLink = setContext((_, { headers }) => {
-    const accessToken: AccessToken = getAccessToken(context) || '';
-    return {
-      headers: {
-        ...headers,
-        ...(accessToken ? { authorization: `Bearer ${accessToken}` } : {}),
-      },
-    };
+  const authMiddleware = new ApolloLink((operation, forward) => {
+    // add the authorization to the headers
+    operation.setContext(({ headers = {} }) => {
+      const accessToken: AccessToken = getAccessToken(context) || '';
+      return {
+        headers: {
+          ...headers,
+          ...(accessToken ? { authorization: `Bearer ${accessToken}` } : {}),
+        },
+      };
+    });
+
+    return forward(operation).map(response => {
+      const operationContext = operation.getContext();
+      if (response.data) {
+        response.data.count = parseInt(operationContext.response.headers.get('x-total-count'), 10) || 0;
+      }
+      return response;
+    });
   });
+
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
-    link: authLink.concat(httpLink),
+    link: concat(authMiddleware, httpLink),
     cache: new InMemoryCache(),
+    defaultOptions: {
+      query: {
+        fetchPolicy: 'no-cache',
+      },
+    },
   });
 };
 

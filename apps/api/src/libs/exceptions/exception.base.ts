@@ -22,6 +22,10 @@ export interface SerializedException {
  * @abstract
  * @class ExceptionBase
  * @extends {Error}
+ * example:
+ * export class ConflictException extends ExceptionBase {
+ *   readonly code = CONFLICT;
+ * }
  */
 export abstract class ExceptionBase extends Error {
   abstract code: string;

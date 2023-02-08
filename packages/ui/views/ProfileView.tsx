@@ -1,11 +1,10 @@
 import { Col, Row } from 'antd';
 import { AllowedLanguages } from 'constants/index';
 import Link from 'next/link';
-
-import { ChangeLanguage } from '../components/common/ChangeLanguage';
-import { SiteLayout } from '../components/common/Layout';
-import { ProfileEdit } from '../components/Profile/ProfileEdit';
-import { User } from '../components/user/UserList/hooks';
+import { ChangeLanguage } from 'ui/components/common/ChangeLanguage';
+import { SiteLayout } from 'ui/components/common/Layout';
+import { ProfileEdit } from 'ui/components/Profile/ProfileEdit';
+import { User } from 'ui/components/user/UserList/hooks';
 
 export const ProfileView = ({
   user,

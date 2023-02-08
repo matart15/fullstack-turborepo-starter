@@ -18,8 +18,15 @@ export class UserService {
     return this.prisma.user.findUnique(args);
   }
 
-  async findMany(args: UserFindManyArgs): Promise<User[]> {
-    return this.prisma.user.findMany(args);
+  async findMany(args: UserFindManyArgs): Promise<[number, User[]]> {
+    return this.prisma.$transaction([
+      this.prisma.user.count({
+        ...args,
+        skip: undefined,
+        take: undefined,
+      }),
+      this.prisma.user.findMany(args),
+    ]);
   }
 
   async create(args: UserCreateArgs): Promise<User> {

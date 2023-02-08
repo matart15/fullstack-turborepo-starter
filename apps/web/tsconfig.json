@@ -1,17 +1,7 @@
 {
   "extends": "config/tsconfig.base.json",
-  "exclude": [
-    "dist",
-    "build",
-    "node_modules"
-  ],
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "jest.setup.js",
-    ".next/types/**/*.ts"
-  ],
+  "exclude": ["dist", "build", "node_modules"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "jest.setup.js", ".next/types/**/*.ts"],
   "compilerOptions": {
     "baseUrl": "./",
     "jsx": "preserve",

@@ -20,8 +20,8 @@ export class <%= h.changeCase.pascal(name) %>Service {
     return this.prisma.<%= h.changeCase.camel(name) %>.findUnique(args);
   }
 
-  async findMany(args: <%= h.changeCase.pascal(name) %>FindManyArgs): Promise<<%= h.changeCase.pascal(name) %>[]> {
-    return this.prisma.<%= h.changeCase.camel(name) %>.findMany(args);
+  async findMany(args: <%= h.changeCase.pascal(name) %>FindManyArgs): Promise<[number, <%= h.changeCase.pascal(name) %>[]]> {
+    return this.prisma.$transaction([this.prisma.<%= h.changeCase.camel(name) %>.count(args), this.prisma.<%= h.changeCase.camel(name) %>.findMany(args)]);
   }
 
   async create(args: <%= h.changeCase.pascal(name) %>CreateArgs): Promise<<%= h.changeCase.pascal(name) %>> {

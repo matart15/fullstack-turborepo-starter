@@ -1,5 +1,7 @@
 import { UseGuards } from '@nestjs/common';
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Context, GraphQLExecutionContext, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { TOTAL_COUNT_HEADER } from '@src/config/constants';
+import { NoPermissionException } from '@src/libs/exceptions/NoPermissionException';
 import { FindManyUserArgs } from 'prisma/@generated/user/args/find-many-user.args';
 import { FindUniqueUserArgs } from 'prisma/@generated/user/args/find-unique-user.args';
 import { UpdateOneUserArgs } from 'prisma/@generated/user/args/update-one-user.args';
@@ -27,15 +29,18 @@ export class UserResolver {
 
   @Query(() => [User])
   @UseGuards(JwtAuthGuard)
-  async findManyUsers(@Args() args: FindManyUserArgs) {
-    return this.userService.findMany(args);
+  async findManyUsers(@Context() context: GraphQLExecutionContext, @Args() args: FindManyUserArgs): Promise<User[]> {
+    const [total, users] = await this.userService.findMany(args);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (context as any).res.set({ [TOTAL_COUNT_HEADER]: total });
+    return users;
   }
 
   @Mutation(() => User)
   @UseGuards(JwtAuthGuard)
   async deleteUser(@Args('id') id: string, @CurrentUser() user: User): Promise<User> {
-    if (user.role.name !== 'admin') {
-      throw new Error('Only admin can delete user user');
+    if (user.role?.name !== 'admin') {
+      throw new NoPermissionException();
     }
     return this.userService.update({
       where: {

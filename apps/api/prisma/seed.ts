@@ -4,7 +4,6 @@ import { PrismaService } from 'nestjs-prisma';
 
 import * as a from '../src/modules/user/user.service';
 
-console.log('a: ', a);
 const { UserService } = a;
 
 const prisma = new PrismaClient();
@@ -15,10 +14,11 @@ const main = async (): Promise<void> => {
   const prismaService = new PrismaService();
   const usersService = new UserService(prismaService);
 
-  // ユーザー追加
+  // add admin user
   await usersService.create({
     data: {
       email: 'manager@asdf.com',
+      name: 'manager',
       password: 'Ab123456',
       emailConfirmedAt: new Date(),
       confirmationCode: '123',
@@ -30,19 +30,41 @@ const main = async (): Promise<void> => {
     },
   });
 
-  await usersService.create({
+  // add user role
+  const userRole = await prismaService.role.create({
     data: {
-      email: 'user@asdf.com',
-      password: 'Ab123456',
-      emailConfirmedAt: new Date(),
-      confirmationCode: '456',
-      role: {
-        create: {
-          name: 'user',
-        },
-      },
+      name: 'user',
     },
   });
+
+  // add 5 users
+  const createUsersPromises = [1, 2, 3, 4, 5]
+    .map(i => {
+      return {
+        email: `user${i}@asdf.com`,
+        name: `user${i}`,
+        password: 'Ab123456',
+        emailConfirmedAt: new Date(),
+        confirmationCode: `confirmationCode${i}`,
+        role: {
+          connect: {
+            id: userRole.id,
+          },
+        },
+      };
+    })
+    .map(async data => {
+      return new Promise(resolve => {
+        usersService
+          .create({
+            data,
+          })
+          .then(value => {
+            resolve(value);
+          });
+      });
+    });
+  await Promise.all(createUsersPromises);
   console.log('💫 seed finished.');
 };
 

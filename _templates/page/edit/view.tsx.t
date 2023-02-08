@@ -1,16 +1,25 @@
 ---
 to: packages/ui/views/<%= h.changeCase.pascal(name) %>EditView.tsx
 ---
-import { SiteLayout } from '../components/common/Layout';
-import { <%= h.changeCase.pascal(name) %>Edit, <%= h.changeCase.pascal(name) %>EditProps } from '../components/<%= h.changeCase.camel(name) %>/<%= h.changeCase.pascal(name) %>Edit';
-import { EditViewModeSwitch } from '../utils/EditViewModeSwitch';
+import { Space } from 'antd';
+import { SiteLayout } from 'ui/components/common/Layout';
+import { SearchField, SearchForm } from 'ui/components/common/Search';
+import { <%= h.changeCase.pascal(name) %>List, <%= h.changeCase.pascal(name) %>ListProps } from 'ui/components/<%= h.changeCase.camel(name) %>/<%= h.changeCase.pascal(name) %>List';
 
-export const <%= h.changeCase.pascal(name) %>EditView = ({ <%= h.changeCase.camel(name) %>, onFinish, allPermissions }: <%= h.changeCase.pascal(name) %>EditProps): JSX.Element => {
+export const <%= h.changeCase.pascal(name) %>ListView = (
+  p: <%= h.changeCase.pascal(name) %>ListProps & {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    onSearch?: (values: any) => void;
+    availableSearchFields: SearchField[];
+  },
+): JSX.Element => {
+  const { onSearch, availableSearchFields, ...rest } = p;
   return (
-    <SiteLayout breadCrumbItems={['Home', '<%= h.changeCase.pascal(name) %>', 'Detail']}>
-      <EditViewModeSwitch>
-        <<%= h.changeCase.pascal(name) %>Edit <%= h.changeCase.camel(name) %>={<%= h.changeCase.camel(name) %>} onFinish={onFinish} allPermissions={allPermissions} />
-      </EditViewModeSwitch>
+    <SiteLayout breadCrumbItems={['Home', '<%= h.changeCase.pascal(name) %>']}>
+      <Space direction="vertical" style={{ display: 'flex' }}>
+        <SearchForm onSearch={onSearch} availableSearchFields={availableSearchFields} />
+        <<%= h.changeCase.pascal(name) %>List {...rest} />
+      </Space>
     </SiteLayout>
   );
 };

@@ -1,7 +1,6 @@
 import { LoadingOutlined } from '@ant-design/icons';
-// import { ApolloError } from '@apollo/client';
 import { notification, Progress } from 'antd';
-import { ArgsProps, NotificationPlacement } from 'antd/lib/notification';
+import { ArgsProps, NotificationPlacement } from 'antd/es/notification/interface';
 
 const errorDisplay = (description: unknown): void => {
   if (typeof description === 'string') {
@@ -17,9 +16,9 @@ const errorDisplay = (description: unknown): void => {
       });
     } else if ('graphQLErrors' in description && Array.isArray(description.graphQLErrors)) {
       if (description?.graphQLErrors?.length > 0) {
-        const gqlExtension = description?.graphQLErrors?.[0]?.extensions;
+        // const gqlExtension = description?.graphQLErrors?.[0]?.extensions;
         notification.error({
-          message: `エラーコード： ${gqlExtension?.errorCode || gqlExtension?.code}`,
+          message: 'エラー', // `エラーコード： ${gqlExtension?.errorCode || gqlExtension?.code}`,
           description: description?.graphQLErrors?.[0]?.message,
         });
       }

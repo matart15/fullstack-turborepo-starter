@@ -42,6 +42,7 @@ const interceptors = [
       autoSchemaFile: './graphql/schema.gql',
       sortSchema: true,
       introspection: true,
+      context: ({ req, res }) => ({ req, res }),
     }),
     I18nModule.forRoot({
       fallbackLanguage: 'en',

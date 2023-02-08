@@ -8,11 +8,11 @@ import { NOT_FOUND } from './exception.codes';
  * @extends {ExceptionBase}
  */
 export class NotFoundException extends ExceptionBase {
+  readonly code = NOT_FOUND;
+
   static readonly message = 'Not found';
 
   constructor(message = NotFoundException.message) {
     super(message);
   }
-
-  readonly code = NOT_FOUND;
 }
