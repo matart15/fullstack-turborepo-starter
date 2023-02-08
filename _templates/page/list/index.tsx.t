@@ -77,7 +77,7 @@ export const getServerSideProps: GetServerSideProps<<%= h.changeCase.pascal(name
 
   const where = search
     .map(s => ({
-      [s.customFieldName]: {
+      [s.fieldName]: {
         [s.condition]: s.value,
       },
     }))

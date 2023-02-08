@@ -35,10 +35,10 @@ export const UserEdit = ({ user, onFinish, allPermissions, editMode }: UserEditP
         <Input />
       </Form.Item>
       <Form.Item label="Created At" name="createdAt">
-        <DatePicker />
+        <DatePicker style={{ width: '100%' }} />
       </Form.Item>
       <Form.Item label="Updated At" name="updatedAt">
-        <DatePicker />
+        <DatePicker style={{ width: '100%' }} />
       </Form.Item>
       <Form.Item label="Email" name="email">
         <Input />
@@ -47,7 +47,7 @@ export const UserEdit = ({ user, onFinish, allPermissions, editMode }: UserEditP
         <Input />
       </Form.Item>
       <Form.Item label="Email Confirmed At" name="emailConfirmedAt">
-        <DatePicker />
+        <DatePicker style={{ width: '100%' }} />
       </Form.Item>
       <Form.Item label="Confirmation Code" name="confirmationCode">
         <Input />

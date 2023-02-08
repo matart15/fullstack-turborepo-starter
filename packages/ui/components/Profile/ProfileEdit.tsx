@@ -17,10 +17,10 @@ export const ProfileEdit = ({ user }: { user: User }): JSX.Element => {
         <Input value={user.id} disabled />
       </Form.Item>
       <Form.Item label="Created At">
-        <DatePicker value={formatDate(user.createdAt)} disabled />
+        <DatePicker value={formatDate(user.createdAt)} disabled style={{ width: '100%' }} />
       </Form.Item>
       <Form.Item label="Updated At">
-        <DatePicker value={formatDate(user.updatedAt)} disabled />
+        <DatePicker value={formatDate(user.updatedAt)} disabled style={{ width: '100%' }} />
       </Form.Item>
       <Form.Item label="Email">
         <Input value={user.email} disabled />
@@ -29,7 +29,7 @@ export const ProfileEdit = ({ user }: { user: User }): JSX.Element => {
         <Input value={user.name} disabled />
       </Form.Item>
       <Form.Item label="Email Confirmed At">
-        <DatePicker value={formatDate(user.emailConfirmedAt)} disabled />
+        <DatePicker value={formatDate(user.emailConfirmedAt)} disabled style={{ width: '100%' }} />
       </Form.Item>
       <Form.Item label="Confirmation Code">
         <Input value={user.confirmationCode} disabled />

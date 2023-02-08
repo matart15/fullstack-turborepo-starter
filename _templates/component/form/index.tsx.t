@@ -3,6 +3,7 @@ to: packages/ui/components/<%= h.changeCase.camel(name) %>/edit/index.tsx
 ---
 import { Button, DatePicker, Empty, Form, Input, Row, Typography } from 'antd';
 import { formatDate } from 'ui/utils/formatDate';
+import { useTranslatedTexts } from './hooks';
 import { I<%= h.changeCase.pascal(name) %>Edit } from './interface';
 
 const { Title } = Typography;
@@ -16,7 +17,8 @@ export const <%= h.changeCase.pascal(name) %>Edit = ({ <%= h.changeCase.camel(na
   const { yupSync, okButtonLabel, <%= h.changeCase.camel(name) %>Label } = useTranslatedTexts();
   if (!<%= h.changeCase.camel(name) %>) return <Empty />;
   return (
-    <Form
+    <form
+      form={form}
       initialValues={{
         ...<%= h.changeCase.camel(name) %>,
         createdAt: formatDate(<%= h.changeCase.camel(name) %>.createdAt),
@@ -27,23 +29,41 @@ export const <%= h.changeCase.pascal(name) %>Edit = ({ <%= h.changeCase.camel(na
       wrapperCol={{ span: 16 }}
       onFinish={onFinish}
       disabled={!editMode}>
-      <Title level={3}><%= h.changeCase.camel(name) %>Label</Title>
+      <Title level={3}>{<%= h.changeCase.camel(name) %>Label}</Title>
       <Form.Item label="ID" name="id" hidden>
         <Input />
       </Form.Item>
-      <Form.Item label="Created At" name="createdAt">
-        <DatePicker disabled />
+      <Form.Item
+        label="Created At"
+        name="createdAt"
+        data-testid="test-project-createdAt"
+        required
+        rules={[yupSync]}
+      >
+        <DatePicker disabled style={{ width: '100%' }} />
       </Form.Item>
-      <Form.Item label="Updated At" name="updatedAt">
-        <DatePicker disabled />
+      <Form.Item 
+        label="Updated At" 
+        name="updatedAt"
+        data-testid="test-project-updatedAt"
+        required
+        rules={[yupSync]}
+      >
+        <DatePicker disabled style={{ width: '100%' }} />
       </Form.Item>
-      <Form.Item label="Field" name="customField">
+      <Form.Item 
+        label="Field" 
+        name="customField"
+        data-testid="test-project-customField"
+        required
+        rules={[yupSync]}
+      >
         <Input />
       </Form.Item>
       {editMode ? (
         <Form.Item>
           <Button type="primary" htmlType="submit">
-            Save
+            {okButtonLabel}
           </Button>
         </Form.Item>
       ) : undefined}

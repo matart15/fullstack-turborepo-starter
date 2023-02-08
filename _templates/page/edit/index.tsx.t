@@ -26,7 +26,7 @@ const <%= h.changeCase.pascal(name) %>Edit: NextPage<<%= h.changeCase.pascal(nam
       <%= h.changeCase.camel(name) %>={<%= h.changeCase.camel(name) %>}
       onFinish={async (value): Promise<void> => {
         try {
-          const s = await update<%= h.changeCase.pascal(name) %>Mutation({
+          await update<%= h.changeCase.pascal(name) %>Mutation({
             variables: {
               id: value.id,
               data: {
