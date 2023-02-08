@@ -1,3 +1,6 @@
+---
+to: packages/ui/components/<%= h.changeCase.camel(name) %>/edit/<%= h.changeCase.pascal(name) %>.stories.tsx
+---
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import { <%= h.changeCase.pascal(name) %>Edit } from '.';
@@ -19,7 +22,7 @@ export const Empty = Template.bind({});
 Empty.args = {
   <%= h.changeCase.camel(name) %>: {
     id: '12345',
-    field: 'field1',
+    customField: 'customField1',
   },
 };
 
@@ -27,7 +30,7 @@ export const ViewMode = Template.bind({});
 ViewMode.args = {
   <%= h.changeCase.camel(name) %>: {
     id: '12345',
-    field: 'field1',
+    customField: 'customField1',
   },
 };
 
@@ -36,6 +39,6 @@ EditMode.args = {
   editMode: true,
   <%= h.changeCase.camel(name) %>: {
     id: '12345',
-    field: 'field1',
+    customField: 'customField1',
   },
 };

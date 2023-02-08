@@ -1,6 +1,6 @@
 ---
-to: packages/ui/components/<%= h.changeCase.pascal(name) %>/list/interface.ts
+to: packages/ui/components/<%= h.changeCase.camel(name) %>/list/interface.ts
 ---
 export interface I<%= h.changeCase.pascal(name) %>List {
-  field: string;
+  customField: string;
 }

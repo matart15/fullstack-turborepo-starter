@@ -9,16 +9,16 @@ import { AllowedLanguages } from 'constants/index';
 export const schemaValidate = (currentLocale: AllowedLanguages) => {
   i18n.changeLanguage(currentLocale); // hack. We could not easily set language on react component from next  path
   return Yup.object().shape({
-    field: Yup.string()
+    customField: Yup.string()
       .required(
         i18n.t('validation.common.required', {
-          fieldName: i18n.t('pages.<%= h.changeCase.camel(name) %>.field'),
+          fieldName: i18n.t('pages.<%= h.changeCase.camel(name) %>.customField'),
         }),
       )
       .min(
         8,
         i18n.t('validation.common.minLength', {
-          fieldName: i18n.t('pages.<%= h.changeCase.camel(name) %>.field'),
+          fieldName: i18n.t('pages.<%= h.changeCase.camel(name) %>.customField'),
           context: 'withName',
           minLength: 8,
         }),
@@ -26,7 +26,7 @@ export const schemaValidate = (currentLocale: AllowedLanguages) => {
       .max(
         50,
         i18n.t('validation.common.maxLength', {
-          fieldName: i18n.t('pages.<%= h.changeCase.camel(name) %>.field'),
+          fieldName: i18n.t('pages.<%= h.changeCase.camel(name) %>.customField'),
           context: 'withName',
           maxLength: 50,
         }),

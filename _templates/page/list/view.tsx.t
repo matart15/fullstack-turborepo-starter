@@ -1,6 +1,9 @@
+---
+to: packages/ui/views/<%= h.changeCase.pascal(name) %>ListView.tsx
+---
 import { Space } from 'antd';
 import { SiteLayout } from 'ui/components/common/Layout';
-import { <%= h.changeCase.pascal(name) %>List, <%= h.changeCase.pascal(name) %>ListProps } from 'ui/components/<%= h.changeCase.camel(name) %>/<%= h.changeCase.pascal(name) %>List';
+import { <%= h.changeCase.pascal(name) %>List, <%= h.changeCase.pascal(name) %>ListProps } from 'ui/components/<%= h.changeCase.camel(name) %>/list';
 import { SearchField, SearchForm } from 'ui/components/common/Search';
 
 export const <%= h.changeCase.pascal(name) %>ListView = (

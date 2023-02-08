@@ -16,13 +16,13 @@ import { getSearch } from 'ui/components/common/Search/getSearch';
 
 const AVAILABLE_SEARCH_FIELDS: SearchField[] = [
   {
-    name: 'field',
+    name: 'customField',
     type: 'string',
   },
 ];
 
-const ALLOWED_ORDER_FIELDS = ['field'];
-const DEFAULT_ORDER_FIELD = 'field';
+const ALLOWED_ORDER_FIELDS = ['customField'];
+const DEFAULT_ORDER_FIELD = 'customField';
 
 type <%= h.changeCase.pascal(name) %>ListType = { <%= h.changeCase.camel(name) %>List: <%= h.changeCase.pascal(name) %>ListQuery['findMany<%= h.changeCase.pascal(name) %>s']; pagination: PaginationType; search: SearchCriteria[] };
 const <%= h.changeCase.pascal(name) %>List = (data: <%= h.changeCase.pascal(name) %>ListType): JSX.Element => {
@@ -77,7 +77,7 @@ export const getServerSideProps: GetServerSideProps<<%= h.changeCase.pascal(name
 
   const where = search
     .map(s => ({
-      [s.fieldName]: {
+      [s.customFieldName]: {
         [s.condition]: s.value,
       },
     }))

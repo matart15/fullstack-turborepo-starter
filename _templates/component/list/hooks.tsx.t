@@ -1,3 +1,6 @@
+---
+to: packages/ui/components/<%= h.changeCase.camel(name) %>/list/hooks.tsx
+---
 import { DeleteOutlined } from '@ant-design/icons';
 import { Button, Space } from 'antd';
 import { ColumnProps } from 'antd/es/table';
@@ -13,13 +16,13 @@ export const useDatasource = ({
   const columns: ColumnProps<I<%= h.changeCase.pascal(name) %>List>[] = [
     {
       title: 'Field',
-      dataIndex: 'field',
-      key: 'field',
+      dataIndex: 'customField',
+      key: 'customField',
       sorter: true,
       sortDirections: ['ascend', 'descend', 'ascend'],
-      render: (field, <%= h.changeCase.camel(name) %>) => (
+      render: (customField, <%= h.changeCase.camel(name) %>) => (
         <Space size="middle">
-          <Link href={`/<%= h.changeCase.camel(name) %>/${<%= h.changeCase.camel(name) %>.id}`}>{field}</Link>
+          <Link href={`/<%= h.changeCase.camel(name) %>/${<%= h.changeCase.camel(name) %>.id}`}>{customField}</Link>
         </Space>
       ),
     },

@@ -1,5 +1,5 @@
 ---
-to: packages/ui/components/<%= h.changeCase.pascal(name) %>/list/<%= h.changeCase.pascal(name) %>.stories.tsx
+to: packages/ui/components/<%= h.changeCase.camel(name) %>/list/<%= h.changeCase.pascal(name) %>.stories.tsx
 ---
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
@@ -18,10 +18,10 @@ export const Primary = Template.bind({});
 Primary.args = {
   <%= h.changeCase.camel(name) %>s: [
     {
-      field: 'field1',
+      customField: 'customField1',
     },
     {
-      field: 'field2',
+      customField: 'customField2',
     },
   ],
 };

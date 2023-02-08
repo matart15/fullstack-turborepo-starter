@@ -1,5 +1,5 @@
 ---
-to: packages/ui/components/<%= h.changeCase.pascal(name) %>/list/index.tsx
+to: packages/ui/components/<%= h.changeCase.camel(name) %>/list/index.tsx
 ---
 import { Table } from 'antd';
 import { ColumnProps } from 'antd/es/table';
@@ -18,12 +18,12 @@ export const <%= h.changeCase.pascal(name) %>List = ({ <%= h.changeCase.camel(na
   const router = useRouter();
   const columns: ColumnProps<I<%= h.changeCase.pascal(name) %>List>[] = useDatasource({ handleDelete });
 
-  const handleTableChange = (pagination, filters, sorter) => {
+  const handleTableChange = (pagination1, filters, sorter): void => {
     router.push({
       pathname: router.pathname,
       query: {
         ...router.query,
-        page: pagination.current,
+        page: pagination1.current,
         orderField: sorter.field,
         orderDirection: sorter.order,
         ...filters,

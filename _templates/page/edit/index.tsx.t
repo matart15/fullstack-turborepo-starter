@@ -3,12 +3,14 @@ to: apps/web/pages/<%= h.changeCase.camel(name) %>/[id]/index.tsx
 ---
 import { 
   <%= h.changeCase.pascal(name) %>DetailDocument,
-  <%= h.changeCase.pascal(name) %>DetailQuery 
+  <%= h.changeCase.pascal(name) %>DetailQuery,
   useUpdate<%= h.changeCase.pascal(name) %>Mutation,
 } from 'graphql/generated';
 import { initializeApollo } from 'lib/apollo-client';
 import { GetServerSideProps, NextPage } from 'next';
-import { SiteLayout } from 'ui/components/common/Layout';
+import i18n from 'translation';
+import { popup } from 'ui/components/popup';
+import { useCurrentLocale } from 'ui/utils/common';
 import { <%= h.changeCase.pascal(name) %>EditView } from 'ui/views/<%= h.changeCase.pascal(name) %>EditView';
 
 type <%= h.changeCase.pascal(name) %>EditProps = {
@@ -20,25 +22,24 @@ const <%= h.changeCase.pascal(name) %>Edit: NextPage<<%= h.changeCase.pascal(nam
   const currentLocale = useCurrentLocale();
   i18n.changeLanguage(currentLocale); // hack. We could not easily set language on react component from next  path
   return (
-    <SiteLayout breadCrumbItems={['Home', '<%= h.changeCase.pascal(name) %>', 'Edit']}>
-      <<%= h.changeCase.pascal(name) %>EditView
-        <%= h.changeCase.camel(name) %>={<%= h.changeCase.camel(name) %>}
-        onFinish={async (value): Promise<void> => {
-          try {
-            const s = await update<%= h.changeCase.pascal(name) %>Mutation({
-              variables: {
-                id: value.id,
-                data: {
-                  field: value.field,
-                },
+    <<%= h.changeCase.pascal(name) %>EditView
+      <%= h.changeCase.camel(name) %>={<%= h.changeCase.camel(name) %>}
+      onFinish={async (value): Promise<void> => {
+        try {
+          const s = await update<%= h.changeCase.pascal(name) %>Mutation({
+            variables: {
+              id: value.id,
+              data: {
+                customField: value.customField,
               },
-            });
-            popup.success(i18n.t('common.succeeded'));
-          } catch (error) {
-            popup.error(error);
-          }
-      />
-    </SiteLayout>
+            },
+          });
+          popup.success(i18n.t('common.succeeded'));
+        } catch (error) {
+          popup.error(error);
+        }
+      }}
+    />
   );
 };
 export const getServerSideProps: GetServerSideProps = async context => {

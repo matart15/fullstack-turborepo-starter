@@ -12,7 +12,7 @@ import { NoPermissionException } from '@src/libs/exceptions/NoPermissionExceptio
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { <%= h.changeCase.pascal(name) %>Service } from './<%= h.changeCase.camel(name) %>.service';
-
+import { User } from 'prisma/@generated/user/model/user.model';
 
 @Resolver()
 export class <%= h.changeCase.pascal(name) %>Resolver {
@@ -23,17 +23,13 @@ export class <%= h.changeCase.pascal(name) %>Resolver {
   async findUnique<%= h.changeCase.pascal(name) %>(@Args() args: FindUnique<%= h.changeCase.pascal(name) %>Args) {
     return this.<%= h.changeCase.camel(name) %>Service.findUnique({
       where: args.where,
-      include: {
-        role: true,
-        permissions: true,
-      },
     });
   }
 
   @Query(() => [<%= h.changeCase.pascal(name) %>])
   @UseGuards(JwtAuthGuard)
-  async findMany<%= h.changeCase.pascal(name) %>s(@Args() args: FindMany<%= h.changeCase.pascal(name) %>Args) {
-    const [total, <%= h.changeCase.camel(name) %>s] = this.<%= h.changeCase.camel(name) %>Service.findMany(args);
+  async findMany<%= h.changeCase.pascal(name) %>s(@Context() context: GraphQLExecutionContext, @Args() args: FindMany<%= h.changeCase.pascal(name) %>Args) {
+    const [total, <%= h.changeCase.camel(name) %>s] = await this.<%= h.changeCase.camel(name) %>Service.findMany(args);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (context as any).res.set({ [TOTAL_COUNT_HEADER]: total });
     return <%= h.changeCase.camel(name) %>s;
@@ -41,8 +37,8 @@ export class <%= h.changeCase.pascal(name) %>Resolver {
 
   @Mutation(() => <%= h.changeCase.pascal(name) %>)
   @UseGuards(JwtAuthGuard)
-  async delete<%= h.changeCase.pascal(name) %>(@Args('id') id: string, @CurrentUser() <%= h.changeCase.camel(name) %>: <%= h.changeCase.pascal(name) %>): Promise<<%= h.changeCase.pascal(name) %>> {
-    if (<%= h.changeCase.camel(name) %>.role.name !== 'admin') {
+  async delete<%= h.changeCase.pascal(name) %>(@Args('id') id: string, @CurrentUser() user: User): Promise<<%= h.changeCase.pascal(name) %>> {
+    if (user.role?.name !== 'admin') {
       throw new NoPermissionException();
     }
     return this.<%= h.changeCase.camel(name) %>Service.update({
@@ -52,25 +48,12 @@ export class <%= h.changeCase.pascal(name) %>Resolver {
       data: {
         deletedAt: new Date(),
       },
-      include: {
-        role: true,
-        permissions: true,
-      },
     });
   }
 
   @Mutation(() => <%= h.changeCase.pascal(name) %>)
   @UseGuards(JwtAuthGuard)
-  async update<%= h.changeCase.pascal(name) %>(@Args() args: UpdateOne<%= h.changeCase.pascal(name) %>Args, @CurrentUser() <%= h.changeCase.camel(name) %>: <%= h.changeCase.pascal(name) %>): Promise<<%= h.changeCase.pascal(name) %>> {
-    if (args.where.id !== <%= h.changeCase.camel(name) %>.id) {
-      throw new NoPermissionException();
-    }
-    return this.<%= h.changeCase.camel(name) %>Service.update({
-      ...args,
-      include: {
-        role: true,
-        permissions: true,
-      },
-    });
+  async update<%= h.changeCase.pascal(name) %>(@Args() args: UpdateOne<%= h.changeCase.pascal(name) %>Args): Promise<<%= h.changeCase.pascal(name) %>> {
+    return this.<%= h.changeCase.camel(name) %>Service.update(args);
   }
 }

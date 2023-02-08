@@ -10,6 +10,6 @@ query <%= h.changeCase.pascal(name) %>List(
   $where: <%= h.changeCase.pascal(name) %>WhereInput
 ) {
   findMany<%= h.changeCase.pascal(name) %>s(cursor: $cursor, distinct: $distinct, orderBy: $orderBy, skip: $skip, take: $take, where: $where) {
-    field
+    customField
   }
 }
