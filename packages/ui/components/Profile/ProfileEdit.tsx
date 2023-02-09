@@ -1,15 +1,10 @@
 import { DatePicker, Form, Input, Typography } from 'antd';
-import dayjs from 'dayjs';
-
-import { User } from '../user/UserList/hooks';
-
-const formatDate = (date: string | number | Date): dayjs.Dayjs => {
-  return dayjs(date);
-};
+import { IUserEdit } from 'ui/components/user/form/interface';
+import { formatDate } from 'ui/utils/formatDate';
 
 const { Title } = Typography;
 
-export const ProfileEdit = ({ user }: { user: User }): JSX.Element => {
+export const ProfileEdit = ({ user }: { user: IUserEdit }): JSX.Element => {
   return (
     <Form labelCol={{ span: 8, offset: 0 }} labelAlign="left" wrapperCol={{ span: 16 }}>
       <Title level={3}>Profile</Title>

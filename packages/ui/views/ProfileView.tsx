@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { ChangeLanguage } from 'ui/components/common/ChangeLanguage';
 import { SiteLayout } from 'ui/components/common/Layout';
 import { ProfileEdit } from 'ui/components/Profile/ProfileEdit';
-import { User } from 'ui/components/user/UserList/hooks';
+import { User } from 'ui/components/user/form/hooks';
 
 export const ProfileView = ({
   user,

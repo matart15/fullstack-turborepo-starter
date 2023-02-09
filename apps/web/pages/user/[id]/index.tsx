@@ -36,8 +36,6 @@ const UserDetail: NextPage<UserDetailProps> = (data: UserDetailProps): JSX.Eleme
               data: {
                 email: value.email,
                 name: value.name,
-                emailConfirmedAt: value.emailConfirmedAt,
-                confirmationCode: value.confirmationCode,
                 permissions: {
                   set: value.permissions,
                 },

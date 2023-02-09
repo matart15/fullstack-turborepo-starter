@@ -60,9 +60,13 @@ export type Mutation = {
   __typename?: 'Mutation';
   changePassword: Scalars['Boolean'];
   confirmUserEmail: Scalars['Boolean'];
+  createRole: Role;
+  createUser: User;
+  deleteRole: Role;
   deleteUser: User;
   signInUser: UserSignInResponse;
   signUpUser: Scalars['Boolean'];
+  updateRole: Role;
   updateUser: User;
 };
 
@@ -74,6 +78,21 @@ export type MutationChangePasswordArgs = {
 
 export type MutationConfirmUserEmailArgs = {
   token: Scalars['String'];
+};
+
+
+export type MutationCreateRoleArgs = {
+  data: RoleCreateInput;
+};
+
+
+export type MutationCreateUserArgs = {
+  data: UserCreateInput;
+};
+
+
+export type MutationDeleteRoleArgs = {
+  id: Scalars['String'];
 };
 
 
@@ -89,6 +108,12 @@ export type MutationSignInUserArgs = {
 
 export type MutationSignUpUserArgs = {
   data: UserSignUpInput;
+};
+
+
+export type MutationUpdateRoleArgs = {
+  data: RoleUpdateInput;
+  where: RoleWhereUniqueInput;
 };
 
 
@@ -157,6 +182,7 @@ export type NestedStringNullableFilter = {
 export type Permission = {
   __typename?: 'Permission';
   _count: PermissionCount;
+  deletedAt?: Maybe<Scalars['DateTime']>;
   id: Scalars['ID'];
   operation: PermissionOperation;
   roles?: Maybe<Array<Role>>;
@@ -193,6 +219,7 @@ export type PermissionCreateOrConnectWithoutUsersInput = {
 };
 
 export type PermissionCreateWithoutRolesInput = {
+  deletedAt?: InputMaybe<Scalars['DateTime']>;
   id?: InputMaybe<Scalars['String']>;
   operation: PermissionOperation;
   tableName: Scalars['String'];
@@ -200,6 +227,7 @@ export type PermissionCreateWithoutRolesInput = {
 };
 
 export type PermissionCreateWithoutUsersInput = {
+  deletedAt?: InputMaybe<Scalars['DateTime']>;
   id?: InputMaybe<Scalars['String']>;
   operation: PermissionOperation;
   roles?: InputMaybe<RoleCreateNestedManyWithoutPermissionsInput>;
@@ -225,6 +253,7 @@ export type PermissionOrderByRelationAggregateInput = {
 };
 
 export type PermissionOrderByWithRelationInput = {
+  deletedAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   operation?: InputMaybe<SortOrder>;
   roles?: InputMaybe<RoleOrderByRelationAggregateInput>;
@@ -233,6 +262,7 @@ export type PermissionOrderByWithRelationInput = {
 };
 
 export const PermissionScalarFieldEnum = {
+  DeletedAt: 'deletedAt',
   Id: 'id',
   Operation: 'operation',
   TableName: 'tableName'
@@ -243,12 +273,14 @@ export type PermissionScalarWhereInput = {
   AND?: InputMaybe<Array<PermissionScalarWhereInput>>;
   NOT?: InputMaybe<Array<PermissionScalarWhereInput>>;
   OR?: InputMaybe<Array<PermissionScalarWhereInput>>;
+  deletedAt?: InputMaybe<DateTimeNullableFilter>;
   id?: InputMaybe<StringFilter>;
   operation?: InputMaybe<EnumPermissionOperationFilter>;
   tableName?: InputMaybe<StringFilter>;
 };
 
 export type PermissionUpdateManyMutationInput = {
+  deletedAt?: InputMaybe<Scalars['DateTime']>;
   id?: InputMaybe<Scalars['String']>;
   operation?: InputMaybe<PermissionOperation>;
   tableName?: InputMaybe<Scalars['String']>;
@@ -301,6 +333,7 @@ export type PermissionUpdateWithWhereUniqueWithoutUsersInput = {
 };
 
 export type PermissionUpdateWithoutRolesInput = {
+  deletedAt?: InputMaybe<Scalars['DateTime']>;
   id?: InputMaybe<Scalars['String']>;
   operation?: InputMaybe<PermissionOperation>;
   tableName?: InputMaybe<Scalars['String']>;
@@ -308,6 +341,7 @@ export type PermissionUpdateWithoutRolesInput = {
 };
 
 export type PermissionUpdateWithoutUsersInput = {
+  deletedAt?: InputMaybe<Scalars['DateTime']>;
   id?: InputMaybe<Scalars['String']>;
   operation?: InputMaybe<PermissionOperation>;
   roles?: InputMaybe<RoleUpdateManyWithoutPermissionsNestedInput>;
@@ -330,6 +364,7 @@ export type PermissionWhereInput = {
   AND?: InputMaybe<Array<PermissionWhereInput>>;
   NOT?: InputMaybe<Array<PermissionWhereInput>>;
   OR?: InputMaybe<Array<PermissionWhereInput>>;
+  deletedAt?: InputMaybe<DateTimeNullableFilter>;
   id?: InputMaybe<StringFilter>;
   operation?: InputMaybe<EnumPermissionOperationFilter>;
   roles?: InputMaybe<RoleListRelationFilter>;
@@ -401,6 +436,7 @@ export type QueryMode = typeof QueryMode[keyof typeof QueryMode];
 export type Role = {
   __typename?: 'Role';
   _count: RoleCount;
+  deletedAt?: Maybe<Scalars['DateTime']>;
   description?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   name: Scalars['String'];
@@ -412,6 +448,15 @@ export type RoleCount = {
   __typename?: 'RoleCount';
   permissions: Scalars['Int'];
   users: Scalars['Int'];
+};
+
+export type RoleCreateInput = {
+  deletedAt?: InputMaybe<Scalars['DateTime']>;
+  description?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']>;
+  name: Scalars['String'];
+  permissions?: InputMaybe<PermissionCreateNestedManyWithoutRolesInput>;
+  users?: InputMaybe<UserCreateNestedManyWithoutRoleInput>;
 };
 
 export type RoleCreateNestedManyWithoutPermissionsInput = {
@@ -437,6 +482,7 @@ export type RoleCreateOrConnectWithoutUsersInput = {
 };
 
 export type RoleCreateWithoutPermissionsInput = {
+  deletedAt?: InputMaybe<Scalars['DateTime']>;
   description?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['String']>;
   name: Scalars['String'];
@@ -444,6 +490,7 @@ export type RoleCreateWithoutPermissionsInput = {
 };
 
 export type RoleCreateWithoutUsersInput = {
+  deletedAt?: InputMaybe<Scalars['DateTime']>;
   description?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['String']>;
   name: Scalars['String'];
@@ -461,6 +508,7 @@ export type RoleOrderByRelationAggregateInput = {
 };
 
 export type RoleOrderByWithRelationInput = {
+  deletedAt?: InputMaybe<SortOrder>;
   description?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
@@ -468,12 +516,8 @@ export type RoleOrderByWithRelationInput = {
   users?: InputMaybe<UserOrderByRelationAggregateInput>;
 };
 
-export type RoleRelationFilter = {
-  is?: InputMaybe<RoleWhereInput>;
-  isNot?: InputMaybe<RoleWhereInput>;
-};
-
 export const RoleScalarFieldEnum = {
+  DeletedAt: 'deletedAt',
   Description: 'description',
   Id: 'id',
   Name: 'name'
@@ -484,12 +528,23 @@ export type RoleScalarWhereInput = {
   AND?: InputMaybe<Array<RoleScalarWhereInput>>;
   NOT?: InputMaybe<Array<RoleScalarWhereInput>>;
   OR?: InputMaybe<Array<RoleScalarWhereInput>>;
+  deletedAt?: InputMaybe<DateTimeNullableFilter>;
   description?: InputMaybe<StringNullableFilter>;
   id?: InputMaybe<StringFilter>;
   name?: InputMaybe<StringFilter>;
 };
 
+export type RoleUpdateInput = {
+  deletedAt?: InputMaybe<Scalars['DateTime']>;
+  description?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  permissions?: InputMaybe<PermissionUpdateManyWithoutRolesNestedInput>;
+  users?: InputMaybe<UserUpdateManyWithoutRoleNestedInput>;
+};
+
 export type RoleUpdateManyMutationInput = {
+  deletedAt?: InputMaybe<Scalars['DateTime']>;
   description?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
@@ -527,6 +582,7 @@ export type RoleUpdateWithWhereUniqueWithoutPermissionsInput = {
 };
 
 export type RoleUpdateWithoutPermissionsInput = {
+  deletedAt?: InputMaybe<Scalars['DateTime']>;
   description?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
@@ -534,6 +590,7 @@ export type RoleUpdateWithoutPermissionsInput = {
 };
 
 export type RoleUpdateWithoutUsersInput = {
+  deletedAt?: InputMaybe<Scalars['DateTime']>;
   description?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
@@ -555,6 +612,7 @@ export type RoleWhereInput = {
   AND?: InputMaybe<Array<RoleWhereInput>>;
   NOT?: InputMaybe<Array<RoleWhereInput>>;
   OR?: InputMaybe<Array<RoleWhereInput>>;
+  deletedAt?: InputMaybe<DateTimeNullableFilter>;
   description?: InputMaybe<StringNullableFilter>;
   id?: InputMaybe<StringFilter>;
   name?: InputMaybe<StringFilter>;
@@ -607,6 +665,7 @@ export type User = {
   _count: UserCount;
   confirmationCode: Scalars['String'];
   createdAt: Scalars['DateTime'];
+  deletedAt?: Maybe<Scalars['DateTime']>;
   email: Scalars['String'];
   emailConfirmedAt?: Maybe<Scalars['DateTime']>;
   id: Scalars['ID'];
@@ -626,14 +685,23 @@ export type UserCount = {
   permissions: Scalars['Int'];
 };
 
-export type UserCreateManyRoleInput = {
-  confirmationCode: Scalars['String'];
+export type UserCreateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
+  deletedAt?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
-  emailConfirmedAt?: InputMaybe<Scalars['DateTime']>;
   id?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
-  password: Scalars['String'];
+  permissions?: InputMaybe<PermissionCreateNestedManyWithoutUsersInput>;
+  role: RoleCreateNestedOneWithoutUsersInput;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type UserCreateManyRoleInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  deletedAt?: InputMaybe<Scalars['DateTime']>;
+  email: Scalars['String'];
+  id?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -666,25 +734,21 @@ export type UserCreateOrConnectWithoutRoleInput = {
 };
 
 export type UserCreateWithoutPermissionsInput = {
-  confirmationCode: Scalars['String'];
   createdAt?: InputMaybe<Scalars['DateTime']>;
+  deletedAt?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
-  emailConfirmedAt?: InputMaybe<Scalars['DateTime']>;
   id?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
-  password: Scalars['String'];
   role: RoleCreateNestedOneWithoutUsersInput;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type UserCreateWithoutRoleInput = {
-  confirmationCode: Scalars['String'];
   createdAt?: InputMaybe<Scalars['DateTime']>;
+  deletedAt?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
-  emailConfirmedAt?: InputMaybe<Scalars['DateTime']>;
   id?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
-  password: Scalars['String'];
   permissions?: InputMaybe<PermissionCreateNestedManyWithoutUsersInput>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
@@ -700,13 +764,11 @@ export type UserOrderByRelationAggregateInput = {
 };
 
 export type UserOrderByWithRelationInput = {
-  confirmationCode?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
+  deletedAt?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
-  emailConfirmedAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
-  password?: InputMaybe<SortOrder>;
   permissions?: InputMaybe<PermissionOrderByRelationAggregateInput>;
   role?: InputMaybe<RoleOrderByWithRelationInput>;
   roleId?: InputMaybe<SortOrder>;
@@ -716,6 +778,7 @@ export type UserOrderByWithRelationInput = {
 export const UserScalarFieldEnum = {
   ConfirmationCode: 'confirmationCode',
   CreatedAt: 'createdAt',
+  DeletedAt: 'deletedAt',
   Email: 'email',
   EmailConfirmedAt: 'emailConfirmedAt',
   Id: 'id',
@@ -730,13 +793,11 @@ export type UserScalarWhereInput = {
   AND?: InputMaybe<Array<UserScalarWhereInput>>;
   NOT?: InputMaybe<Array<UserScalarWhereInput>>;
   OR?: InputMaybe<Array<UserScalarWhereInput>>;
-  confirmationCode?: InputMaybe<StringFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
+  deletedAt?: InputMaybe<DateTimeNullableFilter>;
   email?: InputMaybe<StringFilter>;
-  emailConfirmedAt?: InputMaybe<DateTimeNullableFilter>;
   id?: InputMaybe<StringFilter>;
   name?: InputMaybe<StringNullableFilter>;
-  password?: InputMaybe<StringFilter>;
   roleId?: InputMaybe<StringFilter>;
   updatedAt?: InputMaybe<DateTimeFilter>;
 };
@@ -757,26 +818,22 @@ export type UserSignUpInput = {
 };
 
 export type UserUpdateInput = {
-  confirmationCode?: InputMaybe<Scalars['String']>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
+  deletedAt?: InputMaybe<Scalars['DateTime']>;
   email?: InputMaybe<Scalars['String']>;
-  emailConfirmedAt?: InputMaybe<Scalars['DateTime']>;
   id?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
-  password?: InputMaybe<Scalars['String']>;
   permissions?: InputMaybe<PermissionUpdateManyWithoutUsersNestedInput>;
   role?: InputMaybe<RoleUpdateOneRequiredWithoutUsersNestedInput>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type UserUpdateManyMutationInput = {
-  confirmationCode?: InputMaybe<Scalars['String']>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
+  deletedAt?: InputMaybe<Scalars['DateTime']>;
   email?: InputMaybe<Scalars['String']>;
-  emailConfirmedAt?: InputMaybe<Scalars['DateTime']>;
   id?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
-  password?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -828,25 +885,21 @@ export type UserUpdateWithWhereUniqueWithoutRoleInput = {
 };
 
 export type UserUpdateWithoutPermissionsInput = {
-  confirmationCode?: InputMaybe<Scalars['String']>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
+  deletedAt?: InputMaybe<Scalars['DateTime']>;
   email?: InputMaybe<Scalars['String']>;
-  emailConfirmedAt?: InputMaybe<Scalars['DateTime']>;
   id?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
-  password?: InputMaybe<Scalars['String']>;
   role?: InputMaybe<RoleUpdateOneRequiredWithoutUsersNestedInput>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type UserUpdateWithoutRoleInput = {
-  confirmationCode?: InputMaybe<Scalars['String']>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
+  deletedAt?: InputMaybe<Scalars['DateTime']>;
   email?: InputMaybe<Scalars['String']>;
-  emailConfirmedAt?: InputMaybe<Scalars['DateTime']>;
   id?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
-  password?: InputMaybe<Scalars['String']>;
   permissions?: InputMaybe<PermissionUpdateManyWithoutUsersNestedInput>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
@@ -867,21 +920,18 @@ export type UserWhereInput = {
   AND?: InputMaybe<Array<UserWhereInput>>;
   NOT?: InputMaybe<Array<UserWhereInput>>;
   OR?: InputMaybe<Array<UserWhereInput>>;
-  confirmationCode?: InputMaybe<StringFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
+  deletedAt?: InputMaybe<DateTimeNullableFilter>;
   email?: InputMaybe<StringFilter>;
-  emailConfirmedAt?: InputMaybe<DateTimeNullableFilter>;
   id?: InputMaybe<StringFilter>;
   name?: InputMaybe<StringNullableFilter>;
-  password?: InputMaybe<StringFilter>;
   permissions?: InputMaybe<PermissionListRelationFilter>;
-  role?: InputMaybe<RoleRelationFilter>;
+  role?: InputMaybe<RoleWhereInput>;
   roleId?: InputMaybe<StringFilter>;
   updatedAt?: InputMaybe<DateTimeFilter>;
 };
 
 export type UserWhereUniqueInput = {
-  confirmationCode?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['String']>;
 };
 
@@ -937,6 +987,28 @@ export type RoleDetailQueryVariables = Exact<{
 
 export type RoleDetailQuery = { __typename?: 'Query', findUniqueRole: { __typename?: 'Role', id: string, name: string, description?: string | null } };
 
+export type UpdateRoleMutationVariables = Exact<{
+  id: Scalars['String'];
+  data: RoleUpdateInput;
+}>;
+
+
+export type UpdateRoleMutation = { __typename?: 'Mutation', updateRole: { __typename?: 'Role', id: string, name: string, description?: string | null } };
+
+export type DeleteRoleMutationVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type DeleteRoleMutation = { __typename?: 'Mutation', deleteRole: { __typename?: 'Role', id: string } };
+
+export type CreateRoleMutationVariables = Exact<{
+  data: RoleCreateInput;
+}>;
+
+
+export type CreateRoleMutation = { __typename?: 'Mutation', createRole: { __typename?: 'Role', id: string, name: string, description?: string | null } };
+
 export type RoleListQueryVariables = Exact<{
   cursor?: InputMaybe<RoleWhereUniqueInput>;
   distinct?: InputMaybe<Array<RoleScalarFieldEnum> | RoleScalarFieldEnum>;
@@ -970,6 +1042,13 @@ export type DeleteUserMutationVariables = Exact<{
 
 
 export type DeleteUserMutation = { __typename?: 'Mutation', deleteUser: { __typename?: 'User', id: string } };
+
+export type CreateUserMutationVariables = Exact<{
+  data: UserCreateInput;
+}>;
+
+
+export type CreateUserMutation = { __typename?: 'Mutation', createUser: { __typename?: 'User', confirmationCode: string, createdAt: any, email: string, emailConfirmedAt?: any | null, id: string, name?: string | null, roleId: string, updatedAt: any, permissions?: Array<{ __typename?: 'Permission', id: string, tableName: string, operation: PermissionOperation }> | null, role: { __typename?: 'Role', id: string, name: string } } };
 
 export type UserListQueryVariables = Exact<{
   cursor?: InputMaybe<UserWhereUniqueInput>;
@@ -1236,6 +1315,110 @@ export function useRoleDetailLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
 export type RoleDetailQueryHookResult = ReturnType<typeof useRoleDetailQuery>;
 export type RoleDetailLazyQueryHookResult = ReturnType<typeof useRoleDetailLazyQuery>;
 export type RoleDetailQueryResult = Apollo.QueryResult<RoleDetailQuery, RoleDetailQueryVariables>;
+export const UpdateRoleDocument = gql`
+    mutation UpdateRole($id: String!, $data: RoleUpdateInput!) {
+  updateRole(where: {id: $id}, data: $data) {
+    id
+    name
+    description
+  }
+}
+    `;
+export type UpdateRoleMutationFn = Apollo.MutationFunction<UpdateRoleMutation, UpdateRoleMutationVariables>;
+
+/**
+ * __useUpdateRoleMutation__
+ *
+ * To run a mutation, you first call `useUpdateRoleMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateRoleMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateRoleMutation, { data, loading, error }] = useUpdateRoleMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useUpdateRoleMutation(baseOptions?: Apollo.MutationHookOptions<UpdateRoleMutation, UpdateRoleMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateRoleMutation, UpdateRoleMutationVariables>(UpdateRoleDocument, options);
+      }
+export type UpdateRoleMutationHookResult = ReturnType<typeof useUpdateRoleMutation>;
+export type UpdateRoleMutationResult = Apollo.MutationResult<UpdateRoleMutation>;
+export type UpdateRoleMutationOptions = Apollo.BaseMutationOptions<UpdateRoleMutation, UpdateRoleMutationVariables>;
+export const DeleteRoleDocument = gql`
+    mutation DeleteRole($id: String!) {
+  deleteRole(id: $id) {
+    id
+  }
+}
+    `;
+export type DeleteRoleMutationFn = Apollo.MutationFunction<DeleteRoleMutation, DeleteRoleMutationVariables>;
+
+/**
+ * __useDeleteRoleMutation__
+ *
+ * To run a mutation, you first call `useDeleteRoleMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteRoleMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteRoleMutation, { data, loading, error }] = useDeleteRoleMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteRoleMutation(baseOptions?: Apollo.MutationHookOptions<DeleteRoleMutation, DeleteRoleMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteRoleMutation, DeleteRoleMutationVariables>(DeleteRoleDocument, options);
+      }
+export type DeleteRoleMutationHookResult = ReturnType<typeof useDeleteRoleMutation>;
+export type DeleteRoleMutationResult = Apollo.MutationResult<DeleteRoleMutation>;
+export type DeleteRoleMutationOptions = Apollo.BaseMutationOptions<DeleteRoleMutation, DeleteRoleMutationVariables>;
+export const CreateRoleDocument = gql`
+    mutation CreateRole($data: RoleCreateInput!) {
+  createRole(data: $data) {
+    id
+    name
+    description
+  }
+}
+    `;
+export type CreateRoleMutationFn = Apollo.MutationFunction<CreateRoleMutation, CreateRoleMutationVariables>;
+
+/**
+ * __useCreateRoleMutation__
+ *
+ * To run a mutation, you first call `useCreateRoleMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateRoleMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createRoleMutation, { data, loading, error }] = useCreateRoleMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useCreateRoleMutation(baseOptions?: Apollo.MutationHookOptions<CreateRoleMutation, CreateRoleMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateRoleMutation, CreateRoleMutationVariables>(CreateRoleDocument, options);
+      }
+export type CreateRoleMutationHookResult = ReturnType<typeof useCreateRoleMutation>;
+export type CreateRoleMutationResult = Apollo.MutationResult<CreateRoleMutation>;
+export type CreateRoleMutationOptions = Apollo.BaseMutationOptions<CreateRoleMutation, CreateRoleMutationVariables>;
 export const RoleListDocument = gql`
     query RoleList($cursor: RoleWhereUniqueInput, $distinct: [RoleScalarFieldEnum!], $orderBy: [RoleOrderByWithRelationInput!], $skip: Int, $take: Int, $where: RoleWhereInput) {
   findManyRoles(
@@ -1419,6 +1602,55 @@ export function useDeleteUserMutation(baseOptions?: Apollo.MutationHookOptions<D
 export type DeleteUserMutationHookResult = ReturnType<typeof useDeleteUserMutation>;
 export type DeleteUserMutationResult = Apollo.MutationResult<DeleteUserMutation>;
 export type DeleteUserMutationOptions = Apollo.BaseMutationOptions<DeleteUserMutation, DeleteUserMutationVariables>;
+export const CreateUserDocument = gql`
+    mutation CreateUser($data: UserCreateInput!) {
+  createUser(data: $data) {
+    confirmationCode
+    createdAt
+    email
+    emailConfirmedAt
+    id
+    name
+    permissions {
+      id
+      tableName
+      operation
+    }
+    role {
+      id
+      name
+    }
+    roleId
+    updatedAt
+  }
+}
+    `;
+export type CreateUserMutationFn = Apollo.MutationFunction<CreateUserMutation, CreateUserMutationVariables>;
+
+/**
+ * __useCreateUserMutation__
+ *
+ * To run a mutation, you first call `useCreateUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createUserMutation, { data, loading, error }] = useCreateUserMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useCreateUserMutation(baseOptions?: Apollo.MutationHookOptions<CreateUserMutation, CreateUserMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateUserMutation, CreateUserMutationVariables>(CreateUserDocument, options);
+      }
+export type CreateUserMutationHookResult = ReturnType<typeof useCreateUserMutation>;
+export type CreateUserMutationResult = Apollo.MutationResult<CreateUserMutation>;
+export type CreateUserMutationOptions = Apollo.BaseMutationOptions<CreateUserMutation, CreateUserMutationVariables>;
 export const UserListDocument = gql`
     query UserList($cursor: UserWhereUniqueInput, $distinct: [UserScalarFieldEnum!], $orderBy: [UserOrderByWithRelationInput!], $skip: Int, $take: Int, $where: UserWhereInput) {
   findManyUsers(

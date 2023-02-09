@@ -1,13 +1,12 @@
 ---
-to: packages/ui/components/<%= h.changeCase.camel(name) %>/edit/hooks.tsx
+to: packages/ui/components/<%= h.changeCase.camel(name) %>/form/hooks.tsx
 ---
 
 import { Rule } from 'antd/lib/form';
 import i18n from 'translation/index';
-import { converSchemaToAntdRule } from 'validations';
-import { schemaValidate } from 'validations/<%= h.changeCase.pascal(name) %>/index';
-
 import { useCurrentLocale } from 'ui/utils/common';
+import { converSchemaToAntdRule } from 'validations';
+import { schemaValidate } from 'validations/<%= h.changeCase.pascal(name) %>';
 
 export const useTranslatedTexts = (): {
   yupSync: Rule;

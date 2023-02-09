@@ -1,7 +1,7 @@
-import { Role } from '../../role/RoleList/hooks';
-import { Permission } from '../UserEdit/PermissionSelect';
+import { Role } from '../../role/list/hooks';
+import { Permission } from './PermissionSelect';
 
-export interface IUserList {
+export interface IUserForm {
   id: string;
   name?: string | null;
   email: string;

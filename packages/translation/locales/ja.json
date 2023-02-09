@@ -63,6 +63,13 @@
         "passwordConfirm": "パスワード確認",
         "changePassword": "メール送信"
       }
+    },
+    "role": {
+      "name": "ロール名",
+      "title": "ロール"
+    },
+    "user": {
+      "title": "ユーザー"
     }
   }
 }

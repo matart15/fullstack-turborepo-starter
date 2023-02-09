@@ -34,9 +34,11 @@ model User {
   email     String    @unique
   name      String?
 
-  /// @HideField({ output: true, input: false })
+  /// @HideField({ output: true, input: true })
   password         String       @db.VarChar
+  /// @HideField({ output: false, input: true })
   emailConfirmedAt DateTime?
+  /// @HideField({ output: false, input: true })
   confirmationCode String       @unique
   role             Role         @relation(fields: [roleId], references: [id])
   roleId           String

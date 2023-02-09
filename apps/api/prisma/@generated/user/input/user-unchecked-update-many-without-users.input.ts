@@ -1,5 +1,6 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
+import { HideField } from '@nestjs/graphql';
 
 @InputType()
 export class UserUncheckedUpdateManyWithoutUsersInput {
@@ -22,12 +23,12 @@ export class UserUncheckedUpdateManyWithoutUsersInput {
     @Field(() => String, {nullable:true})
     name?: string;
 
-    @Field(() => String, {nullable:true})
+    @HideField()
     password?: string;
 
-    @Field(() => Date, {nullable:true})
+    @HideField()
     emailConfirmedAt?: Date | string;
 
-    @Field(() => String, {nullable:true})
+    @HideField()
     confirmationCode?: string;
 }

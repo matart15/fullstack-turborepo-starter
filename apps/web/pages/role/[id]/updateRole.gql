@@ -1,0 +1,7 @@
+mutation UpdateRole($id: String!, $data: RoleUpdateInput!) {
+  updateRole(where: { id: $id }, data: $data) {
+    id
+    name
+    description
+  }
+}

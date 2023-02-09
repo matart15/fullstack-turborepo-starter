@@ -4,6 +4,7 @@ import { StringFilter } from '../../prisma/input/string-filter.input';
 import { DateTimeFilter } from '../../prisma/input/date-time-filter.input';
 import { DateTimeNullableFilter } from '../../prisma/input/date-time-nullable-filter.input';
 import { StringNullableFilter } from '../../prisma/input/string-nullable-filter.input';
+import { HideField } from '@nestjs/graphql';
 import { RoleWhereInput } from '../../role/input/role-where.input';
 import { PermissionListRelationFilter } from '../../permission/input/permission-list-relation-filter.input';
 
@@ -37,13 +38,13 @@ export class UserWhereInput {
     @Field(() => StringNullableFilter, {nullable:true})
     name?: StringNullableFilter;
 
-    @Field(() => StringFilter, {nullable:true})
+    @HideField()
     password?: StringFilter;
 
-    @Field(() => DateTimeNullableFilter, {nullable:true})
+    @HideField()
     emailConfirmedAt?: DateTimeNullableFilter;
 
-    @Field(() => StringFilter, {nullable:true})
+    @HideField()
     confirmationCode?: StringFilter;
 
     @Field(() => RoleWhereInput, {nullable:true})

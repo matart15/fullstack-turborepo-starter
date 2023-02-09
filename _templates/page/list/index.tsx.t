@@ -7,22 +7,26 @@ import { getPaginationDataAtServer } from 'lib/getPaginationAtServer';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import i18n from 'translation';
-import { popup } from 'ui/components/popup';
 import { SearchCriteria, SearchField } from 'ui/components/common/Search';
+import { getSearch } from 'ui/components/common/Search/getSearch';
+import { popup } from 'ui/components/popup';
 import { PaginationType } from 'ui/types/pagination';
 import { useCurrentLocale } from 'ui/utils/common';
 import { <%= h.changeCase.pascal(name) %>ListView } from 'ui/views/<%= h.changeCase.pascal(name) %>ListView';
-import { getSearch } from 'ui/components/common/Search/getSearch';
 
 const AVAILABLE_SEARCH_FIELDS: SearchField[] = [
   {
     name: 'customField',
     type: 'string',
   },
+  {
+    name: 'createdAt',
+    type: 'date',
+  },
 ];
 
-const ALLOWED_ORDER_FIELDS = ['customField'];
-const DEFAULT_ORDER_FIELD = 'customField';
+const ALLOWED_ORDER_FIELDS = ['customField', 'createdAt'];
+const DEFAULT_ORDER_FIELD = 'createdAt';
 
 type <%= h.changeCase.pascal(name) %>ListType = { <%= h.changeCase.camel(name) %>List: <%= h.changeCase.pascal(name) %>ListQuery['findMany<%= h.changeCase.pascal(name) %>s']; pagination: PaginationType; search: SearchCriteria[] };
 const <%= h.changeCase.pascal(name) %>List = (data: <%= h.changeCase.pascal(name) %>ListType): JSX.Element => {
@@ -101,7 +105,7 @@ export const getServerSideProps: GetServerSideProps<<%= h.changeCase.pascal(name
         <%= h.changeCase.camel(name) %>List: <%= h.changeCase.camel(name) %>ListQueryResult.data.findMany<%= h.changeCase.pascal(name) %>s,
         pagination: {
           current: currentPage,
-          pageSize: pageSize,
+          pageSize,
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           total: (<%= h.changeCase.camel(name) %>ListQueryResult.data as any).count || 0,
           orderField,

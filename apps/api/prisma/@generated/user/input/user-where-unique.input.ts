@@ -11,6 +11,6 @@ export class UserWhereUniqueInput {
     @HideField()
     email?: string;
 
-    @Field(() => String, {nullable:true})
+    @HideField()
     confirmationCode?: string;
 }

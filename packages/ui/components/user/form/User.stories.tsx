@@ -1,16 +1,17 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import { UserEdit } from '.';
+import { FORM_MODE } from '../../../utils/formMode';
+import { UserForm } from '.';
 
 export default {
-  title: 'component/UserEdit',
-  component: UserEdit,
-} as ComponentMeta<typeof UserEdit>;
+  title: 'component/UserForm',
+  component: UserForm,
+} as ComponentMeta<typeof UserForm>;
 
-const Template: ComponentStory<typeof UserEdit> = ({ user, onFinish, editMode }) => {
+const Template: ComponentStory<typeof UserForm> = ({ user, onFinish, formMode }) => {
   return (
-    <UserEdit
-      editMode={editMode}
+    <UserForm
+      formMode={formMode}
       user={user}
       onFinish={onFinish}
       allPermissions={[
@@ -56,9 +57,25 @@ ViewMode.args = {
   },
 };
 
-export const EditMode = Template.bind({});
-EditMode.args = {
-  editMode: true,
+export const createMode = Template.bind({});
+createMode.args = {
+  formMode: FORM_MODE.CREATE,
+  user: {
+    id: '12345',
+    createdAt: '2022-01-01T00:00:00.000Z',
+    updatedAt: '2022-02-01T00:00:00.000Z',
+    email: 'user@example.com',
+    name: 'John Doe',
+    password: 'password123',
+    emailConfirmedAt: '2022-01-05T00:00:00.000Z',
+    confirmationCode: 'abcdef',
+    permissions: ['per123', 'asdf456'],
+  },
+};
+
+export const editMode = Template.bind({});
+editMode.args = {
+  formMode: FORM_MODE.EDIT,
   user: {
     id: '12345',
     createdAt: '2022-01-01T00:00:00.000Z',

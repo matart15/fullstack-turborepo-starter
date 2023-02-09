@@ -1,0 +1,21 @@
+mutation CreateUser($data: UserCreateInput!) {
+  createUser(data: $data) {
+    confirmationCode
+    createdAt
+    email
+    emailConfirmedAt
+    id
+    name
+    permissions {
+      id
+      tableName
+      operation
+    }
+    role {
+      id
+      name
+    }
+    roleId
+    updatedAt
+  }
+}

@@ -1,14 +1,14 @@
 import { SiteLayout } from 'ui/components/common/Layout';
-import { UserEdit, UserEditProps } from 'ui/components/user/UserEdit';
+import { UserForm, UserFormProps } from 'ui/components/user/form';
 
-import { EditViewModeSwitch } from '../utils/EditViewModeSwitch';
+import { FormModeSwitch } from '../utils/FormModeSwitch';
 
-export const UserEditView = ({ user, onFinish, allPermissions }: UserEditProps): JSX.Element => {
+export const UserEditView = ({ user, onFinish, allPermissions }: UserFormProps): JSX.Element => {
   return (
     <SiteLayout breadCrumbItems={['Home', 'User', 'Detail']}>
-      <EditViewModeSwitch>
-        <UserEdit user={user} onFinish={onFinish} allPermissions={allPermissions} />
-      </EditViewModeSwitch>
+      <FormModeSwitch>
+        <UserForm user={user} onFinish={onFinish} allPermissions={allPermissions} />
+      </FormModeSwitch>
     </SiteLayout>
   );
 };

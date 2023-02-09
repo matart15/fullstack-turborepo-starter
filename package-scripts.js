@@ -32,7 +32,7 @@ module.exports = {
       web: `cd ${webPath} && yarn lint:fix`,
       api: `cd ${apiPath} && yarn lint:fix`,
       ui: `cd ${uiPath} && yarn lint:fix`,
-      translation: `cd ${translationPath} && yarn lint:fix`,
+      translation: `cd ${translationPath} && yarn lint:fix && yarn check-translations`,
     },
     test: {
       default: `nps test.validation`,
@@ -66,6 +66,7 @@ module.exports = {
       page: {
         list: 'hygen page list',
         edit: 'hygen page edit',
+        new: 'hygen page new',
       },
       component: {
         list: 'hygen component list',

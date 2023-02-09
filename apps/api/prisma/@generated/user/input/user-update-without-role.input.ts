@@ -1,5 +1,6 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
+import { HideField } from '@nestjs/graphql';
 import { PermissionUpdateManyWithoutUsersNestedInput } from '../../permission/input/permission-update-many-without-users-nested.input';
 
 @InputType()
@@ -23,13 +24,13 @@ export class UserUpdateWithoutRoleInput {
     @Field(() => String, {nullable:true})
     name?: string;
 
-    @Field(() => String, {nullable:true})
+    @HideField()
     password?: string;
 
-    @Field(() => Date, {nullable:true})
+    @HideField()
     emailConfirmedAt?: Date | string;
 
-    @Field(() => String, {nullable:true})
+    @HideField()
     confirmationCode?: string;
 
     @Field(() => PermissionUpdateManyWithoutUsersNestedInput, {nullable:true})

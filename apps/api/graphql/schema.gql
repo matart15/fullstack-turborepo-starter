@@ -49,9 +49,13 @@ input EnumPermissionOperationFilter {
 type Mutation {
   changePassword(data: UserChangePasswordInput!): Boolean!
   confirmUserEmail(token: String!): Boolean!
+  createRole(data: RoleCreateInput!): Role!
+  createUser(data: UserCreateInput!): User!
+  deleteRole(id: String!): Role!
   deleteUser(id: String!): User!
   signInUser(data: UserSignInInput!): UserSignInResponse!
   signUpUser(data: UserSignUpInput!): Boolean!
+  updateRole(data: RoleUpdateInput!, where: RoleWhereUniqueInput!): Role!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User!
 }
 
@@ -335,6 +339,15 @@ type RoleCount {
   users: Int!
 }
 
+input RoleCreateInput {
+  deletedAt: DateTime
+  description: String
+  id: String
+  name: String!
+  permissions: PermissionCreateNestedManyWithoutRolesInput
+  users: UserCreateNestedManyWithoutRoleInput
+}
+
 input RoleCreateNestedManyWithoutPermissionsInput {
   connect: [RoleWhereUniqueInput!]
   connectOrCreate: [RoleCreateOrConnectWithoutPermissionsInput!]
@@ -407,6 +420,15 @@ input RoleScalarWhereInput {
   description: StringNullableFilter
   id: StringFilter
   name: StringFilter
+}
+
+input RoleUpdateInput {
+  deletedAt: DateTime
+  description: String
+  id: String
+  name: String
+  permissions: PermissionUpdateManyWithoutRolesNestedInput
+  users: UserUpdateManyWithoutRoleNestedInput
 }
 
 input RoleUpdateManyMutationInput {
@@ -548,15 +570,23 @@ type UserCount {
   permissions: Int!
 }
 
-input UserCreateManyRoleInput {
-  confirmationCode: String!
+input UserCreateInput {
   createdAt: DateTime
   deletedAt: DateTime
   email: String!
-  emailConfirmedAt: DateTime
   id: String
   name: String
-  password: String!
+  permissions: PermissionCreateNestedManyWithoutUsersInput
+  role: RoleCreateNestedOneWithoutUsersInput!
+  updatedAt: DateTime
+}
+
+input UserCreateManyRoleInput {
+  createdAt: DateTime
+  deletedAt: DateTime
+  email: String!
+  id: String
+  name: String
   updatedAt: DateTime
 }
 
@@ -589,27 +619,21 @@ input UserCreateOrConnectWithoutRoleInput {
 }
 
 input UserCreateWithoutPermissionsInput {
-  confirmationCode: String!
   createdAt: DateTime
   deletedAt: DateTime
   email: String!
-  emailConfirmedAt: DateTime
   id: String
   name: String
-  password: String!
   role: RoleCreateNestedOneWithoutUsersInput!
   updatedAt: DateTime
 }
 
 input UserCreateWithoutRoleInput {
-  confirmationCode: String!
   createdAt: DateTime
   deletedAt: DateTime
   email: String!
-  emailConfirmedAt: DateTime
   id: String
   name: String
-  password: String!
   permissions: PermissionCreateNestedManyWithoutUsersInput
   updatedAt: DateTime
 }
@@ -625,14 +649,11 @@ input UserOrderByRelationAggregateInput {
 }
 
 input UserOrderByWithRelationInput {
-  confirmationCode: SortOrder
   createdAt: SortOrder
   deletedAt: SortOrder
   email: SortOrder
-  emailConfirmedAt: SortOrder
   id: SortOrder
   name: SortOrder
-  password: SortOrder
   permissions: PermissionOrderByRelationAggregateInput
   role: RoleOrderByWithRelationInput
   roleId: SortOrder
@@ -656,14 +677,11 @@ input UserScalarWhereInput {
   AND: [UserScalarWhereInput!]
   NOT: [UserScalarWhereInput!]
   OR: [UserScalarWhereInput!]
-  confirmationCode: StringFilter
   createdAt: DateTimeFilter
   deletedAt: DateTimeNullableFilter
   email: StringFilter
-  emailConfirmedAt: DateTimeNullableFilter
   id: StringFilter
   name: StringNullableFilter
-  password: StringFilter
   roleId: StringFilter
   updatedAt: DateTimeFilter
 }
@@ -683,28 +701,22 @@ input UserSignUpInput {
 }
 
 input UserUpdateInput {
-  confirmationCode: String
   createdAt: DateTime
   deletedAt: DateTime
   email: String
-  emailConfirmedAt: DateTime
   id: String
   name: String
-  password: String
   permissions: PermissionUpdateManyWithoutUsersNestedInput
   role: RoleUpdateOneRequiredWithoutUsersNestedInput
   updatedAt: DateTime
 }
 
 input UserUpdateManyMutationInput {
-  confirmationCode: String
   createdAt: DateTime
   deletedAt: DateTime
   email: String
-  emailConfirmedAt: DateTime
   id: String
   name: String
-  password: String
   updatedAt: DateTime
 }
 
@@ -756,27 +768,21 @@ input UserUpdateWithWhereUniqueWithoutRoleInput {
 }
 
 input UserUpdateWithoutPermissionsInput {
-  confirmationCode: String
   createdAt: DateTime
   deletedAt: DateTime
   email: String
-  emailConfirmedAt: DateTime
   id: String
   name: String
-  password: String
   role: RoleUpdateOneRequiredWithoutUsersNestedInput
   updatedAt: DateTime
 }
 
 input UserUpdateWithoutRoleInput {
-  confirmationCode: String
   createdAt: DateTime
   deletedAt: DateTime
   email: String
-  emailConfirmedAt: DateTime
   id: String
   name: String
-  password: String
   permissions: PermissionUpdateManyWithoutUsersNestedInput
   updatedAt: DateTime
 }
@@ -797,14 +803,11 @@ input UserWhereInput {
   AND: [UserWhereInput!]
   NOT: [UserWhereInput!]
   OR: [UserWhereInput!]
-  confirmationCode: StringFilter
   createdAt: DateTimeFilter
   deletedAt: DateTimeNullableFilter
   email: StringFilter
-  emailConfirmedAt: DateTimeNullableFilter
   id: StringFilter
   name: StringNullableFilter
-  password: StringFilter
   permissions: PermissionListRelationFilter
   role: RoleWhereInput
   roleId: StringFilter
@@ -812,6 +815,5 @@ input UserWhereInput {
 }
 
 input UserWhereUniqueInput {
-  confirmationCode: String
   id: String
 }

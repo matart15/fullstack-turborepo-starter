@@ -2,6 +2,7 @@ import { UseGuards } from '@nestjs/common';
 import { Args, Context, GraphQLExecutionContext, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { TOTAL_COUNT_HEADER } from '@src/config/constants';
 import { NoPermissionException } from '@src/libs/exceptions/NoPermissionException';
+import { CreateOneUserArgs } from 'prisma/@generated/user/args/create-one-user.args';
 import { FindManyUserArgs } from 'prisma/@generated/user/args/find-many-user.args';
 import { FindUniqueUserArgs } from 'prisma/@generated/user/args/find-unique-user.args';
 import { UpdateOneUserArgs } from 'prisma/@generated/user/args/update-one-user.args';
@@ -34,6 +35,21 @@ export class UserResolver {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (context as any).res.set({ [TOTAL_COUNT_HEADER]: total });
     return users;
+  }
+
+  @Mutation(() => User)
+  @UseGuards(JwtAuthGuard)
+  async createUser(@Args() args: CreateOneUserArgs, @CurrentUser() user: User): Promise<User> {
+    if (user.role?.name !== 'admin') {
+      throw new NoPermissionException();
+    }
+    return this.userService.create({
+      ...args,
+      include: {
+        role: true,
+        permissions: true,
+      },
+    });
   }
 
   @Mutation(() => User)

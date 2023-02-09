@@ -1,5 +1,6 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
+import { HideField } from '@nestjs/graphql';
 import { RoleCreateNestedOneWithoutUsersInput } from '../../role/input/role-create-nested-one-without-users.input';
 import { PermissionCreateNestedManyWithoutUsersInput } from '../../permission/input/permission-create-nested-many-without-users.input';
 
@@ -24,13 +25,13 @@ export class UserCreateInput {
     @Field(() => String, {nullable:true})
     name?: string;
 
-    @Field(() => String, {nullable:false})
+    @HideField()
     password!: string;
 
-    @Field(() => Date, {nullable:true})
+    @HideField()
     emailConfirmedAt?: Date | string;
 
-    @Field(() => String, {nullable:false})
+    @HideField()
     confirmationCode!: string;
 
     @Field(() => RoleCreateNestedOneWithoutUsersInput, {nullable:false})

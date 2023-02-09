@@ -4,15 +4,16 @@ to: apps/api/src/modules/<%= h.changeCase.camel(name) %>/<%= h.changeCase.camel(
 import { UseGuards } from '@nestjs/common';
 import { Args, Context, GraphQLExecutionContext, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { TOTAL_COUNT_HEADER } from '@src/config/constants';
+import { NoPermissionException } from '@src/libs/exceptions/NoPermissionException';
+import { CreateOne<%= h.changeCase.pascal(name) %>Args } from 'prisma/@generated/role/args/create-one-<%= h.changeCase.camel(name) %>.args';
 import { FindMany<%= h.changeCase.pascal(name) %>Args } from 'prisma/@generated/<%= h.changeCase.camel(name) %>/args/find-many-<%= h.changeCase.camel(name) %>.args';
 import { FindUnique<%= h.changeCase.pascal(name) %>Args } from 'prisma/@generated/<%= h.changeCase.camel(name) %>/args/find-unique-<%= h.changeCase.camel(name) %>.args';
 import { UpdateOne<%= h.changeCase.pascal(name) %>Args } from 'prisma/@generated/<%= h.changeCase.camel(name) %>/args/update-one-<%= h.changeCase.camel(name) %>.args';
 import { <%= h.changeCase.pascal(name) %> } from 'prisma/@generated/<%= h.changeCase.camel(name) %>/model/<%= h.changeCase.camel(name) %>.model';
-import { NoPermissionException } from '@src/libs/exceptions/NoPermissionException';
+import { User } from 'prisma/@generated/user/model/user.model';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { <%= h.changeCase.pascal(name) %>Service } from './<%= h.changeCase.camel(name) %>.service';
-import { User } from 'prisma/@generated/user/model/user.model';
 
 @Resolver()
 export class <%= h.changeCase.pascal(name) %>Resolver {
@@ -33,6 +34,15 @@ export class <%= h.changeCase.pascal(name) %>Resolver {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (context as any).res.set({ [TOTAL_COUNT_HEADER]: total });
     return <%= h.changeCase.camel(name) %>s;
+  }
+
+  @Mutation(() => <%= h.changeCase.pascal(name) %>)
+  @UseGuards(JwtAuthGuard)
+  async create<%= h.changeCase.pascal(name) %>(@Args() args: CreateOne<%= h.changeCase.pascal(name) %>Args, @CurrentUser() user: User): Promise<<%= h.changeCase.pascal(name) %>> {
+    if (user.role?.name !== 'admin') {
+      throw new NoPermissionException();
+    }
+    return this.<%= h.changeCase.camel(name) %>Service.create(args);
   }
 
   @Mutation(() => <%= h.changeCase.pascal(name) %>)

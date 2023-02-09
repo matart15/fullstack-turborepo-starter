@@ -14,6 +14,7 @@ export const useDatasource = ({
   handleDelete: (id: string) => Promise<void>;
 }): ColumnProps<I<%= h.changeCase.pascal(name) %>List>[] => {
   const columns: ColumnProps<I<%= h.changeCase.pascal(name) %>List>[] = [
+
     {
       title: 'Field',
       dataIndex: 'customField',
@@ -25,6 +26,13 @@ export const useDatasource = ({
           <Link href={`/<%= h.changeCase.camel(name) %>/${<%= h.changeCase.camel(name) %>.id}`}>{customField}</Link>
         </Space>
       ),
+    },
+    {
+      title: 'Created At',
+      dataIndex: 'createdAt',
+      key: 'createdAt',
+      sorter: true,
+      sortDirections: ['ascend', 'descend', 'ascend'],
     },
     {
       title: 'Actions',

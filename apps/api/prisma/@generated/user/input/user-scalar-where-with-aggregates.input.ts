@@ -4,6 +4,7 @@ import { StringWithAggregatesFilter } from '../../prisma/input/string-with-aggre
 import { DateTimeWithAggregatesFilter } from '../../prisma/input/date-time-with-aggregates-filter.input';
 import { DateTimeNullableWithAggregatesFilter } from '../../prisma/input/date-time-nullable-with-aggregates-filter.input';
 import { StringNullableWithAggregatesFilter } from '../../prisma/input/string-nullable-with-aggregates-filter.input';
+import { HideField } from '@nestjs/graphql';
 
 @InputType()
 export class UserScalarWhereWithAggregatesInput {
@@ -35,13 +36,13 @@ export class UserScalarWhereWithAggregatesInput {
     @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
     name?: StringNullableWithAggregatesFilter;
 
-    @Field(() => StringWithAggregatesFilter, {nullable:true})
+    @HideField()
     password?: StringWithAggregatesFilter;
 
-    @Field(() => DateTimeNullableWithAggregatesFilter, {nullable:true})
+    @HideField()
     emailConfirmedAt?: DateTimeNullableWithAggregatesFilter;
 
-    @Field(() => StringWithAggregatesFilter, {nullable:true})
+    @HideField()
     confirmationCode?: StringWithAggregatesFilter;
 
     @Field(() => StringWithAggregatesFilter, {nullable:true})
