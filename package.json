@@ -4,14 +4,14 @@
   "bin": "bin/cli.js",
   "workspaces": [
     "apps/*",
-    "packages/*"
+    "packages/*",
+    "supabase"
   ],
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "clean": "turbo run clean && rm -rf node_modules && yarn cache clean",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "api:dev": "yarn workspace api dev",
     "web:dev": "yarn workspace web dev",
     "postinstall": "npx husky install"
   },

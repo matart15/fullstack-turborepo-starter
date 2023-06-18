@@ -1,7 +1,15 @@
 import { useRouter, useSegments } from "expo-router";
-import React from "react";
+import { supabase } from "../lib/supabase";
+import React, { useState } from "react";
+import { Alert, Text } from "react-native";
 
-const AuthContext = React.createContext(null);
+type AuthContextType = {
+  signIn: (a: EmailPassword) => Promise<void>;
+  signUp: (a: EmailPassword) => Promise<void>;
+  signOut: () => void;
+  user: any;
+}
+const AuthContext = React.createContext<AuthContextType | null>(null);
 
 // This hook can be used to access the user info.
 export function useAuth() {
@@ -15,7 +23,6 @@ function useProtectedRoute(user) {
 
   React.useEffect(() => {
     const inAuthGroup = segments[0] === "(auth)";
-
     if (
       // If the user is not signed in and the initial segment is not anything in the auth group.
       !user &&
@@ -30,16 +37,50 @@ function useProtectedRoute(user) {
   }, [user, segments]);
 }
 
+type EmailPassword = {
+  email: string;
+  password: string;
+}
 export function Provider(props) {
-  const [user, setAuth] = React.useState(null);
+  const [user, setAuth] = useState<any | null>(null);
+  const [loading, setLoading] = useState(false)
+  async function signInWithEmail({
+    email, 
+    password
+  }: EmailPassword ) {
+    setLoading(true)
+    const { error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    })
 
+    if (error) Alert.alert(error.message)
+    setLoading(false)
+  }
+
+  async function signUpWithEmail({
+    email, 
+    password
+  }: EmailPassword) {
+    setLoading(true)
+    const { error } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+    })
+
+    if (error) Alert.alert(error.message)
+    setLoading(false)
+  }
+  
   useProtectedRoute(user);
-
+  console.log("loading ", loading)
+  if(loading) return <Text>Loading...</Text>
   return (
     <AuthContext.Provider
       value={{
-        signIn: () => setAuth({}),
-        signOut: () => setAuth(null),
+        signIn:  signInWithEmail,
+        signUp:  signUpWithEmail,
+        signOut: () =>  setAuth(null),
         user,
       }}
     >

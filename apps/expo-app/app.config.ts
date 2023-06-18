@@ -1,5 +1,10 @@
 import type { ExpoConfig } from "@expo/config";
 
+const SUPABASE_URL = "https://YOUR_PROJECT_REF.supabase.co";
+const SUPABASE_ANON_KEY = "YOUR_ANON_KEY";
+if (typeof SUPABASE_URL !== "string" || typeof SUPABASE_ANON_KEY !== "string") {
+  throw new Error("Missing Supabase URL or anonymous key");
+}
 const defineConfig = (): ExpoConfig => ({
   name: "expo",
   slug: "expo",
@@ -34,6 +39,8 @@ const defineConfig = (): ExpoConfig => ({
     eas: {
       // projectId: "your-project-id",
     },
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY,
   },
   plugins: [
     // "./expo-plugins/with-modify-gradle.js"

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.tsx",
   "scripts": {
-    "start:wsl": "REACT_NATIVE_PACKAGER_HOSTNAME=$(netsh.exe interface ip show address 'Ethernet' | grep 'IP Address' | sed -r 's/^.*IP Address:\\W*//') expo start --clear",
+    "start:wsl": "REACT_NATIVE_PACKAGER_HOSTNAME=$(netsh.exe interface ip show address 'Ethernet' | grep 'IP Address' | sed -r 's/^.*IP Address:\\W*//') expo start",
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
@@ -13,7 +13,9 @@
     "@react-native-async-storage/async-storage": "^1.18.2",
     "@supabase/supabase-js": "^2.25.0",
     "expo": "~48.0.18",
+    "expo-apple-authentication": "~6.0.1",
     "expo-constants": "~14.2.1",
+    "expo-crypto": "~12.2.1",
     "expo-linking": "~4.0.1",
     "expo-router": "^1.5.3",
     "expo-secure-store": "~12.1.1",

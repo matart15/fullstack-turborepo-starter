@@ -31,7 +31,7 @@ This turborepo uses [Yarn](https://classic.yarnpkg.com/lang/en/) as a package ma
 
 ### Apps and Packages
 
-- `api`: a [NestJS](https://nestjs.com/) app
+- `supabase`: a [supabase](https://supabase.com/docs) app
 - `web`: a [Next.js](https://nextjs.org) app
 - `ui`: a stub React component library used by `web`.
 - `config`: `eslint`, `nginx` (includes `eslint-config-next` and `eslint-config-prettier`)
@@ -90,7 +90,7 @@ nps dev
 ```
 
 - open http://localhost:3000 ( web )
-- open http://localhost:5000/graphql ( api )
+- see cli for supabase endpoints
 
 login data can be found in `seed.ts`
 
