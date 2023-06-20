@@ -1,13 +1,13 @@
-import { Stack } from "expo-router";
-import { useAuth } from "../../context/auth";
-import { Button, Text, View } from "react-native";
+import { Stack } from 'expo-router';
+import { Button, Text } from 'react-native';
 
-function LogoTitle() {
-  return (
-    <Text>Logo1</Text>
-  );
-}
-export default function Layout() {
+import { useAuth } from '../../context/auth';
+
+const LogoTitle = (): JSX.Element => {
+  return <Text>Logo1</Text>;
+};
+
+const Layout = (): JSX.Element => {
   const { signOut } = useAuth();
   return (
     <Stack
@@ -15,23 +15,19 @@ export default function Layout() {
       // https://reactnavigation.org/docs/headers#sharing-common-options-across-screens
       screenOptions={{
         headerStyle: {
-          backgroundColor: "#f4511e",
+          backgroundColor: '#f4511e',
         },
-        headerTintColor: "#fff",
+        headerTintColor: '#fff',
         headerTitleStyle: {
-          fontWeight: "bold",
+          fontWeight: 'bold',
         },
-        headerTitle: (props) => <LogoTitle {...props} />,
-        headerRight: () => (
-          <Button
-            onPress={signOut}
-            title="SignOut1"
-          />
-        ),
-      }}
-    >
+        headerTitle: props => <LogoTitle {...props} />,
+        headerRight: () => <Button onPress={signOut} title="SignOut1" />,
+      }}>
       {/* Optionally configure static options outside the route. */}
       <Stack.Screen name="top" options={{}} />
     </Stack>
   );
-}
+};
+
+export default Layout;

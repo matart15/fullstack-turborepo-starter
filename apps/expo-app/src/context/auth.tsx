@@ -1,90 +1,91 @@
-import { useRouter, useSegments } from "expo-router";
-import { supabase } from "../lib/supabase";
-import React, { useState } from "react";
-import { Alert, Text } from "react-native";
+import { useRouter, useSegments } from 'expo-router';
+import React, { FunctionComponent, useCallback, useContext, useMemo, useState } from 'react';
+import { Alert, Text } from 'react-native';
+
+import { supabase } from '../lib/supabase';
+
+type EmailPassword = {
+  email: string;
+  password: string;
+};
 
 type AuthContextType = {
   signIn: (a: EmailPassword) => Promise<void>;
   signUp: (a: EmailPassword) => Promise<void>;
   signOut: () => void;
   user: any;
-}
+};
+
 const AuthContext = React.createContext<AuthContextType | null>(null);
 
 // This hook can be used to access the user info.
-export function useAuth() {
-  return React.useContext(AuthContext);
-}
+export const useAuth = (): AuthContextType => {
+  return useContext(AuthContext) as AuthContextType;
+};
 
 // This hook will protect the route access based on user authentication.
-function useProtectedRoute(user) {
+const useProtectedRoute = (user: any): void => {
   const segments = useSegments();
   const router = useRouter();
 
   React.useEffect(() => {
-    const inAuthGroup = segments[0] === "(auth)";
+    const inAuthGroup = segments[0] === '(auth)';
     if (
       // If the user is not signed in and the initial segment is not anything in the auth group.
       !user &&
       !inAuthGroup
     ) {
       // Redirect to the sign-in page.
-      router.replace("/sign-in");
+      router.replace('/sign-in');
     } else if (user && inAuthGroup) {
       // Redirect away from the sign-in page.
-      router.replace("/");
+      router.replace('/');
     }
-  }, [user, segments]);
-}
+  }, [user, segments, router]);
+};
 
-type EmailPassword = {
-  email: string;
-  password: string;
-}
-export function Provider(props) {
+export const Provider: FunctionComponent = props => {
   const [user, setAuth] = useState<any | null>(null);
-  const [loading, setLoading] = useState(false)
-  async function signInWithEmail({
-    email, 
-    password
-  }: EmailPassword ) {
-    setLoading(true)
-    const { error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
-    })
+  const [loading, setLoading] = useState(false);
 
-    if (error) Alert.alert(error.message)
-    setLoading(false)
-  }
+  const signInWithEmail = useCallback(async ({ email, password }: EmailPassword): Promise<void> => {
+    setLoading(true);
+    const result = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+    const { error, data } = result;
+    console.log('🚀 ~ result:', result);
+    if (error) Alert.alert(error.message);
+    else setAuth(data);
+    setLoading(false);
+  }, []);
 
-  async function signUpWithEmail({
-    email, 
-    password
-  }: EmailPassword) {
-    setLoading(true)
+  const signUpWithEmail = useCallback(async ({ email, password }: EmailPassword): Promise<void> => {
+    setLoading(true);
     const { error } = await supabase.auth.signUp({
-      email: email,
-      password: password,
-    })
+      email,
+      password,
+    });
 
-    if (error) Alert.alert(error.message)
-    setLoading(false)
-  }
-  
+    if (error) Alert.alert(error.message);
+    setLoading(false);
+  }, []);
+
+  const signOut = (): void => setAuth(null);
   useProtectedRoute(user);
-  console.log("loading ", loading)
-  if(loading) return <Text>Loading...</Text>
-  return (
-    <AuthContext.Provider
-      value={{
-        signIn:  signInWithEmail,
-        signUp:  signUpWithEmail,
-        signOut: () =>  setAuth(null),
-        user,
-      }}
-    >
-      {props.children}
-    </AuthContext.Provider>
+  console.log('loading ', loading);
+
+  const authContextValue = useMemo(
+    () => ({
+      signIn: signInWithEmail,
+      signUp: signUpWithEmail,
+      signOut,
+      user,
+    }),
+    [signInWithEmail, signUpWithEmail, signOut, user],
   );
-}
+
+  if (loading) return <Text>Loading...</Text>;
+  return <AuthContext.Provider value={authContextValue}>{props.children}</AuthContext.Provider>;
+};
